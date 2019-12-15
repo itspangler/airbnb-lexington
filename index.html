@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Airbnb in Lexington, KY</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <link href='css/styles.css' rel='stylesheet' />
+  <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+  <div class='flex-parent viewport-full relative scroll-hidden'>
+    <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
+      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
+        <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
+          <h1 class='txt-h1 mb6'>Airbnb in Lexington, Kentucky</h1>
+          <p><b>Use this map</b> to explore the rates of enrollment between boys and girls in Kenyan primary schools. Drawing on the excellent <a class='link' target='blank' href='http://www.opendata.go.ke/'>open data portal at the Kenya's ICT Authority</a>, this map offers a useful data visualization tool for comparing the gendered dimensions of education across Kenya's counties.<br><br>
+          <b>Drag the slider</b> in the bottom left to toggle between grade levels.<br><br>
+          <b>Hover the cursor</b> overtop of a pair of circles to compare raw numbers between boys and girls.
+        </p>
+        </div>
+        <footer class='px12 py12 bg-gray-faint txt-s'>
+          <ul>
+            <li>Explore the raw
+              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
+            </li>
+            <li>Map authored by
+              <a class='link' target='blank' href='https://github.com/itspangler'>Ian Spangler</a>
+            </li>
+          </ul>
+        </footer>
+      </div>
+    </div>
+    <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
+      <div id="map" class='viewport-twothirds viewport-full-ml'></div>
+    </div>
+  </div>
+
+  <!-- ui slider -->
+  <div id='slider' class='range w240 bg-white round-ml px12'>
+    <input type='range' min="1" , max="8" , value="1" , step="1" />
+  </div>
+
+  <!-- legend -->
+  <div id='legend' class='bg-white round-ml px18 py12'>
+    <h2 class='txt-bold mb24 w-full mx-auto'>Number of <font color=#D96D02>girls</font> and <font color=#6E77B0>boys</font><br> students enrolled by county</h2>
+      <div class='legend-circles relative w180'>
+        <div class="legend-large border border--gray-light absolute"></div>
+        <div class="legend-small border border--gray-light absolute"></div>
+        <div class="legend-large-label txt-m absolute"></div>
+        <div class="legend-small-label txt-m absolute"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ui info panel -->
+  <div id='info' class='py6 px12 bg-white border border--gray-light round absolute w240'>
+    <p>County:
+      <span></span>
+    </p>
+    <p class='girls'>Girls
+      <span></span>:
+      <span class='txt-l txt-bold'></span>
+    </p>
+    <p class='boys'>Boys
+      <span></span>:
+      <span class='txt-l txt-bold'></span>
+    </p>
+
+    <!-- Additional elements added here for this step! -->
+    <hr class='txt-hr'>
+    <p class='my6'>Trend: Grades 1 &ndash; 8</p>
+    <p class='mb6'><span class='girlspark'></span></p>
+    <p><span class='boyspark'></span></p>
+  </div>
+
+  <!-- Slider title -->
+  <div id='sliderTitle' class='range w100 bg-white round-ml px12'>
+    <h3 class='txt-h3 mb6'>Grade </h3>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+  <script src='js/app.js'></script>
+
+</body>
+
+</html>
