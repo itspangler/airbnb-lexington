@@ -3,7 +3,7 @@
   var map = L.map('map', {
     zoomSnap: .1,
     center: [-34, 84.5],
-    zoom: 18,
+    zoom: 20,
     minZoom: 6,
     maxZoom: 40,
     // maxBounds: L.latLngBounds([-34, 50], [-34, 84])
@@ -47,7 +47,7 @@
     map.fitBounds(airbnbLex.getBounds());
 
     // adjust zoom level of map
-    map.setZoom(map.getZoom());
+    map.setZoom(map.getZoom(200));
 
     airbnbLex.setStyle({
       color: '#D96D02',
@@ -71,14 +71,14 @@
   function resizeCircles(airbnbLex, PRICE) {
 
     airbnbLex.eachLayer(function(layer) {
-      var radius = calcRadius(Number(layer.feature.properties[PRICE]));
+      var radius = calcRadius(Number(layer.feature.properties.PRICE));
       console.log(layer.feature.properties);
 
       layer.setRadius(radius);
     });
 
     // update the hover window with current grade's
-    retrieveInfo(airbnbLex, PRICE);
+    // retrieveInfo(airbnbLex, PRICE);
 
   }
 
