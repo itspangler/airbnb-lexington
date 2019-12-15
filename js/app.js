@@ -3,9 +3,9 @@
   var map = L.map('map', {
     zoomSnap: .1,
     center: [-34, 84.5],
-    zoom: 30,
+    zoom: 18,
     minZoom: 6,
-    maxZoom: 9,
+    maxZoom: 40,
     // maxBounds: L.latLngBounds([-34, 50], [-34, 84])
   });
 
@@ -13,13 +13,13 @@
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 30,
+    maxZoom: 40,
     id: 'mapbox.light',
     accessToken: accessToken
   }).addTo(map);
 
   // use omnivore to load the CSV data -- convert Leaflet GeoJSON to regular GeoJSON
-  omnivore.csv('data/airbnb-dummy-data.csv')
+  omnivore.csv('data/lexington_airbnb_s17.csv')
     .on('ready', function(e) {
       drawMap(e.target.toGeoJSON());
       drawLegend(e.target.toGeoJSON()); // add this statement
@@ -41,54 +41,48 @@
       }
     }
     // create 2 separate layers from GeoJSON data
-    var girlsLayer = L.geoJson(data, options).addTo(map),
-      boysLayer = L.geoJson(data, options).addTo(map);
-
+    var airbnbLex = L.geoJson(data, options).addTo(map);
+    console.log(airbnbLex);
     // fit the bounds of the map to one of the layers
-    map.fitBounds(girlsLayer.getBounds());
+    map.fitBounds(airbnbLex.getBounds());
 
     // adjust zoom level of map
     map.setZoom(map.getZoom());
 
-    girlsLayer.setStyle({
+    airbnbLex.setStyle({
       color: '#D96D02',
     });
-    boysLayer.setStyle({
-      color: '#6E77B0',
-    });
 
-    resizeCircles(girlsLayer, boysLayer, 1);
+    resizeCircles(airbnbLex, 1);
 
-    sequenceUI(girlsLayer, boysLayer);
+    sequenceUI(airbnbLex);
 
   } // end drawMap()
 
 
-  // function calcRadius(val) {
-  //
-  //   var radius = Math.sqrt(val / Math.PI);
-  //   return radius * .5; // adjust .5 as a scale factor
-  //
-  // }
+  function calcRadius(val) {
+
+    var radius = Math.sqrt(val / Math.PI);
+    return radius * .5; // adjust .5 as a scale factor
+
+  }
 
   // define function for resizing circles
-  function resizeCircles(girlsLayer, boysLayer, currentGrade) {
+  function resizeCircles(airbnbLex, PRICE) {
 
-    girlsLayer.eachLayer(function(layer) {
-      var radius = calcRadius(Number(layer.feature.properties['G' + currentGrade]));
-      layer.setRadius(radius);
-    });
-    boysLayer.eachLayer(function(layer) {
-      var radius = calcRadius(Number(layer.feature.properties['B' + currentGrade]));
+    airbnbLex.eachLayer(function(layer) {
+      var radius = calcRadius(Number(layer.feature.properties[PRICE]));
+      console.log(layer.feature.properties);
+
       layer.setRadius(radius);
     });
 
     // update the hover window with current grade's
-    retrieveInfo(boysLayer, currentGrade);
+    retrieveInfo(airbnbLex, PRICE);
 
   }
 
-  function sequenceUI(girlsLayer, boysLayer) {
+  function sequenceUI(airbnbLex) {
 
     // create Leaflet control for the slider
     var sliderControl = L.control({
@@ -118,7 +112,7 @@
         var currentGrade = this.value;
 
         // resize the circles with updated grade level
-        resizeCircles(girlsLayer, boysLayer, currentGrade);
+        resizeCircles(airbnbLex, PRICE);
       });
 
     sliderControl.addTo(map);
@@ -220,103 +214,103 @@
     legendControl.addTo(map);
   }
 
-  function retrieveInfo(boysLayer, currentGrade) {
-
-    // select the element and reference with variable
-    // and hide it from view initially
-    var info = $('#info').hide();
-
-    // since boysLayer is on top, use to detect mouseover events
-    boysLayer.on('mouseover', function(e) {
-
-      // remove the none class to display and show
-      info.show();
-
-      // access properties of target layer
-      var props = e.layer.feature.properties;
-
-      // populate HTML elements with relevant info
-      $('#info span').html(props.COUNTY);
-      $(".girls span:first-child").html('(grade ' + currentGrade + ')');
-      $(".boys span:first-child").html('(grade ' + currentGrade + ')');
-      $(".girls span:last-child").html(Number(props['G' + currentGrade]).toLocaleString());
-      $(".boys span:last-child").html(Number(props['B' + currentGrade]).toLocaleString());
-
-      // raise opacity level as visual affordance
-      e.layer.setStyle({
-        fillOpacity: .6
-      });
-
-      // empty arrays for boys and girls values
-      var girlsValues = [],
-        boysValues = [];
-
-      // loop through the grade levels and push values into those arrays
-      for (var i = 1; i <= 8; i++) {
-        girlsValues.push(props['G' + i]);
-        boysValues.push(props['B' + i]);
-      }
-
-      $('.girlspark').sparkline(girlsValues, {
-          width: '200px',
-          height: '30px',
-          lineColor: '#D96D02',
-          fillColor: '#d98939 ',
-          spotRadius: 0,
-          lineWidth: 2
-      });
-
-      $('.boyspark').sparkline(boysValues, {
-          width: '200px',
-          height: '30px',
-          lineColor: '#6E77B0',
-          fillColor: '#878db0',
-          spotRadius: 0,
-          lineWidth: 2
-      });
-
-    });
-
-    // hide the info panel when mousing off layergroup and remove affordance opacity
-    boysLayer.on('mouseout', function(e) {
-
-      // hide the info panel
-      info.hide();
-
-      // reset the layer style
-      e.layer.setStyle({
-        fillOpacity: 0
-      });
-    });
-
-    // when the mouse moves on the document
-    $(document).mousemove(function(e) {
-
-      // set z index higher
-      info.css({
-        "z-index": 400,
-      })
-
-      // first offset from the mouse position of the info window
-      info.css({
-        "left": e.pageX + 6,
-        "top": e.pageY - info.height() - 25
-      });
-
-      // if it crashes into the top, flip it lower right
-      if (info.offset().top < 4) {
-        info.css({
-          "top": e.pageY + 15
-        });
-      }
-      // if it crashes into the right, flip it to the left
-      if (info.offset().left + info.width() >= $(document).width() - 40) {
-        info.css({
-          "left": e.pageX - info.width() - 80
-        });
-      }
-    });
-
-  }
+  // function retrieveInfo(boysLayer, currentGrade) {
+  //
+  //   // select the element and reference with variable
+  //   // and hide it from view initially
+  //   var info = $('#info').hide();
+  //
+  //   // since boysLayer is on top, use to detect mouseover events
+  //   boysLayer.on('mouseover', function(e) {
+  //
+  //     // remove the none class to display and show
+  //     info.show();
+  //
+  //     // access properties of target layer
+  //     var props = e.layer.feature.properties;
+  //
+  //     // populate HTML elements with relevant info
+  //     $('#info span').html(props.COUNTY);
+  //     $(".girls span:first-child").html('(grade ' + currentGrade + ')');
+  //     $(".boys span:first-child").html('(grade ' + currentGrade + ')');
+  //     $(".girls span:last-child").html(Number(props['G' + currentGrade]).toLocaleString());
+  //     $(".boys span:last-child").html(Number(props['B' + currentGrade]).toLocaleString());
+  //
+  //     // raise opacity level as visual affordance
+  //     e.layer.setStyle({
+  //       fillOpacity: .6
+  //     });
+  //
+  //     // empty arrays for boys and girls values
+  //     var girlsValues = [],
+  //       boysValues = [];
+  //
+  //     // loop through the grade levels and push values into those arrays
+  //     for (var i = 1; i <= 8; i++) {
+  //       girlsValues.push(props['G' + i]);
+  //       boysValues.push(props['B' + i]);
+  //     }
+  //
+  //     $('.girlspark').sparkline(girlsValues, {
+  //         width: '200px',
+  //         height: '30px',
+  //         lineColor: '#D96D02',
+  //         fillColor: '#d98939 ',
+  //         spotRadius: 0,
+  //         lineWidth: 2
+  //     });
+  //
+  //     $('.boyspark').sparkline(boysValues, {
+  //         width: '200px',
+  //         height: '30px',
+  //         lineColor: '#6E77B0',
+  //         fillColor: '#878db0',
+  //         spotRadius: 0,
+  //         lineWidth: 2
+  //     });
+  //
+  //   });
+  //
+  //   // hide the info panel when mousing off layergroup and remove affordance opacity
+  //   boysLayer.on('mouseout', function(e) {
+  //
+  //     // hide the info panel
+  //     info.hide();
+  //
+  //     // reset the layer style
+  //     e.layer.setStyle({
+  //       fillOpacity: 0
+  //     });
+  //   });
+  //
+  //   // when the mouse moves on the document
+  //   $(document).mousemove(function(e) {
+  //
+  //     // set z index higher
+  //     info.css({
+  //       "z-index": 400,
+  //     })
+  //
+  //     // first offset from the mouse position of the info window
+  //     info.css({
+  //       "left": e.pageX + 6,
+  //       "top": e.pageY - info.height() - 25
+  //     });
+  //
+  //     // if it crashes into the top, flip it lower right
+  //     if (info.offset().top < 4) {
+  //       info.css({
+  //         "top": e.pageY + 15
+  //       });
+  //     }
+  //     // if it crashes into the right, flip it to the left
+  //     if (info.offset().left + info.width() >= $(document).width() - 40) {
+  //       info.css({
+  //         "left": e.pageX - info.width() - 80
+  //       });
+  //     }
+  //   });
+  //
+  // }
 
 })();
