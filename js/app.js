@@ -2,8 +2,8 @@
 
   var map = L.map('map', {
     zoomSnap: .1,
-    center: [-38, 84.5],
-    zoom: 7,
+    center: [-34, 84.5],
+    zoom: 30,
     minZoom: 6,
     maxZoom: 9,
     // maxBounds: L.latLngBounds([-34, 50], [-34, 84])
@@ -13,13 +13,13 @@
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
+    maxZoom: 30,
     id: 'mapbox.light',
     accessToken: accessToken
   }).addTo(map);
 
   // use omnivore to load the CSV data -- convert Leaflet GeoJSON to regular GeoJSON
-  omnivore.csv('data/kenya_education_2014.csv')
+  omnivore.csv('data/airbnb-dummy-data.csv')
     .on('ready', function(e) {
       drawMap(e.target.toGeoJSON());
       drawLegend(e.target.toGeoJSON()); // add this statement
@@ -48,7 +48,7 @@
     map.fitBounds(girlsLayer.getBounds());
 
     // adjust zoom level of map
-    map.setZoom(map.getZoom() - .4);
+    map.setZoom(map.getZoom());
 
     girlsLayer.setStyle({
       color: '#D96D02',
@@ -64,12 +64,12 @@
   } // end drawMap()
 
 
-  function calcRadius(val) {
-
-    var radius = Math.sqrt(val / Math.PI);
-    return radius * .5; // adjust .5 as a scale factor
-
-  }
+  // function calcRadius(val) {
+  //
+  //   var radius = Math.sqrt(val / Math.PI);
+  //   return radius * .5; // adjust .5 as a scale factor
+  //
+  // }
 
   // define function for resizing circles
   function resizeCircles(girlsLayer, boysLayer, currentGrade) {
