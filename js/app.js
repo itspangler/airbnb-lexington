@@ -3,7 +3,7 @@
   var map = L.map('map', {
     zoomSnap: .1,
     center: [-34, 84.5],
-    zoom: 20,
+    zoom: 40,
     minZoom: 6,
     maxZoom: 40,
     // maxBounds: L.latLngBounds([-34, 50], [-34, 84])
@@ -17,6 +17,10 @@
     id: 'mapbox.light',
     accessToken: accessToken
   }).addTo(map);
+
+  $.getJSON("data/lex-zips.geojson", function(data) {
+    drawMap(data);
+  });
 
   // use omnivore to load the CSV data -- convert Leaflet GeoJSON to regular GeoJSON
   omnivore.csv('data/lexington_airbnb_s17.csv')
@@ -40,14 +44,15 @@
         })
       }
     }
-    // create 2 separate layers from GeoJSON data
+    // create layer from GeoJSON data
     var airbnbLex = L.geoJson(data, options).addTo(map);
-    console.log(airbnbLex);
+
+    // console.log(airbnbLex);
     // fit the bounds of the map to one of the layers
     map.fitBounds(airbnbLex.getBounds());
 
     // adjust zoom level of map
-    map.setZoom(map.getZoom(200));
+    map.setZoom(map.getZoom() + 1.7);
 
     airbnbLex.setStyle({
       color: '#D96D02',
@@ -55,7 +60,7 @@
 
     resizeCircles(airbnbLex, 1);
 
-    sequenceUI(airbnbLex);
+    // sequenceUI(airbnbLex);
 
   } // end drawMap()
 
@@ -72,52 +77,52 @@
 
     airbnbLex.eachLayer(function(layer) {
       var radius = calcRadius(Number(layer.feature.properties.PRICE));
-      console.log(layer.feature.properties);
+      // console.log(layer.feature.properties);
 
       layer.setRadius(radius);
     });
 
     // update the hover window with current grade's
-    // retrieveInfo(airbnbLex, PRICE);
+    retrieveInfo(airbnbLex, PRICE);
 
   }
 
-  function sequenceUI(airbnbLex) {
-
-    // create Leaflet control for the slider
-    var sliderControl = L.control({
-      position: 'bottomleft'
-    });
-    var sliderTitle = L.control({
-      position: 'topleft'
-    })
-
-    sliderControl.onAdd = function(map) {
-
-      var controls = L.DomUtil.get("slider");
-      // var controls = L.DomUtil.get("sliderTitle")
-
-      L.DomEvent.disableScrollPropagation(controls);
-      L.DomEvent.disableClickPropagation(controls);
-
-      return controls;
-
-    }
-
-    //select the slider's input and listen for change
-    $('#slider input[type=range]')
-      .on('input', function() {
-
-        // current value of slider is current grade level
-        var currentGrade = this.value;
-
-        // resize the circles with updated grade level
-        resizeCircles(airbnbLex, PRICE);
-      });
-
-    sliderControl.addTo(map);
-
-  }
+  // function sequenceUI(airbnbLex) {
+  //
+  //   // create Leaflet control for the slider
+  //   var sliderControl = L.control({
+  //     position: 'bottomleft'
+  //   });
+  //   var sliderTitle = L.control({
+  //     position: 'topleft'
+  //   })
+  //
+  //   sliderControl.onAdd = function(map) {
+  //
+  //     var controls = L.DomUtil.get("slider");
+  //     // var controls = L.DomUtil.get("sliderTitle")
+  //
+  //     L.DomEvent.disableScrollPropagation(controls);
+  //     L.DomEvent.disableClickPropagation(controls);
+  //
+  //     return controls;
+  //
+  //   }
+  //
+  //   //select the slider's input and listen for change
+  //   $('#slider input[type=range]')
+  //     .on('input', function() {
+  //
+  //       // current value of slider is current grade level
+  //       var currentGrade = this.value;
+  //
+  //       // resize the circles with updated grade level
+  //       resizeCircles(airbnbLex, PRICE);
+  //     });
+  //
+  //   sliderControl.addTo(map);
+  //
+  // }
 
   function drawLegend(data) {
     // create Leaflet control for the legend
@@ -169,7 +174,7 @@
     var maxValue = Math.round(sortedValues[0] / 1000) * 1000;
 
     // verify max value
-    console.log(maxValue);
+    // console.log(maxValue);
 
     // calc the diameters
     var largeDiameter = calcRadius(maxValue) * 2,
@@ -214,103 +219,103 @@
     legendControl.addTo(map);
   }
 
-  // function retrieveInfo(boysLayer, currentGrade) {
-  //
-  //   // select the element and reference with variable
-  //   // and hide it from view initially
-  //   var info = $('#info').hide();
-  //
-  //   // since boysLayer is on top, use to detect mouseover events
-  //   boysLayer.on('mouseover', function(e) {
-  //
-  //     // remove the none class to display and show
-  //     info.show();
-  //
-  //     // access properties of target layer
-  //     var props = e.layer.feature.properties;
-  //
-  //     // populate HTML elements with relevant info
-  //     $('#info span').html(props.COUNTY);
-  //     $(".girls span:first-child").html('(grade ' + currentGrade + ')');
-  //     $(".boys span:first-child").html('(grade ' + currentGrade + ')');
-  //     $(".girls span:last-child").html(Number(props['G' + currentGrade]).toLocaleString());
-  //     $(".boys span:last-child").html(Number(props['B' + currentGrade]).toLocaleString());
-  //
-  //     // raise opacity level as visual affordance
-  //     e.layer.setStyle({
-  //       fillOpacity: .6
-  //     });
-  //
-  //     // empty arrays for boys and girls values
-  //     var girlsValues = [],
-  //       boysValues = [];
-  //
-  //     // loop through the grade levels and push values into those arrays
-  //     for (var i = 1; i <= 8; i++) {
-  //       girlsValues.push(props['G' + i]);
-  //       boysValues.push(props['B' + i]);
-  //     }
-  //
-  //     $('.girlspark').sparkline(girlsValues, {
-  //         width: '200px',
-  //         height: '30px',
-  //         lineColor: '#D96D02',
-  //         fillColor: '#d98939 ',
-  //         spotRadius: 0,
-  //         lineWidth: 2
-  //     });
-  //
-  //     $('.boyspark').sparkline(boysValues, {
-  //         width: '200px',
-  //         height: '30px',
-  //         lineColor: '#6E77B0',
-  //         fillColor: '#878db0',
-  //         spotRadius: 0,
-  //         lineWidth: 2
-  //     });
-  //
-  //   });
-  //
-  //   // hide the info panel when mousing off layergroup and remove affordance opacity
-  //   boysLayer.on('mouseout', function(e) {
-  //
-  //     // hide the info panel
-  //     info.hide();
-  //
-  //     // reset the layer style
-  //     e.layer.setStyle({
-  //       fillOpacity: 0
-  //     });
-  //   });
-  //
-  //   // when the mouse moves on the document
-  //   $(document).mousemove(function(e) {
-  //
-  //     // set z index higher
-  //     info.css({
-  //       "z-index": 400,
-  //     })
-  //
-  //     // first offset from the mouse position of the info window
-  //     info.css({
-  //       "left": e.pageX + 6,
-  //       "top": e.pageY - info.height() - 25
-  //     });
-  //
-  //     // if it crashes into the top, flip it lower right
-  //     if (info.offset().top < 4) {
-  //       info.css({
-  //         "top": e.pageY + 15
-  //       });
-  //     }
-  //     // if it crashes into the right, flip it to the left
-  //     if (info.offset().left + info.width() >= $(document).width() - 40) {
-  //       info.css({
-  //         "left": e.pageX - info.width() - 80
-  //       });
-  //     }
-  //   });
-  //
-  // }
+  function retrieveInfo(boysLayer, currentGrade) {
+
+    // select the element and reference with variable
+    // and hide it from view initially
+    var info = $('#info').hide();
+
+    // since boysLayer is on top, use to detect mouseover events
+    boysLayer.on('mouseover', function(e) {
+
+      // remove the none class to display and show
+      info.show();
+
+      // access properties of target layer
+      var props = e.layer.feature.properties;
+
+      // populate HTML elements with relevant info
+      $('#info span').html(props.COUNTY);
+      $(".girls span:first-child").html('(grade ' + currentGrade + ')');
+      $(".boys span:first-child").html('(grade ' + currentGrade + ')');
+      $(".girls span:last-child").html(Number(props['G' + currentGrade]).toLocaleString());
+      $(".boys span:last-child").html(Number(props['B' + currentGrade]).toLocaleString());
+
+      // raise opacity level as visual affordance
+      e.layer.setStyle({
+        fillOpacity: .6
+      });
+
+      // empty arrays for boys and girls values
+      var girlsValues = [],
+        boysValues = [];
+
+      // loop through the grade levels and push values into those arrays
+      for (var i = 1; i <= 8; i++) {
+        girlsValues.push(props['G' + i]);
+        boysValues.push(props['B' + i]);
+      }
+
+      $('.girlspark').sparkline(girlsValues, {
+          width: '200px',
+          height: '30px',
+          lineColor: '#D96D02',
+          fillColor: '#d98939 ',
+          spotRadius: 0,
+          lineWidth: 2
+      });
+
+      $('.boyspark').sparkline(boysValues, {
+          width: '200px',
+          height: '30px',
+          lineColor: '#6E77B0',
+          fillColor: '#878db0',
+          spotRadius: 0,
+          lineWidth: 2
+      });
+
+    });
+
+    // hide the info panel when mousing off layergroup and remove affordance opacity
+    boysLayer.on('mouseout', function(e) {
+
+      // hide the info panel
+      info.hide();
+
+      // reset the layer style
+      e.layer.setStyle({
+        fillOpacity: 0
+      });
+    });
+
+    // when the mouse moves on the document
+    $(document).mousemove(function(e) {
+
+      // set z index higher
+      info.css({
+        "z-index": 400,
+      })
+
+      // first offset from the mouse position of the info window
+      info.css({
+        "left": e.pageX + 6,
+        "top": e.pageY - info.height() - 25
+      });
+
+      // if it crashes into the top, flip it lower right
+      if (info.offset().top < 4) {
+        info.css({
+          "top": e.pageY + 15
+        });
+      }
+      // if it crashes into the right, flip it to the left
+      if (info.offset().left + info.width() >= $(document).width() - 40) {
+        info.css({
+          "left": e.pageX - info.width() - 80
+        });
+      }
+    });
+
+  }
 
 })();
