@@ -6,7 +6,6 @@
     zoom: 40,
     minZoom: 6,
     maxZoom: 40,
-    // maxBounds: L.latLngBounds([-34, 50], [-34, 84])
   });
 
   var accessToken = 'pk.eyJ1IjoiaXNwYW5nbGUiLCJhIjoiY2sya3Zvd2dxMDBuYTNtcG04MHB0bHlnNiJ9.STLbosVoe-X1_12FoqgI6A'
@@ -22,11 +21,15 @@
     drawMap(data);
   });
 
+
+  // if you're using assembly already, be sure to check out their radio buttons for nicer styling -- get the basic functionality first, and then that kind of visual refinement/colors/pixel pushing/etc.
+  // check d3 for loading the csv data instead of using omnivore -- there's a recent lab where we did this
+  // check Joshua Stevens for bivariate choropleth color mapping -- "joshua stevens bivariate mapping"
   // use omnivore to load the CSV data -- convert Leaflet GeoJSON to regular GeoJSON
   omnivore.csv('data/lexington_airbnb_s17.csv')
     .on('ready', function(e) {
       drawMap(e.target.toGeoJSON());
-      drawLegend(e.target.toGeoJSON()); // add this statement
+      // drawLegend(e.target.toGeoJSON()); // add this statement
     })
     .on('error', function(e) {
       console.log(e.error[0].message);
@@ -52,7 +55,7 @@
     map.fitBounds(airbnbLex.getBounds());
 
     // adjust zoom level of map
-    map.setZoom(map.getZoom() + 1.7);
+    map.setZoom(map.getZoom() + .5);
 
     airbnbLex.setStyle({
       color: '#D96D02',
@@ -60,10 +63,12 @@
 
     resizeCircles(airbnbLex, 1);
 
-    // sequenceUI(airbnbLex);
+    sequenceUI(airbnbLex);
 
   } // end drawMap()
 
+
+// see marker cluster as a plugin from leaflet
 
   function calcRadius(val) {
 
