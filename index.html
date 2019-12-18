@@ -7,12 +7,9 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-  <link href='css/styles.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
   <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
-
+  <link href='css/styles.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -21,15 +18,19 @@
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
         <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
           <h1 class='txt-h1 mb6'>Airbnb in Lexington, Kentucky</h1>
-          <p><b>Use this map</b> to explore the rates of enrollment between boys and girls in Kenyan primary schools. Drawing on the excellent <a class='link' target='blank' href='http://www.opendata.go.ke/'>open data portal at the Kenya's ICT Authority</a>, this map offers a useful data visualization tool for comparing the gendered dimensions of education across Kenya's counties.<br><br>
-          <b>Drag the slider</b> in the bottom left to toggle between grade levels.<br><br>
-          <b>Hover the cursor</b> overtop of a pair of circles to compare raw numbers between boys and girls.
-        </p>
+          <p><b>Use this map</b> to explore the rates of enrollment between boys and girls in Kenyan primary schools.
+            Drawing on the excellent <a class='link' target='blank' href='http://www.opendata.go.ke/'>open data portal
+              at the Kenya's ICT Authority</a>, this map offers a useful data visualization tool for comparing the
+            gendered dimensions of education across Kenya's counties.<br><br>
+            <b>Drag the slider</b> in the bottom left to toggle between grade levels.<br><br>
+            <b>Hover the cursor</b> overtop of a pair of circles to compare raw numbers between boys and girls.
+          </p>
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <ul>
             <li>Explore the raw
-              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
+              <a class='link' target='blank'
+                href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
             </li>
             <li>Map authored by
               <a class='link' target='blank' href='https://github.com/itspangler'>Ian Spangler</a>
@@ -50,14 +51,16 @@
 
   <!-- legend -->
   <div id='legend' class='bg-white round-ml px18 py12'>
-    <h2 class='txt-bold mb24 w-full mx-auto'>Number of <font color=#D96D02>girls</font> and <font color=#6E77B0>boys</font><br> students enrolled by county</h2>
-      <div class='legend-circles relative w180'>
-        <div class="legend-large border border--gray-light absolute"></div>
-        <div class="legend-small border border--gray-light absolute"></div>
-        <div class="legend-large-label txt-m absolute"></div>
-        <div class="legend-small-label txt-m absolute"></div>
-      </div>
+    <h2 class='txt-bold mb24 w-full mx-auto'>Number of <div style='color:#D96D02;'>girls</font> and <font color=#6E77B0>
+          boys
+      </div><br> students enrolled by county</h2>
+    <div class='legend-circles relative w180'>
+      <div class="legend-large border border--gray-light absolute"></div>
+      <div class="legend-small border border--gray-light absolute"></div>
+      <div class="legend-large-label txt-m absolute"></div>
+      <div class="legend-small-label txt-m absolute"></div>
     </div>
+  </div>
   </div>
 
   <!-- ui info panel -->
@@ -86,12 +89,11 @@
     <h3 class='txt-h3 mb6'>Grade </h3>
   </div>
 
-	<script src="https://unpkg.com/simple-statistics@5.2.1/dist/simple-statistics.min.js"></script>
+  <script src="https://unpkg.com/simple-statistics@7.0.2/dist/simple-statistics.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
   <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.js"></script>
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
-  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script src='js/app.js'></script>
 
 </body>
