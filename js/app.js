@@ -70,9 +70,15 @@
     console.log(zipsGeojson)
     console.log(airbnbGeojson)
 
-    var zipsOptions = {};
+    var zipsOptions = {
+      style: {
+        color: '#e0ecf9'
+      }
+    };
 
-    L.geoJSON(zipsGeojson, zipsOptions).addTo(map);
+    var zips = L.geoJSON(zipsGeojson, zipsOptions).addTo(map);
+
+    map.fitBounds(zips.getBounds());
 
 
     L.geoJSON(airbnbGeojson, {
@@ -80,8 +86,9 @@
         return L.circleMarker(ll, {
           opacity: 1,
           weight: 2,
-          fillOpacity: 0,
-          radius: 5
+          fillOpacity: 1,
+          radius: 5,
+          color: '#f0dc00'
         })
       },
       onEachFeature: function (feature, layer) {
