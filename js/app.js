@@ -6,15 +6,6 @@
     zoom: 8
   });
 
-  // var accessToken = 'pk.eyJ1IjoiaXNwYW5nbGUiLCJhIjoiY2sya3Zvd2dxMDBuYTNtcG04MHB0bHlnNiJ9.STLbosVoe-X1_12FoqgI6A'
-
-  // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + accessToken, {
-  //   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  //   maxZoom: 40,
-  //   id: 'mapbox.light',
-  //   accessToken: accessToken
-  // }).addTo(map);
-
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
     subdomains: 'abcd',
@@ -72,7 +63,7 @@
 
     var zipsOptions = {
       style: {
-        color: '#e0ecf9'
+        color: '#448ee4'
       }
     };
 
@@ -85,10 +76,10 @@
       pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           opacity: 1,
-          weight: 2,
-          fillOpacity: 1,
-          radius: 5,
-          color: '#f0dc00'
+          weight: 1,
+          fillOpacity: .8,
+          radius: 4,
+          color: '#ff6e00'
         })
       },
       onEachFeature: function (feature, layer) {
