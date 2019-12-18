@@ -83,6 +83,15 @@
           fillOpacity: 0,
           radius: 5
         })
+      },
+      onEachFeature: function (feature, layer) {
+
+        console.log(feature.properties)
+
+        var tooltip = 'Price: ' + feature.properties.PRICE;
+
+        layer.bindTooltip(tooltip);
+
       }
     }).addTo(map)
 
