@@ -45,8 +45,6 @@
       // console.log(row);
 
       airbnbGeojson.features.push(feature);
-      // console.log(airbnbGeojson);
-
     })
 
     drawMap(data[0], airbnbGeojson)
@@ -74,7 +72,7 @@
           })
         },
         onEachFeature: function(feature, layer) {
-          console.log(feature.properties)
+          // console.log(feature.properties)
 
           var tooltip = 'Price: ' + feature.properties.PRICE;
 
