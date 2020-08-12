@@ -33,20 +33,24 @@ hr.small, hr.large {
 }
 
 h1 {
-  font-family: "Helvetica Bold", sans-serif;
+  font-family: "Playfair Display";
   font-size: 40px;
+  font-weight: bold;
 }
 
 h2 {
-  font-family: "Helvetica Bold", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
 }
 
 h3 {
-  font-family: "Garamond", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
 }
 
 p {
-  font-family: "Garamond";
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
 }
 
 .legend-large-label {
