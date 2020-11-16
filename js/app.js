@@ -63,22 +63,22 @@
     //
     L.geoJSON(ZipsGeojson ).addTo(map);
 
-    // L.geoJSON(airbnbGeojson, {
-    //     pointToLayer: function(feature, ll) {
-    //       return L.circleMarker(ll, {
-    //         opacity: 1,
-    //         weight: 2,
-    //         fillOpacity: 0,
-    //       })
-    //     },
-    //     onEachFeature: function(feature, layer) {
-    //       // console.log(feature.properties)
-    //
-    //       var tooltip = 'Price: ' + feature.properties.PRICE;
-    //
-    //       layer.bindTooltip(tooltip);
-    //     }
-    // }).addTo(map)
+    L.geoJSON(airbnbGeojson, {
+        pointToLayer: function(feature, ll) {
+          return L.circleMarker(ll, {
+            opacity: 1,
+            weight: 2,
+            fillOpacity: 0,
+          })
+        },
+        onEachFeature: function(feature, layer) {
+          // console.log(feature.properties)
+
+          var tooltip = 'Price: ' + feature.properties.PRICE;
+
+          layer.bindTooltip(tooltip);
+        }
+    }).addTo(map)
 
   }
 
