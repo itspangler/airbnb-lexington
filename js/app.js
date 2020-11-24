@@ -18,6 +18,7 @@
 
   var ZipsGeojsonData = d3.json('data/lex-zips.geojson');
   var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
+  var medValBG = d3.json('data/lex-bg-medval.geojson');
 
   Promise.all([ZipsGeojsonData, airbnbCsvData]).then(function(data) {
 
@@ -54,14 +55,16 @@
 
   // define drawmap functionality
 
-  function drawMap(ZipsGeojson, airbnbGeojson) {
+  function drawMap(ZipsGeojson, medValBG, airbnbGeojson) {
 
     // var = zipsOptions {
     //   style {
     //   }
     // };
     //
-    L.geoJSON(ZipsGeojson ).addTo(map);
+    L.geoJSON(ZipsGeojson).addTo(map);
+
+    L.geoJSON(medValBG).addTo(map);
 
     L.geoJSON(airbnbGeojson, {
         pointToLayer: function(feature, ll) {
