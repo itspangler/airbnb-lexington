@@ -1,9 +1,9 @@
 (function() {
 
   var map = L.map('map', {
-    zoomSnap: .1,
+    zoomSnap: .5,
     center: [38.03, -84.5],
-    zoom: 10,
+    zoom: 13,
     minZoom: 0,
     maxZoom: 20,
   });
@@ -16,11 +16,11 @@
   	ext: 'png'
   }).addTo(map);
 
-  var ZipsGeojsonData = d3.json('data/lex-zips.geojson');
+  // var ZipsGeojsonData = d3.json('data/lex-zips.geojson');
+  var MedValBG = d3.json('data/bg-medval-reproject.geojson');
   var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
-  var medValBG = d3.json('data/lex-bg-medval.geojson');
 
-  Promise.all([ZipsGeojsonData, airbnbCsvData]).then(function(data) {
+  Promise.all([MedValBG, airbnbCsvData]).then(function(data) {
 
     var csvData = data[1];
 
@@ -55,23 +55,28 @@
 
   // define drawmap functionality
 
-  function drawMap(ZipsGeojson, medValBG, airbnbGeojson) {
+  function drawMap(MedValBG, airbnbGeojson) {
 
     // var = zipsOptions {
     //   style {
     //   }
     // };
     //
-    L.geoJSON(ZipsGeojson).addTo(map);
+    L.geoJSON(MedValBG, {
 
-    L.geoJSON(medValBG).addTo(map);
+    }).addTo(map);
+
+    // console.log(MedValBG.features);
 
     L.geoJSON(airbnbGeojson, {
         pointToLayer: function(feature, ll) {
           return L.circleMarker(ll, {
-            opacity: 1,
-            weight: 2,
-            fillOpacity: 0,
+            // opacity: 0.5,
+            weight: 0,
+            fillOpacity: 0.6,
+            radius: 5,
+            fillColor: 'red',
+            // color: 'white',
           })
         },
         onEachFeature: function(feature, layer) {
@@ -80,9 +85,52 @@
           var tooltip = 'Price: ' + feature.properties.PRICE;
 
           layer.bindTooltip(tooltip);
-        }
-    }).addTo(map)
 
+          function onEachFeature(feature, layer){
+              layer.on('click', function(e){
+                  zoomToFeature(e)
+              });
+
+          }
+
+          // when mousing over a layer
+					layer.on('mouseover', function() {
+
+						// change the stroke color and bring that element to the front
+						layer.setStyle({
+							fillColor: 'yellow',
+              // color: '#ff6e00',
+              radius: 10,
+              fillOpacity: 0.9,
+						}).bringToFront();
+					});
+
+					// on mousing off layer
+					layer.on('mouseout', function() {
+
+						// reset the layer style to its original stroke color
+						layer.setStyle({
+              fillColor: 'red',
+              // color: 'white',
+              radius: 5,
+						});
+					});
+				}
+
+    }).addTo(map)
+  }
+
+  // map.fitBounds(MedValBG.getBounds(), {
+  //   paddingTopLeft: [25, 25] // push off top left for sake of legend
+  // });
+
+  // define zoom to feature on click
+
+  function zoomToFeature(e)
+  {
+    var latLngs = [e.target.getLatLng()];
+    var markerBounds = L.latLngBounds(latLngs);
+    map.fitBounds(markerBounds);
   }
 
   // define proportional circle functionality

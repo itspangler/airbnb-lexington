@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2020-11-23T11:05:56" saveUserFull="Ian Spangler" projectname="" saveUser="ianspangler" version="3.14.16-Pi">
+<qgis saveDateTime="2020-11-25T17:13:33" saveUserFull="Ian Spangler" projectname="" saveUser="ianspangler" version="3.14.16-Pi">
   <homePath path=""/>
   <title></title>
   <autotransaction active="0"/>
@@ -20,24 +20,94 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-layer name="med-value-change.csvt" source="./data/census-data/med-value-change.csvt.csv" checked="Qt::Checked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226" expanded="1" legend_split_behavior="0">
+    <layer-tree-layer name="med-value-change.csvt" source="./data/census-data/med-value-change.csvt.csv?type=csv&amp;maxFields=10000&amp;detectTypes=yes&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no" checked="Qt::Checked" legend_exp="" patch_size="-1,-1" providerKey="delimitedtext" id="med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692" expanded="1" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer name="lex-bg" source="./data/lex-bg.geojson|layername=lex-bg" checked="Qt::Checked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4" expanded="1" legend_split_behavior="0">
+    <layer-tree-layer name="lex-bg-medval" source="./data/lex-bg-medval.geojson" checked="Qt::Checked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0" expanded="1" legend_split_behavior="0">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer name="lex-bg-medval" source="./data/lex-bg-medval.geojson" checked="Qt::Unchecked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0" expanded="1" legend_split_behavior="0">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer name="lex-bg" source="./data/lex-bg.geojson|layername=lex-bg" checked="Qt::Unchecked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4" expanded="1" legend_split_behavior="0">
+      <customproperties/>
+    </layer-tree-layer>
+    <layer-tree-layer name="lex-bg copy" source="./data/lex-bg.geojson|layername=lex-bg" checked="Qt::Unchecked" legend_exp="" patch_size="-1,-1" providerKey="ogr" id="lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b" expanded="1" legend_split_behavior="0">
       <customproperties/>
     </layer-tree-layer>
     <custom-order enabled="0">
       <item>lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4</item>
-      <item>med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226</item>
+      <item>med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692</item>
+      <item>lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b</item>
+      <item>lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0</item>
+      <item>lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings type="1" mode="2" tolerance="12" enabled="0" minScale="0" self-snapping="0" scaleDependencyMode="0" intersection-snapping="0" maxScale="0" unit="1">
     <individual-layer-settings>
       <layer-setting type="1" tolerance="12" enabled="0" minScale="0" units="1" id="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4" maxScale="0"/>
+      <layer-setting type="1" tolerance="12" enabled="0" minScale="0" units="1" id="lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0" maxScale="0"/>
+      <layer-setting type="1" tolerance="12" enabled="0" minScale="0" units="1" id="lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0" maxScale="0"/>
+      <layer-setting type="1" tolerance="12" enabled="0" minScale="0" units="1" id="lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b" maxScale="0"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations/>
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>-84.78038579198300795</xmin>
+      <ymin>37.84149922860197535</ymin>
+      <xmax>-84.16078580176056789</xmax>
+      <ymax>38.22589078668366369</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]]</wkt>
+        <proj4>+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+        <srsid>3401</srsid>
+        <srid>4269</srid>
+        <authid>EPSG:4269</authid>
+        <description>NAD83</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <projectModels/>
+  <legend updateDrawingOrder="true">
+    <legendlayer checked="Qt::Checked" name="med-value-change.csvt" open="true" showFeatureCount="0" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" isInOverview="0" layerid="med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Checked" name="lex-bg-medval" open="true" showFeatureCount="0" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="1" isInOverview="0" layerid="lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Unchecked" name="lex-bg-medval" open="true" showFeatureCount="0" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Unchecked" name="lex-bg" open="true" showFeatureCount="0" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4"/>
+      </filegroup>
+    </legendlayer>
+    <legendlayer checked="Qt::Unchecked" name="lex-bg copy" open="true" showFeatureCount="0" drawingOrder="-1">
+      <filegroup hidden="false" open="true">
+        <legendlayerfile visible="0" isInOverview="0" layerid="lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b"/>
+      </filegroup>
+    </legendlayer>
+  </legend>
+  <mapViewDocks/>
+  <mapViewDocks3D/>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
     <units>degrees</units>
     <extent>
       <xmin>-84.8866241596110882</xmin>
@@ -62,21 +132,81 @@
     <rendermaptile>0</rendermaptile>
     <expressionContextScope/>
   </mapcanvas>
-  <projectModels/>
-  <legend updateDrawingOrder="true">
-    <legendlayer checked="Qt::Checked" name="med-value-change.csvt" open="true" showFeatureCount="0" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile visible="1" isInOverview="0" layerid="med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226"/>
-      </filegroup>
-    </legendlayer>
-    <legendlayer checked="Qt::Checked" name="lex-bg" open="true" showFeatureCount="0" drawingOrder="-1">
-      <filegroup hidden="false" open="true">
-        <legendlayerfile visible="1" isInOverview="0" layerid="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4"/>
-      </filegroup>
-    </legendlayer>
-  </legend>
-  <mapViewDocks/>
-  <mapViewDocks3D/>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>-84.8866241596110882</xmin>
+      <ymin>37.82441193870375429</ymin>
+      <xmax>-84.26702416938864815</xmax>
+      <ymax>38.20880349678544263</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]]</wkt>
+        <proj4>+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+        <srsid>3401</srsid>
+        <srid>4269</srid>
+        <authid>EPSG:4269</authid>
+        <description>NAD83</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <mapcanvas name="mAreaCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>-84.8866241596110882</xmin>
+      <ymin>37.82441193870375429</ymin>
+      <xmax>-84.26702416938864815</xmax>
+      <ymax>38.20880349678544263</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]]</wkt>
+        <proj4>+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+        <srsid>3401</srsid>
+        <srid>4269</srid>
+        <authid>EPSG:4269</authid>
+        <description>NAD83</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
+  <mapcanvas name="georefCanvas" annotationsVisible="1">
+    <units>degrees</units>
+    <extent>
+      <xmin>-84.8866241596110882</xmin>
+      <ymin>37.82441193870375429</ymin>
+      <xmax>-84.26702416938864815</xmax>
+      <ymax>38.20880349678544263</ymax>
+    </extent>
+    <rotation>0</rotation>
+    <destinationsrs>
+      <spatialrefsys>
+        <wkt>GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]]</wkt>
+        <proj4>+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs</proj4>
+        <srsid>3401</srsid>
+        <srid>4269</srid>
+        <authid>EPSG:4269</authid>
+        <description>NAD83</description>
+        <projectionacronym>longlat</projectionacronym>
+        <ellipsoidacronym>GRS80</ellipsoidacronym>
+        <geographicflag>true</geographicflag>
+      </spatialrefsys>
+    </destinationsrs>
+    <rendermaptile>0</rendermaptile>
+    <expressionContextScope/>
+  </mapcanvas>
   <projectlayers>
     <maplayer maxScale="0" simplifyDrawingHints="1" wkbType="MultiPolygon" simplifyDrawingTol="1" styleCategories="AllStyleCategories" labelsEnabled="0" autoRefreshTime="0" simplifyLocal="1" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyMessage="" geometry="Polygon" simplifyMaxScale="1" simplifyAlgorithm="0" readOnly="0" minScale="100000000" type="vector" refreshOnNotifyEnabled="0">
       <extent>
@@ -85,12 +215,12 @@
         <xmax>1631016.68519866093993187</xmax>
         <ymax>259108.07567035497049801</ymax>
       </extent>
-      <id>lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4</id>
+      <id>lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b</id>
       <datasource>./data/lex-bg.geojson|layername=lex-bg</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>lex-bg</layername>
+      <layername>lex-bg copy</layername>
       <srs>
         <spatialrefsys>
           <wkt>PROJCS["NAD83 / Kentucky North (ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",37.96666666666667],PARAMETER["standard_parallel_2",38.96666666666667],PARAMETER["latitude_of_origin",37.5],PARAMETER["central_meridian",-84.25],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["US survey foot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2246"]]</wkt>
@@ -148,7 +278,7 @@
       </resourceMetadata>
       <provider encoding="UTF-8">ogr</provider>
       <vectorjoins>
-        <join targetFieldName="GEOID" joinFieldName="GEOID" joinLayerId="med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226" dynamicForm="0" upsertOnEdit="0" cascadedDelete="0" memoryCache="1" editable="0"/>
+        <join targetFieldName="GEOIDnum" joinFieldName="GEO_ID" joinLayerId="med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692" dynamicForm="0" upsertOnEdit="0" cascadedDelete="0" memoryCache="1" editable="0"/>
       </vectorjoins>
       <layerDependencies/>
       <dataDependencies/>
@@ -172,18 +302,72 @@
       <renderer-v2 type="singleSymbol" enableorderby="0" forceraster="0" symbollevels="0">
         <symbols>
           <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
-            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="255,158,23,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
+            <layer pass="0" locked="0" enabled="1" class="LinePatternFill">
+              <prop k="angle" v="45"/>
+              <prop k="color" v="55,126,184,255"/>
+              <prop k="distance" v="2"/>
+              <prop k="distance_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="distance_unit" v="MM"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
               <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
               <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
               <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+              <symbol type="line" name="@0@0" clip_to_extent="1" alpha="1" force_rhr="0">
+                <layer pass="0" locked="0" enabled="1" class="SimpleLine">
+                  <prop k="capstyle" v="square"/>
+                  <prop k="customdash" v="5;2"/>
+                  <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                  <prop k="customdash_unit" v="MM"/>
+                  <prop k="draw_inside_polygon" v="0"/>
+                  <prop k="joinstyle" v="bevel"/>
+                  <prop k="line_color" v="61,61,61,255"/>
+                  <prop k="line_style" v="solid"/>
+                  <prop k="line_width" v="0.3"/>
+                  <prop k="line_width_unit" v="MM"/>
+                  <prop k="offset" v="0"/>
+                  <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                  <prop k="offset_unit" v="MM"/>
+                  <prop k="ring_filter" v="0"/>
+                  <prop k="use_custom_dash" v="0"/>
+                  <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                  <data_defined_properties>
+                    <Option type="Map">
+                      <Option type="QString" name="name" value=""/>
+                      <Option name="properties"/>
+                      <Option type="QString" name="type" value="collection"/>
+                    </Option>
+                  </data_defined_properties>
+                </layer>
+              </symbol>
+            </layer>
+            <layer pass="0" locked="0" enabled="1" class="SimpleLine">
+              <prop k="capstyle" v="square"/>
+              <prop k="customdash" v="5;2"/>
+              <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="customdash_unit" v="MM"/>
+              <prop k="draw_inside_polygon" v="0"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="line_color" v="61,61,61,255"/>
+              <prop k="line_style" v="solid"/>
+              <prop k="line_width" v="0.26"/>
+              <prop k="line_width_unit" v="MM"/>
+              <prop k="offset" v="0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="ring_filter" v="0"/>
+              <prop k="use_custom_dash" v="0"/>
+              <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
               <data_defined_properties>
                 <Option type="Map">
                   <Option type="QString" name="name" value=""/>
@@ -198,9 +382,7 @@
         <sizescale/>
       </renderer-v2>
       <customproperties>
-        <property key="dualview/previewExpressions">
-          <value>"NAMELSAD"</value>
-        </property>
+        <property value="&quot;NAMELSAD&quot;" key="dualview/previewExpressions"/>
         <property value="0" key="embeddedWidgets/count"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -211,6 +393,7 @@
       <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
         <DiagramCategory spacingUnit="MM" spacing="5" opacity="1" spacingUnitScale="3x:0,0,0,0,0,0" diagramOrientation="Up" barWidth="5" sizeType="MM" penAlpha="255" width="15" height="15" scaleDependency="Area" rotationOffset="270" backgroundAlpha="255" backgroundColor="#ffffff" direction="0" lineSizeScale="3x:0,0,0,0,0,0" sizeScale="3x:0,0,0,0,0,0" penWidth="0" enabled="0" minScaleDenominator="0" showAxis="1" minimumSize="0" scaleBasedVisibility="0" maxScaleDenominator="1e+08" penColor="#000000" labelPlacementMethod="XHeight" lineSizeType="MM">
           <fontProperties style="" description=".AppleSystemUIFont,13,-1,5,50,0,0,0,0,0"/>
+          <attribute field="" label="" color="#000000"/>
           <axisSymbol>
             <symbol type="line" name="" clip_to_extent="1" alpha="1" force_rhr="0">
               <layer pass="0" locked="0" enabled="1" class="SimpleLine">
@@ -348,6 +531,13 @@
             </config>
           </editWidget>
         </field>
+        <field name="GEOIDnum">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
         <field name="med-value-change.csvt_name">
           <editWidget type="TextEdit">
             <config>
@@ -390,10 +580,11 @@
         <alias name="" field="AWATER" index="9"/>
         <alias name="" field="INTPTLAT" index="10"/>
         <alias name="" field="INTPTLON" index="11"/>
-        <alias name="" field="med-value-change.csvt_name" index="12"/>
-        <alias name="" field="med-value-change.csvt_med_val_13" index="13"/>
-        <alias name="" field="med-value-change.csvt_med_val_18" index="14"/>
-        <alias name="" field="med-value-change.csvt_pctgrowth" index="15"/>
+        <alias name="" field="GEOIDnum" index="12"/>
+        <alias name="" field="med-value-change.csvt_name" index="13"/>
+        <alias name="" field="med-value-change.csvt_med_val_13" index="14"/>
+        <alias name="" field="med-value-change.csvt_med_val_18" index="15"/>
+        <alias name="" field="med-value-change.csvt_pctgrowth" index="16"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -410,6 +601,7 @@
         <default expression="" field="AWATER" applyOnUpdate="0"/>
         <default expression="" field="INTPTLAT" applyOnUpdate="0"/>
         <default expression="" field="INTPTLON" applyOnUpdate="0"/>
+        <default expression="" field="GEOIDnum" applyOnUpdate="0"/>
         <default expression="" field="med-value-change.csvt_name" applyOnUpdate="0"/>
         <default expression="" field="med-value-change.csvt_med_val_13" applyOnUpdate="0"/>
         <default expression="" field="med-value-change.csvt_med_val_18" applyOnUpdate="0"/>
@@ -428,6 +620,7 @@
         <constraint unique_strength="0" exp_strength="0" field="AWATER" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="INTPTLAT" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="INTPTLON" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEOIDnum" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_name" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_med_val_13" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_med_val_18" notnull_strength="0" constraints="0"/>
@@ -446,6 +639,7 @@
         <constraint field="AWATER" exp="" desc=""/>
         <constraint field="INTPTLAT" exp="" desc=""/>
         <constraint field="INTPTLON" exp="" desc=""/>
+        <constraint field="GEOIDnum" exp="" desc=""/>
         <constraint field="med-value-change.csvt_name" exp="" desc=""/>
         <constraint field="med-value-change.csvt_med_val_13" exp="" desc=""/>
         <constraint field="med-value-change.csvt_med_val_18" exp="" desc=""/>
@@ -455,13 +649,13 @@
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
       </attributeactions>
-      <attributetableconfig sortExpression="&quot;ALAND&quot;" sortOrder="0" actionWidgetStyle="dropDown">
+      <attributetableconfig sortExpression="&quot;med-value-change.csvt_pctgrowth&quot;" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
           <column type="field" name="STATEFP" hidden="0" width="-1"/>
           <column type="field" name="COUNTYFP" hidden="0" width="-1"/>
           <column type="field" name="TRACTCE" hidden="0" width="-1"/>
           <column type="field" name="BLKGRPCE" hidden="0" width="-1"/>
-          <column type="field" name="GEOID" hidden="0" width="-1"/>
+          <column type="field" name="GEOID" hidden="0" width="183"/>
           <column type="field" name="NAMELSAD" hidden="0" width="-1"/>
           <column type="field" name="MTFCC" hidden="0" width="-1"/>
           <column type="field" name="FUNCSTAT" hidden="0" width="-1"/>
@@ -470,9 +664,10 @@
           <column type="field" name="INTPTLAT" hidden="0" width="-1"/>
           <column type="field" name="INTPTLON" hidden="0" width="-1"/>
           <column type="actions" hidden="1" width="-1"/>
-          <column type="field" name="med-value-change.csvt_name" hidden="0" width="-1"/>
-          <column type="field" name="med-value-change.csvt_med_val_13" hidden="0" width="-1"/>
-          <column type="field" name="med-value-change.csvt_med_val_18" hidden="0" width="-1"/>
+          <column type="field" name="GEOIDnum" hidden="0" width="-1"/>
+          <column type="field" name="med-value-change.csvt_name" hidden="0" width="152"/>
+          <column type="field" name="med-value-change.csvt_med_val_13" hidden="0" width="118"/>
+          <column type="field" name="med-value-change.csvt_med_val_18" hidden="0" width="120"/>
           <column type="field" name="med-value-change.csvt_pctgrowth" hidden="0" width="-1"/>
         </columns>
       </attributetableconfig>
@@ -511,6 +706,7 @@ def my_form_open(dialog, layer, feature):
         <field name="COUNTYFP" editable="1"/>
         <field name="FUNCSTAT" editable="1"/>
         <field name="GEOID" editable="1"/>
+        <field name="GEOIDnum" editable="1"/>
         <field name="INTPTLAT" editable="1"/>
         <field name="INTPTLON" editable="1"/>
         <field name="MTFCC" editable="1"/>
@@ -533,6 +729,7 @@ def my_form_open(dialog, layer, feature):
         <field name="COUNTYFP" labelOnTop="0"/>
         <field name="FUNCSTAT" labelOnTop="0"/>
         <field name="GEOID" labelOnTop="0"/>
+        <field name="GEOIDnum" labelOnTop="0"/>
         <field name="INTPTLAT" labelOnTop="0"/>
         <field name="INTPTLON" labelOnTop="0"/>
         <field name="MTFCC" labelOnTop="0"/>
@@ -553,23 +750,1136 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>"NAMELSAD"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer type="vector" autoRefreshEnabled="0" refreshOnNotifyMessage="" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" minScale="1e+08" autoRefreshTime="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" maxScale="0" readOnly="0">
-      <id>med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226</id>
-      <datasource>./data/census-data/med-value-change.csvt.csv</datasource>
+    <maplayer maxScale="0" simplifyDrawingHints="1" wkbType="MultiPolygon" simplifyDrawingTol="1" styleCategories="AllStyleCategories" labelsEnabled="0" autoRefreshTime="0" simplifyLocal="1" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyMessage="" geometry="Polygon" simplifyMaxScale="1" simplifyAlgorithm="0" readOnly="0" minScale="100000000" type="vector" refreshOnNotifyEnabled="0">
+      <extent>
+        <xmin>1522178.77955185435712337</xmin>
+        <ymin>125760.4106103896338027</ymin>
+        <xmax>1631016.68519866093993187</xmax>
+        <ymax>259108.07567035497049801</ymax>
+      </extent>
+      <id>lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4</id>
+      <datasource>./data/lex-bg.geojson|layername=lex-bg</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>med-value-change.csvt</layername>
+      <layername>lex-bg</layername>
       <srs>
         <spatialrefsys>
-          <wkt></wkt>
-          <proj4></proj4>
-          <srsid>0</srsid>
-          <srid>0</srid>
-          <authid></authid>
-          <description></description>
-          <projectionacronym></projectionacronym>
-          <ellipsoidacronym></ellipsoidacronym>
+          <wkt>PROJCS["NAD83 / Kentucky North (ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",37.96666666666667],PARAMETER["standard_parallel_2",38.96666666666667],PARAMETER["latitude_of_origin",37.5],PARAMETER["central_meridian",-84.25],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["US survey foot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2246"]]</wkt>
+          <proj4>+proj=lcc +lat_1=37.96666666666667 +lat_2=38.96666666666667 +lat_0=37.5 +lon_0=-84.25 +x_0=500000.0001016001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs</proj4>
+          <srsid>228</srsid>
+          <srid>2246</srid>
+          <authid>EPSG:2246</authid>
+          <description>NAD83 / Kentucky North (ftUS)</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>true</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minx="0" minz="0" maxy="0" maxz="0" maxx="0" dimensions="2" miny="0" crs=""/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins>
+        <join targetFieldName="GEOIDnum" joinFieldName="GEO_ID" joinLayerId="med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692" dynamicForm="0" upsertOnEdit="0" cascadedDelete="0" memoryCache="1" editable="0"/>
+      </vectorjoins>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal startField="" durationUnit="min" mode="0" endField="" fixedDuration="0" enabled="0" startExpression="" durationField="" endExpression="" accumulate="0">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <renderer-v2 type="graduatedSymbol" attr="med-value-change.csvt_pctgrowth" graduatedMethod="GraduatedColor" enableorderby="0" forceraster="0" symbollevels="0">
+        <ranges>
+          <range lower="0.000000000000000" label="0 - 9.1" render="true" symbol="0" upper="9.060000000000000"/>
+          <range lower="9.060000000000000" label="9.1 - 23.5" render="true" symbol="1" upper="23.510000000000002"/>
+          <range lower="23.510000000000002" label="23.5 - 53.3" render="true" symbol="2" upper="53.259999999999998"/>
+          <range lower="53.259999999999998" label="53.3 - 99.7" render="true" symbol="3" upper="99.739999999999995"/>
+          <range lower="99.739999999999995" label="99.7 - 350.9" render="true" symbol="4" upper="350.930000000000007"/>
+        </ranges>
+        <symbols>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="254,240,217,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="1" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="253,204,138,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="2" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="252,141,89,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="3" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="227,74,51,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="4" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="179,0,0,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="141,90,153,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp type="gradient" name="[source]">
+          <prop k="color1" v="254,240,217,255"/>
+          <prop k="color2" v="179,0,0,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="rampType" v="gradient"/>
+          <prop k="stops" v="0.25;253,204,138,255:0.5;252,141,89,255:0.75;227,74,51,255"/>
+        </colorramp>
+        <classificationMethod id="Jenks">
+          <symmetricMode symmetrypoint="0" enabled="0" astride="0"/>
+          <labelFormat labelprecision="1" format="%1 - %2" trimtrailingzeroes="1"/>
+          <parameters>
+            <Option/>
+          </parameters>
+          <extraInformation/>
+        </classificationMethod>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"NAMELSAD"</value>
+        </property>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory spacingUnit="MM" spacing="5" opacity="1" spacingUnitScale="3x:0,0,0,0,0,0" diagramOrientation="Up" barWidth="5" sizeType="MM" penAlpha="255" width="15" height="15" scaleDependency="Area" rotationOffset="270" backgroundAlpha="255" backgroundColor="#ffffff" direction="0" lineSizeScale="3x:0,0,0,0,0,0" sizeScale="3x:0,0,0,0,0,0" penWidth="0" enabled="0" minScaleDenominator="0" showAxis="1" minimumSize="0" scaleBasedVisibility="0" maxScaleDenominator="1e+08" penColor="#000000" labelPlacementMethod="XHeight" lineSizeType="MM">
+          <fontProperties style="" description=".AppleSystemUIFont,13,-1,5,50,0,0,0,0,0"/>
+          <attribute field="" label="" color="#000000"/>
+          <axisSymbol>
+            <symbol type="line" name="" clip_to_extent="1" alpha="1" force_rhr="0">
+              <layer pass="0" locked="0" enabled="1" class="SimpleLine">
+                <prop k="capstyle" v="square"/>
+                <prop k="customdash" v="5;2"/>
+                <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <prop k="customdash_unit" v="MM"/>
+                <prop k="draw_inside_polygon" v="0"/>
+                <prop k="joinstyle" v="bevel"/>
+                <prop k="line_color" v="35,35,35,255"/>
+                <prop k="line_style" v="solid"/>
+                <prop k="line_width" v="0.26"/>
+                <prop k="line_width_unit" v="MM"/>
+                <prop k="offset" v="0"/>
+                <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <prop k="offset_unit" v="MM"/>
+                <prop k="ring_filter" v="0"/>
+                <prop k="use_custom_dash" v="0"/>
+                <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <data_defined_properties>
+                  <Option type="Map">
+                    <Option type="QString" name="name" value=""/>
+                    <Option name="properties"/>
+                    <Option type="QString" name="type" value="collection"/>
+                  </Option>
+                </data_defined_properties>
+              </layer>
+            </symbol>
+          </axisSymbol>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings linePlacementFlags="18" placement="1" zIndex="0" priority="0" obstacle="0" showAll="1" dist="0">
+        <properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration type="Map">
+          <Option type="Map" name="QgsGeometryGapCheck">
+            <Option type="double" name="allowedGapsBuffer" value="0"/>
+            <Option type="bool" name="allowedGapsEnabled" value="false"/>
+            <Option type="QString" name="allowedGapsLayer" value=""/>
+          </Option>
+        </checkConfiguration>
+      </geometryOptions>
+      <referencedLayers/>
+      <referencingLayers/>
+      <fieldConfiguration>
+        <field name="STATEFP">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="NAMELSAD">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="MTFCC">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="FUNCSTAT">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="ALAND">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="AWATER">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLAT">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="INTPTLON">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOIDnum">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="med-value-change.csvt_name">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="med-value-change.csvt_med_val_13">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="med-value-change.csvt_med_val_18">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="med-value-change.csvt_pctgrowth">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" field="STATEFP" index="0"/>
+        <alias name="" field="COUNTYFP" index="1"/>
+        <alias name="" field="TRACTCE" index="2"/>
+        <alias name="" field="BLKGRPCE" index="3"/>
+        <alias name="" field="GEOID" index="4"/>
+        <alias name="" field="NAMELSAD" index="5"/>
+        <alias name="" field="MTFCC" index="6"/>
+        <alias name="" field="FUNCSTAT" index="7"/>
+        <alias name="" field="ALAND" index="8"/>
+        <alias name="" field="AWATER" index="9"/>
+        <alias name="" field="INTPTLAT" index="10"/>
+        <alias name="" field="INTPTLON" index="11"/>
+        <alias name="" field="GEOIDnum" index="12"/>
+        <alias name="" field="med-value-change.csvt_name" index="13"/>
+        <alias name="" field="med-value-change.csvt_med_val_13" index="14"/>
+        <alias name="" field="med-value-change.csvt_med_val_18" index="15"/>
+        <alias name="" field="med-value-change.csvt_pctgrowth" index="16"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="STATEFP" applyOnUpdate="0"/>
+        <default expression="" field="COUNTYFP" applyOnUpdate="0"/>
+        <default expression="" field="TRACTCE" applyOnUpdate="0"/>
+        <default expression="" field="BLKGRPCE" applyOnUpdate="0"/>
+        <default expression="" field="GEOID" applyOnUpdate="0"/>
+        <default expression="" field="NAMELSAD" applyOnUpdate="0"/>
+        <default expression="" field="MTFCC" applyOnUpdate="0"/>
+        <default expression="" field="FUNCSTAT" applyOnUpdate="0"/>
+        <default expression="" field="ALAND" applyOnUpdate="0"/>
+        <default expression="" field="AWATER" applyOnUpdate="0"/>
+        <default expression="" field="INTPTLAT" applyOnUpdate="0"/>
+        <default expression="" field="INTPTLON" applyOnUpdate="0"/>
+        <default expression="" field="GEOIDnum" applyOnUpdate="0"/>
+        <default expression="" field="med-value-change.csvt_name" applyOnUpdate="0"/>
+        <default expression="" field="med-value-change.csvt_med_val_13" applyOnUpdate="0"/>
+        <default expression="" field="med-value-change.csvt_med_val_18" applyOnUpdate="0"/>
+        <default expression="" field="med-value-change.csvt_pctgrowth" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint unique_strength="0" exp_strength="0" field="STATEFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="COUNTYFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="TRACTCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="BLKGRPCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEOID" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="NAMELSAD" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="MTFCC" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="FUNCSTAT" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="ALAND" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="AWATER" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="INTPTLAT" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="INTPTLON" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEOIDnum" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_name" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_med_val_13" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_med_val_18" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="med-value-change.csvt_pctgrowth" notnull_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="STATEFP" exp="" desc=""/>
+        <constraint field="COUNTYFP" exp="" desc=""/>
+        <constraint field="TRACTCE" exp="" desc=""/>
+        <constraint field="BLKGRPCE" exp="" desc=""/>
+        <constraint field="GEOID" exp="" desc=""/>
+        <constraint field="NAMELSAD" exp="" desc=""/>
+        <constraint field="MTFCC" exp="" desc=""/>
+        <constraint field="FUNCSTAT" exp="" desc=""/>
+        <constraint field="ALAND" exp="" desc=""/>
+        <constraint field="AWATER" exp="" desc=""/>
+        <constraint field="INTPTLAT" exp="" desc=""/>
+        <constraint field="INTPTLON" exp="" desc=""/>
+        <constraint field="GEOIDnum" exp="" desc=""/>
+        <constraint field="med-value-change.csvt_name" exp="" desc=""/>
+        <constraint field="med-value-change.csvt_med_val_13" exp="" desc=""/>
+        <constraint field="med-value-change.csvt_med_val_18" exp="" desc=""/>
+        <constraint field="med-value-change.csvt_pctgrowth" exp="" desc=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="&quot;med-value-change.csvt_pctgrowth&quot;" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column type="field" name="STATEFP" hidden="0" width="-1"/>
+          <column type="field" name="COUNTYFP" hidden="0" width="-1"/>
+          <column type="field" name="TRACTCE" hidden="0" width="-1"/>
+          <column type="field" name="BLKGRPCE" hidden="0" width="-1"/>
+          <column type="field" name="GEOID" hidden="0" width="183"/>
+          <column type="field" name="NAMELSAD" hidden="0" width="-1"/>
+          <column type="field" name="MTFCC" hidden="0" width="-1"/>
+          <column type="field" name="FUNCSTAT" hidden="0" width="-1"/>
+          <column type="field" name="ALAND" hidden="0" width="-1"/>
+          <column type="field" name="AWATER" hidden="0" width="-1"/>
+          <column type="field" name="INTPTLAT" hidden="0" width="-1"/>
+          <column type="field" name="INTPTLON" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
+          <column type="field" name="GEOIDnum" hidden="0" width="-1"/>
+          <column type="field" name="med-value-change.csvt_name" hidden="0" width="152"/>
+          <column type="field" name="med-value-change.csvt_med_val_13" hidden="0" width="118"/>
+          <column type="field" name="med-value-change.csvt_med_val_18" hidden="0" width="120"/>
+          <column type="field" name="med-value-change.csvt_pctgrowth" hidden="0" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="ALAND" editable="1"/>
+        <field name="AWATER" editable="1"/>
+        <field name="BLKGRPCE" editable="1"/>
+        <field name="COUNTYFP" editable="1"/>
+        <field name="FUNCSTAT" editable="1"/>
+        <field name="GEOID" editable="1"/>
+        <field name="GEOIDnum" editable="1"/>
+        <field name="INTPTLAT" editable="1"/>
+        <field name="INTPTLON" editable="1"/>
+        <field name="MTFCC" editable="1"/>
+        <field name="NAMELSAD" editable="1"/>
+        <field name="STATEFP" editable="1"/>
+        <field name="TRACTCE" editable="1"/>
+        <field name="med-value-change.csvt_med_val_13" editable="0"/>
+        <field name="med-value-change.csvt_med_val_18" editable="0"/>
+        <field name="med-value-change.csvt_name" editable="0"/>
+        <field name="med-value-change.csvt_pctgrowth" editable="0"/>
+        <field name="med-value-change_med_val_13" editable="0"/>
+        <field name="med-value-change_med_val_18" editable="0"/>
+        <field name="med-value-change_name" editable="0"/>
+        <field name="med-value-change_pctgrowth" editable="0"/>
+      </editable>
+      <labelOnTop>
+        <field name="ALAND" labelOnTop="0"/>
+        <field name="AWATER" labelOnTop="0"/>
+        <field name="BLKGRPCE" labelOnTop="0"/>
+        <field name="COUNTYFP" labelOnTop="0"/>
+        <field name="FUNCSTAT" labelOnTop="0"/>
+        <field name="GEOID" labelOnTop="0"/>
+        <field name="GEOIDnum" labelOnTop="0"/>
+        <field name="INTPTLAT" labelOnTop="0"/>
+        <field name="INTPTLON" labelOnTop="0"/>
+        <field name="MTFCC" labelOnTop="0"/>
+        <field name="NAMELSAD" labelOnTop="0"/>
+        <field name="STATEFP" labelOnTop="0"/>
+        <field name="TRACTCE" labelOnTop="0"/>
+        <field name="med-value-change.csvt_med_val_13" labelOnTop="0"/>
+        <field name="med-value-change.csvt_med_val_18" labelOnTop="0"/>
+        <field name="med-value-change.csvt_name" labelOnTop="0"/>
+        <field name="med-value-change.csvt_pctgrowth" labelOnTop="0"/>
+        <field name="med-value-change_med_val_13" labelOnTop="0"/>
+        <field name="med-value-change_med_val_18" labelOnTop="0"/>
+        <field name="med-value-change_name" labelOnTop="0"/>
+        <field name="med-value-change_pctgrowth" labelOnTop="0"/>
+      </labelOnTop>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression>"NAMELSAD"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer maxScale="0" simplifyDrawingHints="1" wkbType="MultiPolygon" simplifyDrawingTol="1" styleCategories="AllStyleCategories" labelsEnabled="0" autoRefreshTime="0" simplifyLocal="1" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyMessage="" geometry="Polygon" simplifyMaxScale="1" simplifyAlgorithm="0" readOnly="0" minScale="100000000" type="vector" refreshOnNotifyEnabled="0">
+      <extent>
+        <xmin>1522178.77955185435712337</xmin>
+        <ymin>125760.4106103896338027</ymin>
+        <xmax>1631016.68519866093993187</xmax>
+        <ymax>259108.07567035497049801</ymax>
+      </extent>
+      <id>lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0</id>
+      <datasource>./data/lex-bg-medval.geojson</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>lex-bg-medval</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt>PROJCS["NAD83 / Kentucky North (ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",37.96666666666667],PARAMETER["standard_parallel_2",38.96666666666667],PARAMETER["latitude_of_origin",37.5],PARAMETER["central_meridian",-84.25],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["US survey foot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2246"]]</wkt>
+          <proj4>+proj=lcc +lat_1=37.96666666666667 +lat_2=38.96666666666667 +lat_0=37.5 +lon_0=-84.25 +x_0=500000.0001016001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs</proj4>
+          <srsid>228</srsid>
+          <srid>2246</srid>
+          <authid>EPSG:2246</authid>
+          <description>NAD83 / Kentucky North (ftUS)</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent>
+          <spatial minx="0" minz="0" maxy="0" maxz="0" maxx="0" dimensions="2" miny="0" crs=""/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
+      </resourceMetadata>
+      <provider encoding="UTF-8">ogr</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal startField="" durationUnit="min" mode="0" endField="" fixedDuration="0" enabled="0" startExpression="" durationField="" endExpression="" accumulate="0">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <renderer-v2 type="graduatedSymbol" attr="pctgrowth" graduatedMethod="GraduatedColor" enableorderby="0" forceraster="0" symbollevels="0">
+        <ranges>
+          <range lower="0.080000000000000" label="0.1 - 3.5" render="true" symbol="0" upper="3.510000000000000"/>
+          <range lower="3.510000000000000" label="3.5 - 7.1" render="true" symbol="1" upper="7.060000000000000"/>
+          <range lower="7.060000000000000" label="7.1 - 12.2" render="true" symbol="2" upper="12.180000000000000"/>
+          <range lower="12.180000000000000" label="12.2 - 22.5" render="true" symbol="3" upper="22.520000000000000"/>
+          <range lower="22.520000000000000" label="22.5 - 350.9" render="true" symbol="4" upper="350.930000000000007"/>
+        </ranges>
+        <symbols>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="255,255,255,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="1" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="255,191,191,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="2" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="255,128,128,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="3" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="255,64,64,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="fill" name="4" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="255,0,0,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <source-symbol>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="141,90,153,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </source-symbol>
+        <colorramp type="gradient" name="[source]">
+          <prop k="color1" v="255,255,255,255"/>
+          <prop k="color2" v="255,0,0,255"/>
+          <prop k="discrete" v="0"/>
+          <prop k="rampType" v="gradient"/>
+        </colorramp>
+        <classificationMethod id="Quantile">
+          <symmetricMode symmetrypoint="0" enabled="0" astride="0"/>
+          <labelFormat labelprecision="1" format="%1 - %2" trimtrailingzeroes="1"/>
+          <parameters>
+            <Option/>
+          </parameters>
+          <extraInformation/>
+        </classificationMethod>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties>
+        <property value="0" key="embeddedWidgets/count"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer attributeLegend="1" diagramType="Histogram">
+        <DiagramCategory spacingUnit="MM" spacing="5" opacity="1" spacingUnitScale="3x:0,0,0,0,0,0" diagramOrientation="Up" barWidth="5" sizeType="MM" penAlpha="255" width="15" height="15" scaleDependency="Area" rotationOffset="270" backgroundAlpha="255" backgroundColor="#ffffff" direction="0" lineSizeScale="3x:0,0,0,0,0,0" sizeScale="3x:0,0,0,0,0,0" penWidth="0" enabled="0" minScaleDenominator="0" showAxis="1" minimumSize="0" scaleBasedVisibility="0" maxScaleDenominator="1e+08" penColor="#000000" labelPlacementMethod="XHeight" lineSizeType="MM">
+          <fontProperties style="" description=".AppleSystemUIFont,13,-1,5,50,0,0,0,0,0"/>
+          <axisSymbol>
+            <symbol type="line" name="" clip_to_extent="1" alpha="1" force_rhr="0">
+              <layer pass="0" locked="0" enabled="1" class="SimpleLine">
+                <prop k="capstyle" v="square"/>
+                <prop k="customdash" v="5;2"/>
+                <prop k="customdash_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <prop k="customdash_unit" v="MM"/>
+                <prop k="draw_inside_polygon" v="0"/>
+                <prop k="joinstyle" v="bevel"/>
+                <prop k="line_color" v="35,35,35,255"/>
+                <prop k="line_style" v="solid"/>
+                <prop k="line_width" v="0.26"/>
+                <prop k="line_width_unit" v="MM"/>
+                <prop k="offset" v="0"/>
+                <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <prop k="offset_unit" v="MM"/>
+                <prop k="ring_filter" v="0"/>
+                <prop k="use_custom_dash" v="0"/>
+                <prop k="width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+                <data_defined_properties>
+                  <Option type="Map">
+                    <Option type="QString" name="name" value=""/>
+                    <Option name="properties"/>
+                    <Option type="QString" name="type" value="collection"/>
+                  </Option>
+                </data_defined_properties>
+              </layer>
+            </symbol>
+          </axisSymbol>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings linePlacementFlags="18" placement="1" zIndex="0" priority="0" obstacle="0" showAll="1" dist="0">
+        <properties>
+          <Option type="Map">
+            <Option type="QString" name="name" value=""/>
+            <Option name="properties"/>
+            <Option type="QString" name="type" value="collection"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks/>
+        <checkConfiguration type="Map">
+          <Option type="Map" name="QgsGeometryGapCheck">
+            <Option type="double" name="allowedGapsBuffer" value="0"/>
+            <Option type="bool" name="allowedGapsEnabled" value="false"/>
+            <Option type="QString" name="allowedGapsLayer" value=""/>
+          </Option>
+        </checkConfiguration>
+      </geometryOptions>
+      <referencedLayers/>
+      <referencingLayers/>
+      <fieldConfiguration>
+        <field name="STATEFP">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="medval13">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="medval18">
+          <editWidget type="Range">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pctgrowth">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" field="STATEFP" index="0"/>
+        <alias name="" field="COUNTYFP" index="1"/>
+        <alias name="" field="TRACTCE" index="2"/>
+        <alias name="" field="BLKGRPCE" index="3"/>
+        <alias name="" field="GEOID" index="4"/>
+        <alias name="" field="medval13" index="5"/>
+        <alias name="" field="medval18" index="6"/>
+        <alias name="" field="pctgrowth" index="7"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="STATEFP" applyOnUpdate="0"/>
+        <default expression="" field="COUNTYFP" applyOnUpdate="0"/>
+        <default expression="" field="TRACTCE" applyOnUpdate="0"/>
+        <default expression="" field="BLKGRPCE" applyOnUpdate="0"/>
+        <default expression="" field="GEOID" applyOnUpdate="0"/>
+        <default expression="" field="medval13" applyOnUpdate="0"/>
+        <default expression="" field="medval18" applyOnUpdate="0"/>
+        <default expression="" field="pctgrowth" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint unique_strength="0" exp_strength="0" field="STATEFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="COUNTYFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="TRACTCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="BLKGRPCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEOID" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="medval13" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="medval18" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="pctgrowth" notnull_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="STATEFP" exp="" desc=""/>
+        <constraint field="COUNTYFP" exp="" desc=""/>
+        <constraint field="TRACTCE" exp="" desc=""/>
+        <constraint field="BLKGRPCE" exp="" desc=""/>
+        <constraint field="GEOID" exp="" desc=""/>
+        <constraint field="medval13" exp="" desc=""/>
+        <constraint field="medval18" exp="" desc=""/>
+        <constraint field="pctgrowth" exp="" desc=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns>
+          <column type="field" name="STATEFP" hidden="0" width="-1"/>
+          <column type="field" name="COUNTYFP" hidden="0" width="-1"/>
+          <column type="field" name="TRACTCE" hidden="0" width="-1"/>
+          <column type="field" name="BLKGRPCE" hidden="0" width="-1"/>
+          <column type="field" name="GEOID" hidden="0" width="-1"/>
+          <column type="field" name="medval13" hidden="0" width="-1"/>
+          <column type="field" name="medval18" hidden="0" width="-1"/>
+          <column type="field" name="pctgrowth" hidden="0" width="-1"/>
+          <column type="actions" hidden="1" width="-1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+QGIS forms can have a Python function that is called when the form is
+opened.
+
+Use this function to add extra logic to your forms.
+
+Enter the name of the function in the "Python Init function"
+field.
+An example follows:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable>
+        <field name="BLKGRPCE" editable="1"/>
+        <field name="COUNTYFP" editable="1"/>
+        <field name="GEOID" editable="1"/>
+        <field name="STATEFP" editable="1"/>
+        <field name="TRACTCE" editable="1"/>
+        <field name="medval13" editable="1"/>
+        <field name="medval18" editable="1"/>
+        <field name="pctgrowth" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field name="BLKGRPCE" labelOnTop="0"/>
+        <field name="COUNTYFP" labelOnTop="0"/>
+        <field name="GEOID" labelOnTop="0"/>
+        <field name="STATEFP" labelOnTop="0"/>
+        <field name="TRACTCE" labelOnTop="0"/>
+        <field name="medval13" labelOnTop="0"/>
+        <field name="medval18" labelOnTop="0"/>
+        <field name="pctgrowth" labelOnTop="0"/>
+      </labelOnTop>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression>"GEOID"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer maxScale="0" simplifyDrawingHints="1" wkbType="MultiPolygon" simplifyDrawingTol="1" styleCategories="AllStyleCategories" labelsEnabled="0" autoRefreshTime="0" simplifyLocal="1" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyMessage="" geometry="Polygon" simplifyMaxScale="1" simplifyAlgorithm="0" readOnly="0" minScale="100000000" type="vector" refreshOnNotifyEnabled="0">
+      <extent>
+        <xmin>1522178.77955185435712337</xmin>
+        <ymin>125760.4106103896338027</ymin>
+        <xmax>1631016.68519866093993187</xmax>
+        <ymax>259108.07567035497049801</ymax>
+      </extent>
+      <id>lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0</id>
+      <datasource>./data/lex-bg-medval.geojson</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>lex-bg-medval</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt>PROJCS["NAD83 / Kentucky North (ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",37.96666666666667],PARAMETER["standard_parallel_2",38.96666666666667],PARAMETER["latitude_of_origin",37.5],PARAMETER["central_meridian",-84.25],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["US survey foot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2246"]]</wkt>
+          <proj4>+proj=lcc +lat_1=37.96666666666667 +lat_2=38.96666666666667 +lat_0=37.5 +lon_0=-84.25 +x_0=500000.0001016001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs</proj4>
+          <srsid>228</srsid>
+          <srid>2246</srid>
+          <authid>EPSG:2246</authid>
+          <description>NAD83 / Kentucky North (ftUS)</description>
+          <projectionacronym>lcc</projectionacronym>
+          <ellipsoidacronym>GRS80</ellipsoidacronym>
           <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
@@ -619,6 +1929,238 @@ def my_form_open(dialog, layer, feature):
           <end></end>
         </fixedRange>
       </temporal>
+      <renderer-v2 type="singleSymbol" enableorderby="0" forceraster="0" symbollevels="0">
+        <symbols>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1" force_rhr="0">
+            <layer pass="0" locked="0" enabled="1" class="SimpleFill">
+              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="color" v="133,182,111,255"/>
+              <prop k="joinstyle" v="bevel"/>
+              <prop k="offset" v="0,0"/>
+              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
+              <prop k="offset_unit" v="MM"/>
+              <prop k="outline_color" v="35,35,35,255"/>
+              <prop k="outline_style" v="solid"/>
+              <prop k="outline_width" v="0.26"/>
+              <prop k="outline_width_unit" v="MM"/>
+              <prop k="style" v="solid"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </symbols>
+        <rotation/>
+        <sizescale/>
+      </renderer-v2>
+      <customproperties/>
+      <blendMode>0</blendMode>
+      <featureBlendMode>0</featureBlendMode>
+      <layerOpacity>1</layerOpacity>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <referencedLayers/>
+      <referencingLayers/>
+      <fieldConfiguration>
+        <field name="STATEFP">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="COUNTYFP">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="TRACTCE">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="BLKGRPCE">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GEOID">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="medval13">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="medval18">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="pctgrowth">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" field="STATEFP" index="0"/>
+        <alias name="" field="COUNTYFP" index="1"/>
+        <alias name="" field="TRACTCE" index="2"/>
+        <alias name="" field="BLKGRPCE" index="3"/>
+        <alias name="" field="GEOID" index="4"/>
+        <alias name="" field="medval13" index="5"/>
+        <alias name="" field="medval18" index="6"/>
+        <alias name="" field="pctgrowth" index="7"/>
+      </aliases>
+      <excludeAttributesWMS/>
+      <excludeAttributesWFS/>
+      <defaults>
+        <default expression="" field="STATEFP" applyOnUpdate="0"/>
+        <default expression="" field="COUNTYFP" applyOnUpdate="0"/>
+        <default expression="" field="TRACTCE" applyOnUpdate="0"/>
+        <default expression="" field="BLKGRPCE" applyOnUpdate="0"/>
+        <default expression="" field="GEOID" applyOnUpdate="0"/>
+        <default expression="" field="medval13" applyOnUpdate="0"/>
+        <default expression="" field="medval18" applyOnUpdate="0"/>
+        <default expression="" field="pctgrowth" applyOnUpdate="0"/>
+      </defaults>
+      <constraints>
+        <constraint unique_strength="0" exp_strength="0" field="STATEFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="COUNTYFP" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="TRACTCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="BLKGRPCE" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEOID" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="medval13" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="medval18" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="pctgrowth" notnull_strength="0" constraints="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="STATEFP" exp="" desc=""/>
+        <constraint field="COUNTYFP" exp="" desc=""/>
+        <constraint field="TRACTCE" exp="" desc=""/>
+        <constraint field="BLKGRPCE" exp="" desc=""/>
+        <constraint field="GEOID" exp="" desc=""/>
+        <constraint field="medval13" exp="" desc=""/>
+        <constraint field="medval18" exp="" desc=""/>
+        <constraint field="pctgrowth" exp="" desc=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
+        <columns/>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression></previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer type="vector" autoRefreshEnabled="0" refreshOnNotifyMessage="" wkbType="NoGeometry" hasScaleBasedVisibilityFlag="0" minScale="1e+08" autoRefreshTime="0" refreshOnNotifyEnabled="0" geometry="No geometry" styleCategories="AllStyleCategories" maxScale="0" readOnly="0">
+      <id>med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692</id>
+      <datasource>file:./data/census-data/med-value-change.csvt.csv?type=csv&amp;maxFields=10000&amp;detectTypes=yes&amp;geomType=none&amp;subsetIndex=no&amp;watchFile=no</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>med-value-change.csvt</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="">delimitedtext</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <legend type="default-vector"/>
+      <expressionfields/>
+      <map-layer-style-manager current="default">
+        <map-layer-style name="default"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal startField="" durationUnit="min" mode="0" endField="" fixedDuration="0" enabled="0" startExpression="" durationField="" endExpression="" accumulate="0">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
       <customproperties>
         <property key="dualview/previewExpressions">
           <value>"name"</value>
@@ -633,7 +2175,7 @@ def my_form_open(dialog, layer, feature):
       <referencedLayers/>
       <referencingLayers/>
       <fieldConfiguration>
-        <field name="GEOID">
+        <field name="GEO_ID">
           <editWidget type="">
             <config>
               <Option/>
@@ -670,7 +2212,7 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias name="" field="GEOID" index="0"/>
+        <alias name="" field="GEO_ID" index="0"/>
         <alias name="" field="name" index="1"/>
         <alias name="" field="med_val_13" index="2"/>
         <alias name="" field="med_val_18" index="3"/>
@@ -679,21 +2221,21 @@ def my_form_open(dialog, layer, feature):
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default expression="" field="GEOID" applyOnUpdate="0"/>
+        <default expression="" field="GEO_ID" applyOnUpdate="0"/>
         <default expression="" field="name" applyOnUpdate="0"/>
         <default expression="" field="med_val_13" applyOnUpdate="0"/>
         <default expression="" field="med_val_18" applyOnUpdate="0"/>
         <default expression="" field="pctgrowth" applyOnUpdate="0"/>
       </defaults>
       <constraints>
-        <constraint unique_strength="0" exp_strength="0" field="GEOID" notnull_strength="0" constraints="0"/>
+        <constraint unique_strength="0" exp_strength="0" field="GEO_ID" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="name" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="med_val_13" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="med_val_18" notnull_strength="0" constraints="0"/>
         <constraint unique_strength="0" exp_strength="0" field="pctgrowth" notnull_strength="0" constraints="0"/>
       </constraints>
       <constraintExpressions>
-        <constraint field="GEOID" exp="" desc=""/>
+        <constraint field="GEO_ID" exp="" desc=""/>
         <constraint field="name" exp="" desc=""/>
         <constraint field="med_val_13" exp="" desc=""/>
         <constraint field="med_val_18" exp="" desc=""/>
@@ -705,7 +2247,7 @@ def my_form_open(dialog, layer, feature):
       </attributeactions>
       <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column type="field" name="GEOID" hidden="0" width="-1"/>
+          <column type="field" name="GEO_ID" hidden="0" width="-1"/>
           <column type="field" name="name" hidden="0" width="-1"/>
           <column type="field" name="med_val_13" hidden="0" width="-1"/>
           <column type="field" name="med_val_18" hidden="0" width="-1"/>
@@ -735,7 +2277,10 @@ def my_form_open(dialog, layer, feature):
   </projectlayers>
   <layerorder>
     <layer id="lex_bg_3c99dfa5_717d_488c_945e_4c0a53ce8af4"/>
-    <layer id="med_value_change_csvt_47739582_5d0d_4910_bf50_0498ff7da226"/>
+    <layer id="med_value_change_csvt_e08e81e1_840f_4349_b595_8a33b1b76692"/>
+    <layer id="lex_bg_378f73fb_e040_4ce5_931b_845ae73e022b"/>
+    <layer id="lex_bg_medval_4b80eb3d_6cea_4bd3_b88a_be8825ca13f0"/>
+    <layer id="lex_bg_medval_f7ea9a7b_cc71_4424_8ccb_121b6a0527b0"/>
   </layerorder>
   <properties>
     <Digitizing>
