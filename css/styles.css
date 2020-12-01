@@ -4,29 +4,6 @@
   display: none;
 }
 
-.legend-large, .legend-small {
-  border-radius: 50%;
-}
-
-hr.small, hr.large {
-  width: 83px;
-  position: absolute;
-  top: -8px;
-  left: 55px;
-  border: 1px dashed #ccc;
-  /* overwrite assembly.css rule */
-  margin-top: 8px;
-  /* overwrite assembly.css rule */
-}
-
-.boys {
-  color: #6E77B0;
-}
-
-.girls {
-  color: #D96D02;
-}
-
 .txt-h1 {
     font-size: 35px;
     line-height: 54px;
@@ -51,43 +28,4 @@ h3 {
 p {
   font-family: "Poppins", sans-serif;
   font-weight: lighter;
-}
-
-.legend-large-label {
-  font-family: "Garamond";
-}
-
-
-.legend-small-label {
-  font-family: "Garamond";
-}
-
-#legend {
-  padding: 6px 8px;
-  font-size: 1em;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  max-width: 165px;
-}
-
-#legend h5 {
-  font-size: 2.1rem;
-}
-
-#legend span {
-  width: 20px;
-  height: 20px;
-  float: left;
-  margin: 0 10px 4px 0;
-}
-
-#legend label {
-  font-size: 1.2em;
-}
-
-#legend label:after {
-  content: '';
-  display: block;
-  clear: both;
 }
