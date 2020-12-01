@@ -1,6 +1,6 @@
 (function() {
 
-  // map element options
+  // DEFINE MAP OPTIONS
   var options = {
     zoomSnap: 1,
     center: [38.03, -84.5],
@@ -9,7 +9,7 @@
     maxZoom: 20,
   }
 
-  // stamen options
+  // DEFINE BASEMAP OPTIONS
   var stamenOptions = {
     attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     subdomains: 'abcd',
@@ -18,25 +18,20 @@
     ext: 'png'
   }
 
-  // create leaflet map and apply options
+  // DEFINE MAP
   var map = L.map('map', options);
 
-  // set global variables for map layer, mapped attribute, and normalizing attribute
-  var attributeValue = "PRICE";
+  // DEFINE BASEMAP
+  var basemap = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}'
 
-  // create object to hold dropdown bar titles
-  var feature = {
-    "PRICE": "cost of Airbnb listing"
-  }
+  // RADIUS GENERATOR
+  // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
-  // define radius generator
-  var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
-
-  // create objects to hold map data
+  // DEFINE DATA VARIABLES
   var BlockGroups = d3.json('data/bg-race-inc-medval.geojson');
   var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
 
-  // promise.all method for loading data
+  // PROMISE.ALL METHOD FOR LOADING DATA
   Promise.all([BlockGroups, airbnbCsvData]).then(function(data) {
     var csvData = data[1];
     var airbnbGeojson = {
@@ -64,12 +59,27 @@
     })
     drawMap(data[0], airbnbGeojson)
   });
-  // define drawmap functionality
+
+  // DEFINE DRAWMAP FUNCTION
   function drawMap(BlockGroups, airbnbGeojson) {
-    var Stamen_Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', stamenOptions).addTo(map);
+
+    // add basemap
+    L.tileLayer(basemap, stamenOptions).addTo(map);
+
+    // add block groups
     L.geoJSON(BlockGroups, {
-      // add demographic data here?
+      style: function(feature) {
+        // style counties with initial default path options
+        return {
+          color: '#dddddd',
+          weight: 2,
+          fillOpacity: 1,
+          fillColor: '#1f78b4'
+        };
+      },
     }).addTo(map);
+
+    // add airbnb points
     L.geoJSON(airbnbGeojson, {
         pointToLayer: function(feature, ll) {
           return L.circleMarker(ll, {
@@ -107,7 +117,9 @@
 					});
 				}
     }).addTo(map);
-    // addUi(dataLayer); // add the UI controls
+    addUi(map); // add the UI controls
+    // updateMap(map);
+    addLegend(map);
   }
 
   // FUNCTIONS
@@ -130,6 +142,60 @@
     } else if (d <= breaks[5][1]) {
       return '#ff2015'
     }
+
+  }
+
+  function addLegend(breaks) {
+
+    // create a new Leaflet control object, and position it top left
+    var legendControl = L.control({
+      position: 'topleft'
+    });
+
+    // when the legend is added to the map
+    legendControl.onAdd = function(map) {
+
+      // select a div element with an id attribute of legend
+      var legend = L.DomUtil.get('legend');
+
+      // disable scroll and click/touch on map when on legend
+      L.DomEvent.disableScrollPropagation(legend);
+      L.DomEvent.disableClickPropagation(legend);
+
+      // return the selection to the method
+      return legend;
+
+    };
+
+    // add the empty legend div to the map
+    legendControl.addTo(map);
+
+    // updateLegend(breaks);
+  }
+
+  function addUi(map) {
+    // create the slider control
+    var selectControl = L.control({
+      position: 'topright'
+    });
+
+    // when control is added
+    selectControl.onAdd = function(map) {
+      // get the element with id attribute of ui-controls
+      return L.DomUtil.get("ui-controls");
+    }
+    // add the control to the map
+    selectControl.addTo(map);
+
+    // add event listener for when user changes selection and call the updateMap() function to redraw map
+    // $('select[id="airbnb"]').change(function() {
+    //   // store reference to currently selected value
+    //   attributeValue = $(this).val();
+    //
+    //   // call updateMap function
+    //   updateMap(dataLayer);
+    //
+    // });
 
   }
 
