@@ -34,3 +34,15 @@ select {
   font-family: "Poppins", sans-serif;
   font-style: oblique;
 }
+
+ul {
+  list-style-position: inside;
+  text-indent: -1.4em;
+  /* text-align: left; */
+}
+
+li {
+  list-style-position: inside;
+  /* text-indent: -1.4em; */
+  /* text-align: left; */
+}

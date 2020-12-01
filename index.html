@@ -28,22 +28,24 @@
           <h1 class='txt-h1 mb6'>Airbnb in Lexington, KY</h1>
           <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on the cities in which they operate. Use this map to explore the footprint of Airbnb – the largest STR platform currently operating
             – in Lexington, KY.</p><br>
-          <p><b>Drag the slider</b> in the bottom left to toggle between grade levels.</p><br>
-          <p><b>Hover the cursor</b> overtop of a pair of circles to compare raw numbers between boys and girls.</p><br>
-          <div id='ui-controls'>
-          <label>Choose a filter to view room types:</label><br>
-          <select id="airbnb">
-            <option value="ALL"selected>All Room Types</option>
-            <option value="WHOLE">Whole Home</option>
-            <option value="PRIVATE">Private Room</option>
-          </select>
-          </div>
+          <p>This map draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a data visualization project for assessing the impact of STRs across different cities in the world. By including key indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and gentrification.</p><br>
+          <!-- <ul> -->
+            <li><b>Toggle demographic data</b> by checking or unchecking boxes on the legend.</li>
+            <li><b>Hover the cursor</b> overtop of a pair of circles to compare raw numbers between boys and girls.</li>
+            <div id='ui-controls'>
+              <li><b>Choose an option</b> to filter points by room type:</li><br>
+                <select id="airbnb">
+                  <option value="ALL"selected>All Room Types</option>
+                  <option value="WHOLE">Whole Home</option>
+                  <option value="PRIVATE">Private Room</option>
+                </select>
+            </div>
+          <!-- </ul> -->
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <ul>
             <li>Explore the raw
-              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
-            </li>
+              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a></li>
             <li>Map authored by
               <a class='link' target='blank' href='https://github.com/itspangler'>Ian Spangler</a>
             </li>
