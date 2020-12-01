@@ -29,6 +29,9 @@
     "PRICE": "cost of Airbnb listing"
   }
 
+  // define radius generator
+  var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
+
   // create objects to hold map data
   var BlockGroups = d3.json('data/bg-race-inc-medval.geojson');
   var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');

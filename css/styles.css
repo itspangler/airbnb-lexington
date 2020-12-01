@@ -29,3 +29,8 @@ p {
   font-family: "Poppins", sans-serif;
   font-weight: lighter;
 }
+
+select {
+  font-family: "Poppins", sans-serif;
+  font-style: oblique;
+}
