@@ -18,6 +18,7 @@ h1 {
 h2 {
   font-family: "Poppins", sans-serif;
   font-weight: lighter;
+  font-size: 2em;
 }
 
 h3 {
@@ -32,7 +33,8 @@ p {
 
 select {
   font-family: "Poppins", sans-serif;
-  font-style: oblique;
+  /* font-style: oblique; */
+  font-size: 0.6em;
 }
 
 ul {
@@ -45,4 +47,18 @@ li {
   list-style-position: inside;
   /* text-indent: -1.4em; */
   /* text-align: left; */
+}
+
+ui-h1 {
+  font-family: "Playfair Display";
+  /* font-weight: lighter; */
+  font-size: 1.75em;
+  background:#fff;
+  opacity: 1;
+  color:#000;
+  display: grid;
+  padding:3px 15px 15px;
+  /* margin-left:10px; */
+  border-radius:5px;
+
 }

@@ -73,7 +73,8 @@
         return {
           color: '#dddddd',
           weight: 2,
-          fillOpacity: 1,
+          opacity: 0,
+          fillOpacity: 0.3,
           fillColor: '#1f78b4'
         };
       },
@@ -176,7 +177,7 @@
   function addUi(map) {
     // create the slider control
     var selectControl = L.control({
-      position: 'topright'
+      position: 'topleft'
     });
 
     // when control is added
