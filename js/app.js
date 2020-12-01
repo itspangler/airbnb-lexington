@@ -7,6 +7,7 @@
     zoom: 13,
     minZoom: 0,
     maxZoom: 20,
+    // zoomControl: false,
   }
 
   // DEFINE BASEMAP OPTIONS
@@ -20,6 +21,29 @@
 
   // DEFINE MAP
   var map = L.map('map', options);
+
+  // CUSTOM ZOOM BUTTON
+  function addControlPlaceholders(map) {
+      var corners = map._controlCorners,
+          l = 'leaflet-',
+          container = map._controlContainer;
+
+      function createCorner(vSide, hSide) {
+          var className = l + vSide + ' ' + l + hSide;
+
+          corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+      }
+
+      createCorner('verticalcenter', 'left');
+      createCorner('verticalcenter', 'right');
+  }
+  addControlPlaceholders(map);
+
+  // Change the position of the Zoom Control to a newly created placeholder.
+  map.zoomControl.setPosition('verticalcenterright');
+
+  // You can also put other controls in the same placeholder.
+  L.control.scale({position: 'verticalcenterright'}).addTo(map);
 
   // DEFINE BASEMAP
   var basemap = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}'
@@ -177,7 +201,7 @@
   function addUi(map) {
     // create the slider control
     var selectControl = L.control({
-      position: 'topleft'
+      position: 'topright'
     });
 
     // when control is added
