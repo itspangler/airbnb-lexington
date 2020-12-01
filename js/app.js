@@ -48,7 +48,8 @@
           "PRICE": Number(row["PRICE"]),
           "HOST_ID": row["HOST_ID"],
           "NAME": row["NAME"],
-          "NUM_LIST": Number(row["NUM_LIST"])
+          "NUM_LIST": Number(row["NUM_LIST"]),
+          "MULT_LIST": row["MULT_LIST"]
         },
           "geometry": {
           "type": "Point",
@@ -107,5 +108,26 @@
   }
 
   // FUNCTIONS
+
+  function getColor(d, breaks) {
+    // function accepts a single normalized data attribute value
+    // and uses a series of conditional statements to determine
+    // which color value to return to the function caller
+
+    if (d <= breaks[0][1]) {
+      return '#aaaaaa';
+    } else if (d <= breaks[1][1]) {
+      return '#ffb2ae';
+    } else if (d <= breaks[2][1]) {
+      return '#ff9994';
+    } else if (d <= breaks[3][1]) {
+      return '#ff6961'
+    } else if (d <= breaks[4][1]) {
+      return '#ff5148'
+    } else if (d <= breaks[5][1]) {
+      return '#ff2015'
+    }
+
+  }
 
 })();
