@@ -71,7 +71,7 @@ ui-h1 {
 }
 
 body {
-  padding-top: 65px;
+    /* margin-top: 65x; */
 }
 
 .leaflet-verticalcenter {

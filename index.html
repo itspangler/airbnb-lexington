@@ -21,13 +21,12 @@
 </head>
 
 <body>
-  <div class="shadow-sm page-header border border-bottom-light fixed-top flex-0-0-auto bg-white">
+  <div class="shadow-sm page-header border border-bottom-light bg-white">
     <h1 class='ml12 pl12 py12 pb0 mb0'>Exploring Airbnb</h1>
     <h2 class='ml12 pl12 pt0 mb0 pb6'>in Lexington, Kentucky</h2>
   </div>
   <!-- side pane for scrolling -->
-  <div class='flex-parent viewport-full relative scroll-hidden bg-transparent'>
-
+  <div id='screenFiller' class='flex-parent viewport-full relative scroll-hidden bg-transparent'>
     <div class='flex-child w-full w300-ml absolute static-ml left bottom bg-transparent'>
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent py18 px12 pt0'>
         <div class='flex-child flex-child--grow px12 py12 pt2 scroll-auto'>
@@ -42,13 +41,13 @@
           <!-- </ul> -->
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
-          <ul>
+          <ul class='px12'>
             <li>Explore the raw
-              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
-            </li>
+              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a></li>
             <li>Map authored by
               <a class='link' target='blank' href='https://github.com/itspangler'>Ian Spangler</a>
             </li>
+            <li>Powered by Leaflet and Bootstrap</li>
           </ul>
         </footer>
       </div>

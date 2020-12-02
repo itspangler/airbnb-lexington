@@ -22,6 +22,11 @@
   // DEFINE MAP
   var map = L.map('map', options);
 
+  // DEFINE GLOBAL VARIABLES?
+  // var attributeValue = "pctgrowth"
+  var pctGrowth = "pctgrowth"
+
+
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
       var corners = map._controlCorners,
@@ -52,8 +57,8 @@
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
   // DEFINE DATA VARIABLES
-  var BlockGroups = d3.json('data/bg-race-inc-medval.geojson');
-  var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
+  const BlockGroups = d3.json('data/bg-race-inc-medval.geojson');
+  const airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
 
   // PROMISE.ALL METHOD FOR LOADING DATA
   Promise.all([BlockGroups, airbnbCsvData]).then(function(data) {
@@ -62,6 +67,7 @@
       "type": "FeatureCollection",
       "features": []
     };
+
     csvData.forEach(function (row) {
       var feature = {
         "type":"Feature",
@@ -103,6 +109,7 @@
         };
       },
     }).addTo(map);
+    // console.log(BlockGroups)
 
     // add airbnb points
     var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
@@ -143,12 +150,13 @@
 				}
     }).addTo(map);
     addUi(map); // add the UI controls
-    // updateMap(map);
+    updateMap(map);
     addLegend(map);
   }
 
   // FUNCTIONS
 
+  console.log(BlockGroups)
   function updateMap(dataLayerBG) {
 
     // get the class breaks for the current data attribute
@@ -195,14 +203,14 @@
     // add the control to the map
     selectControl.addTo(map);
     // add event listener for when user changes selection and call the updateMap() function to redraw map
-    $('select[id="airbnb"]').change(function() {
-      // store reference to currently selected value
-      attributeValue = $(this).val();
-
-      // call updateMap function
-      updateMap(map);
-
-    });
+    // $('select[id="airbnb"]').change(function() {
+    //   // store reference to currently selected value
+    //   attributeValue = $(this).val();
+    //
+    //   // call updateMap function
+    //   updateMap(map);
+    //
+    // });
 
   }
 
@@ -210,13 +218,14 @@
 
     // create empty Array for storing values
     var values = [];
-
+    console.log(dataLayerBG)
     // loop through all the block groups
     dataLayerBG.eachLayer(function(layer) {
-      var value = layer.feature.properties[attributeValue];
+      console.log(layer._map._layers[49].feature.properties[pctGrowth])
+      var value = layer._map._layers.feature.properties[pctGrowth];
       values.push(value); // push the value for each layer into the Array
 
-      console.log(layer.feature.properties[attributeValue])
+      // console.log(layer.feature.properties[attributeValue])
 
     });
     console.log(values)
@@ -239,17 +248,17 @@
     // which color value to return to the function caller
 
     if (d <= breaks[0][1]) {
-      return '#aaaaaa';
+      return '#f1eef6';
     } else if (d <= breaks[1][1]) {
-      return '#ffb2ae';
+      return '#d7b5d8';
     } else if (d <= breaks[2][1]) {
-      return '#ff9994';
+      return '#df65b0';
     } else if (d <= breaks[3][1]) {
-      return '#ff6961'
+      return '#dd1c77'
     } else if (d <= breaks[4][1]) {
-      return '#ff5148'
-    } else if (d <= breaks[5][1]) {
-      return '#ff2015'
+      return '#980043'
+    // } else if (d <= breaks[5][1]) {
+    //   return '#ff2015'
     }
 
   }
