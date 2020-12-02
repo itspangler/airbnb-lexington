@@ -21,16 +21,20 @@
 </head>
 
 <body>
+  <div class="shadow-sm page-header border border-bottom-light">
+    <h1 class='ml12 pl12 py12 pb0 mb0'>Exploring Airbnb</h1>
+    <h2 class='ml12 pl12 pt0 mb0 pb6'>in Lexington, Kentucky</h2>
+  </div>
   <!-- side pane for scrolling -->
-  <div class='flex-parent viewport-full relative scroll-hidden'>
-    <div class='flex-child w-full w300-ml absolute static-ml left bottom'>
-      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-white py18 px12'>
-        <div class='flex-child flex-child--grow px12 py12 scroll-auto'>
-          <h1 class='txt-h1 mb6'>Airbnb in Lexington, KY</h1>
+  <div class='flex-parent viewport-full relative scroll-hidden bg-transparent'>
+
+    <div class='flex-child w-full w300-ml absolute static-ml left bottom bg-transparent'>
+      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent py18 px12 pt0'>
+        <div class='flex-child flex-child--grow px12 py12 pt2 scroll-auto'>
+          <h2>About</h2>
           <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on the cities in which they operate. Use this map to explore the footprint of Airbnb – the largest STR platform currently operating
             – in Lexington, KY.</p><br>
-          <p>This map draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a data visualization project for assessing the impact of STRs across different cities in the world. By including key
-            indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and gentrification.</p><br>
+          <p>This map draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a data visualization project for assessing the impact of STRs across different cities in the world. By including key indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and gentrification.</p><br>
           <!-- <ul> -->
           <li><b>Toggle demographic data</b> by checking or unchecking boxes on the legend.</li>
           <li><b>Hover the cursor</b> overtop of a listing to learn more details.</li>
@@ -50,32 +54,31 @@
       </div>
     </div>
 
+
+
     <!-- MAPSTUFF BELOW HERE -->
 
     <!-- Map -->
 
-    <div class='flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
-      <div id="map" class='viewport-twothirds viewport-full-ml'></div>
-      <div id='legend' class='bg-white round-ml px18 py12'>
+    <div class='shadow-sm flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
+      <div id="map" class='border border-left-light viewport-twothirds viewport-full-ml'></div>
+      <div id='legend' class='shadow bg-white round-ml px18 py12'>
         <ui-h1 class='txt-bold mb24 w-full mx-auto'>Legend</ui-h1>
         <div class='legend-circles relative w180'>
-          <div class="legend-large border border--gray-light absolute"></div>
-          <div class="legend-small border border--gray-light absolute"></div>
-          <div class="legend-large-label txt-m absolute"></div>
-          <div class="legend-small-label txt-m absolute"></div>
         </div>
       </div>
       <div id='ui-controls'>
-        <ui-h1 class='txt-bold mb24 w-full mx-auto'>Select a filter:
+        <ui-h1 class='shadow txt-bold mb24 w-full mx-auto'>Select a filter:
           <select id="airbnb">
             <option value="ALL" selected>All Room Types</option>
             <option value="WHOLE">Whole Home</option>
             <option value="PRIVATE">Private Room</option>
           </select>
-      </ui-h1>
+        </ui-h1>
 
       </div>
     </div>
+
 
     <!-- ui info panel -->
     <!-- <div id='info' class='py6 px12 bg-white border border--gray-light round absolute w240'>

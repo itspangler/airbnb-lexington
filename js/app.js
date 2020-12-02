@@ -40,7 +40,7 @@
   addControlPlaceholders(map);
 
   // Change the position of the Zoom Control to a newly created placeholder.
-  map.zoomControl.setPosition('verticalcenterright');
+  map.zoomControl.setPosition('verticalcenterleft');
 
   // You can also put other controls in the same placeholder.
   L.control.scale({position: 'verticalcenterright'}).addTo(map);
