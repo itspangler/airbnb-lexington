@@ -70,6 +70,10 @@ ui-h1 {
 
 }
 
+body {
+  padding-top: 65px;
+}
+
 .leaflet-verticalcenter {
     position: absolute;
     z-index: 1000;
