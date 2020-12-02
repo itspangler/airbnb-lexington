@@ -29,18 +29,18 @@
 
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
-      var corners = map._controlCorners,
-          l = 'leaflet-',
-          container = map._controlContainer;
+    var corners = map._controlCorners,
+      l = 'leaflet-',
+      container = map._controlContainer;
 
-      function createCorner(vSide, hSide) {
-          var className = l + vSide + ' ' + l + hSide;
+    function createCorner(vSide, hSide) {
+      var className = l + vSide + ' ' + l + hSide;
 
-          corners[vSide + hSide] = L.DomUtil.create('div', className, container);
-      }
+      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+    }
 
-      createCorner('verticalcenter', 'left');
-      createCorner('verticalcenter', 'right');
+    createCorner('verticalcenter', 'left');
+    createCorner('verticalcenter', 'right');
   }
   addControlPlaceholders(map);
 
@@ -48,7 +48,9 @@
   map.zoomControl.setPosition('verticalcenterleft');
 
   // Add scale bar
-  L.control.scale({position: 'verticalcenterright'}).addTo(map);
+  L.control.scale({
+    position: 'verticalcenterright'
+  }).addTo(map);
 
   // DEFINE BASEMAP
   var basemap = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}'
@@ -61,34 +63,36 @@
   const airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([BlockGroups, airbnbCsvData]).then(function(data) {
-    var csvData = data[1];
-    var airbnbGeojson = {
-      "type": "FeatureCollection",
-      "features": []
-    };
+  Promise.all([BlockGroups, airbnbCsvData])
+    .then(function(data) {
+      var blockGroupsData = data[0];
+      var csvData = data[1];
+      var airbnbGeojson = {
+        "type": "FeatureCollection",
+        "features": []
+      };
 
-    csvData.forEach(function (row) {
-      var feature = {
-        "type":"Feature",
-        "properties": {
-          "CITY": row["CITY"],
-          "PRICE": Number(row["PRICE"]),
-          "HOST_ID": row["HOST_ID"],
-          "NAME": row["NAME"],
-          "NUM_LIST": Number(row["NUM_LIST"]),
-          "MULT_LIST": row["MULT_LIST"]
-        },
+      csvData.forEach(function(row) {
+        var feature = {
+          "type": "Feature",
+          "properties": {
+            "CITY": row["CITY"],
+            "PRICE": Number(row["PRICE"]),
+            "HOST_ID": row["HOST_ID"],
+            "NAME": row["NAME"],
+            "NUM_LIST": Number(row["NUM_LIST"]),
+            "MULT_LIST": row["MULT_LIST"]
+          },
           "geometry": {
-          "type": "Point",
-          "coordinates": [Number(row['LONG']), Number(row['LAT'])]
+            "type": "Point",
+            "coordinates": [Number(row['LONG']), Number(row['LAT'])]
+          }
         }
-      }
-      // console.log(feature.properties)
-      airbnbGeojson.features.push(feature);
-    })
-    drawMap(data[0], airbnbGeojson)
-  });
+        // console.log(feature.properties)
+        airbnbGeojson.features.push(feature);
+      })
+      drawMap(blockGroupsData, airbnbGeojson)
+    });
 
   // DEFINE DRAWMAP FUNCTION
   function drawMap(BlockGroups, airbnbGeojson) {
@@ -113,41 +117,42 @@
 
     // add airbnb points
     var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-        pointToLayer: function(feature, ll) {
-          return L.circleMarker(ll, {
-            weight: 0,
-            fillOpacity: 0.6,
-            radius: 5,
+      pointToLayer: function(feature, ll) {
+        return L.circleMarker(ll, {
+          weight: 0,
+          fillOpacity: 0.6,
+          radius: 5,
+          fillColor: 'red',
+        })
+      },
+      onEachFeature: function(feature, layer) {
+        var tooltip = feature.properties.NAME + '<br>' + 'Host ID: ' + feature.properties.HOST_ID + '<br>' + 'Host number of listings: ' + feature.properties.NUM_LIST + '<br>' + 'Price: ' + feature.properties.PRICE + '<br> ' + ''
+        layer.bindTooltip(tooltip);
+
+        function onEachFeature(feature, layer) {
+          layer.on('click', function(e) {
+            zoomToFeature(e)
+          });
+        }
+        // when mousing over a layer
+        layer.on('mouseover', function() {
+          // change the stroke color and bring that element to the front
+          layer.setStyle({
+            fillColor: 'yellow',
+            radius: 10,
+            fillOpacity: 0.9,
+          }).bringToFront();
+        });
+        // on mousing off layer
+        layer.on('mouseout', function() {
+          // reset the layer style to its original stroke color
+          layer.setStyle({
             fillColor: 'red',
-          })
-        },
-        onEachFeature: function(feature, layer) {
-          var tooltip = feature.properties.NAME + '<br>' + 'Host ID: ' + feature.properties.HOST_ID + '<br>' + 'Host number of listings: ' + feature.properties.NUM_LIST + '<br>' + 'Price: ' + feature.properties.PRICE + '<br> '+''
-          layer.bindTooltip(tooltip);
-          function onEachFeature(feature, layer){
-              layer.on('click', function(e){
-                  zoomToFeature(e)
-              });
-          }
-          // when mousing over a layer
-					layer.on('mouseover', function() {
-						// change the stroke color and bring that element to the front
-						layer.setStyle({
-							fillColor: 'yellow',
-              radius: 10,
-              fillOpacity: 0.9,
-						}).bringToFront();
-					});
-					// on mousing off layer
-					layer.on('mouseout', function() {
-						// reset the layer style to its original stroke color
-						layer.setStyle({
-              fillColor: 'red',
-              radius: 5,
-              fillOpacity: 0.6,
-						});
-					});
-				}
+            radius: 5,
+            fillOpacity: 0.6,
+          });
+        });
+      }
     }).addTo(map);
     addUi(map); // add the UI controls
     updateMap(map);
@@ -156,17 +161,16 @@
 
   // FUNCTIONS
 
-  console.log(BlockGroups)
-  function updateMap(dataLayerBG) {
+  function updateMap(BlockGroups) {
 
     // get the class breaks for the current data attribute
-    var breaks = getClassBreaks(dataLayerBG);
+    var breaks = getClassBreaks(BlockGroups);
 
     // add the legend to the map using breaks
     addLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    dataLayerBG.eachLayer(function(layer) {
+    BlockGroups.eachLayer(function(layer) {
       // console.log(layer.feature.properties);
       var props = layer.feature.properties;
       console.log(props[attributeValue]);
@@ -214,14 +218,14 @@
 
   }
 
-  function getClassBreaks(dataLayerBG) {
+  function getClassBreaks(BlockGroups) {
 
     // create empty Array for storing values
     var values = [];
-    console.log(dataLayerBG)
+    // console.log(BlockGroups)
     // loop through all the block groups
-    dataLayerBG.eachLayer(function(layer) {
-      console.log(layer._map._layers[49].feature.properties[pctGrowth])
+    BlockGroups.eachLayer(function(layer) {
+      console.log(layer._map._layers)
       var value = layer._map._layers.feature.properties[pctGrowth];
       values.push(value); // push the value for each layer into the Array
 
@@ -257,8 +261,8 @@
       return '#dd1c77'
     } else if (d <= breaks[4][1]) {
       return '#980043'
-    // } else if (d <= breaks[5][1]) {
-    //   return '#ff2015'
+      // } else if (d <= breaks[5][1]) {
+      //   return '#ff2015'
     }
 
   }
