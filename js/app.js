@@ -39,16 +39,16 @@
   }
   addControlPlaceholders(map);
 
-  // Change the position of the Zoom Control to a newly created placeholder.
+  // Add zoom button
   map.zoomControl.setPosition('verticalcenterleft');
 
-  // You can also put other controls in the same placeholder.
+  // Add scale bar
   L.control.scale({position: 'verticalcenterright'}).addTo(map);
 
   // DEFINE BASEMAP
   var basemap = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}'
 
-  // RADIUS GENERATOR
+  // RADIUS GENERATOR -- not sure if I need
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
   // DEFINE DATA VARIABLES
@@ -78,7 +78,7 @@
           "coordinates": [Number(row['LONG']), Number(row['LAT'])]
         }
       }
-      console.log(feature.properties)
+      // console.log(feature.properties)
       airbnbGeojson.features.push(feature);
     })
     drawMap(data[0], airbnbGeojson)
@@ -91,7 +91,7 @@
     L.tileLayer(basemap, stamenOptions).addTo(map);
 
     // add block groups
-    L.geoJSON(BlockGroups, {
+    var dataLayerBG = L.geoJSON(BlockGroups, {
       style: function(feature) {
         // style counties with initial default path options
         return {
@@ -105,7 +105,7 @@
     }).addTo(map);
 
     // add airbnb points
-    L.geoJSON(airbnbGeojson, {
+    var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
         pointToLayer: function(feature, ll) {
           return L.circleMarker(ll, {
             weight: 0,
@@ -148,6 +148,90 @@
   }
 
   // FUNCTIONS
+
+  function updateMap(dataLayerBG) {
+
+    // get the class breaks for the current data attribute
+    var breaks = getClassBreaks(dataLayerBG);
+
+    // add the legend to the map using breaks
+    addLegend(breaks);
+
+    // loop through each county layer to update the color and tooltip info
+    dataLayerBG.eachLayer(function(layer) {
+      // console.log(layer.feature.properties);
+      var props = layer.feature.properties;
+      console.log(props[attributeValue]);
+      // set the fill color of layer based on its normalized data value
+      layer.setStyle({
+        fillColor: getColor(props[attributeValue], breaks)
+      });
+
+      // assemble string sequence of info for tooltip (end line break with + operator)
+      // var tooltipInfo = "<b>" + props["GNOCDC_LAB"] +
+      //   " Neighborhood</b></br>" +
+      //   (props[attributeValue]);
+      //
+      // // bind a tooltip to layer with county-specific information
+      // layer.bindTooltip(tooltipInfo, {
+      //   // sticky property so tooltip follows the mouse
+      //   sticky: true,
+      //   tooltipAnchor: [200, 200]
+      // });
+
+    });
+  }
+
+  function addUi(map) {
+    // create the slider control
+    var selectControl = L.control({
+      position: 'topright'
+    });
+    // when control is added
+    selectControl.onAdd = function(map) {
+      // get the element with id attribute of ui-controls
+      return L.DomUtil.get("ui-controls");
+    }
+    // add the control to the map
+    selectControl.addTo(map);
+    // add event listener for when user changes selection and call the updateMap() function to redraw map
+    $('select[id="airbnb"]').change(function() {
+      // store reference to currently selected value
+      attributeValue = $(this).val();
+
+      // call updateMap function
+      updateMap(map);
+
+    });
+
+  }
+
+  function getClassBreaks(dataLayerBG) {
+
+    // create empty Array for storing values
+    var values = [];
+
+    // loop through all the block groups
+    dataLayerBG.eachLayer(function(layer) {
+      var value = layer.feature.properties[attributeValue];
+      values.push(value); // push the value for each layer into the Array
+
+      console.log(layer.feature.properties[attributeValue])
+
+    });
+    console.log(values)
+    // determine similar clusters
+    var clusters = ss.ckmeans(values, 6);
+
+    // create an array of the lowest value within each cluster
+    var breaks = clusters.map(function(cluster) {
+      return [cluster[0], cluster.pop()];
+    });
+
+    //return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
+    return breaks;
+
+  }
 
   function getColor(d, breaks) {
     // function accepts a single normalized data attribute value
@@ -196,32 +280,6 @@
     legendControl.addTo(map);
 
     // updateLegend(breaks);
-  }
-
-  function addUi(map) {
-    // create the slider control
-    var selectControl = L.control({
-      position: 'topright'
-    });
-
-    // when control is added
-    selectControl.onAdd = function(map) {
-      // get the element with id attribute of ui-controls
-      return L.DomUtil.get("ui-controls");
-    }
-    // add the control to the map
-    selectControl.addTo(map);
-
-    // add event listener for when user changes selection and call the updateMap() function to redraw map
-    // $('select[id="airbnb"]').change(function() {
-    //   // store reference to currently selected value
-    //   attributeValue = $(this).val();
-    //
-    //   // call updateMap function
-    //   updateMap(dataLayer);
-    //
-    // });
-
   }
 
 })();
