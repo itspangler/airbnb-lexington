@@ -59,15 +59,23 @@
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
   // DEFINE DATA VARIABLES
-  const BlockGroups = d3.json('data/bg-race-inc-medval.geojson');
-  const airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
+  var blockGroups = d3.json('data/bg-race-inc-medval.geojson');
+  console.log(blockGroups)
+  var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
+
+  // create object to hold legend titles
+  var labels = {
+    "blackpct": "percentage of pop african american",
+    "medincome_medincome": "median income",
+    "pctgrowth": "percent growth in median home value between '13 and '18"
+  }
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([BlockGroups, airbnbCsvData])
+  Promise.all([blockGroups, airbnbCsvData])
     .then(function(data) {
-      var blockGroupsData = data[0];
-      var csvData = data[1];
-      var airbnbGeojson = {
+      const blockGroupsData = data[0];
+      const csvData = data[1];
+      const airbnbGeojson = {
         "type": "FeatureCollection",
         "features": []
       };
@@ -95,13 +103,14 @@
     });
 
   // DEFINE DRAWMAP FUNCTION
-  function drawMap(BlockGroups, airbnbGeojson) {
-
+  function drawMap(blockGroupsData, airbnbGeojson) {
+    console.log(blockGroupsData)
+    console.log(airbnbGeojson)
     // add basemap
     L.tileLayer(basemap, stamenOptions).addTo(map);
 
     // add block groups
-    var dataLayerBG = L.geoJSON(BlockGroups, {
+    var dataLayerBG = L.geoJSON(blockGroupsData, {
       style: function(feature) {
         // style counties with initial default path options
         return {
@@ -113,7 +122,7 @@
         };
       },
     }).addTo(map);
-    // console.log(BlockGroups)
+    // console.log(blockGroupsData)
 
     // add airbnb points
     var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
@@ -155,28 +164,28 @@
       }
     }).addTo(map);
     addUi(map); // add the UI controls
+    // addLegend(map)
     updateMap(map);
-    addLegend(map);
   }
 
   // FUNCTIONS
 
-  function updateMap(BlockGroups) {
+  function updateMap(blockGroupsData) {
+    console.log(blockGroupsData)
 
     // get the class breaks for the current data attribute
-    var breaks = getClassBreaks(BlockGroups);
-
+    var breaks = getClassBreaks(blockGroupsData);
     // add the legend to the map using breaks
     addLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    BlockGroups.eachLayer(function(layer) {
-      // console.log(layer.feature.properties);
+    blockGroupsData.eachLayer(function(layer) {
+      console.log(layer.feature.properties);
       var props = layer.feature.properties;
-      console.log(props[attributeValue]);
+      console.log(props[pctGrowth]);
       // set the fill color of layer based on its normalized data value
       layer.setStyle({
-        fillColor: getColor(props[attributeValue], breaks)
+        fillColor: getColor(props[pctGrowth], breaks)
       });
 
       // assemble string sequence of info for tooltip (end line break with + operator)
@@ -222,11 +231,11 @@
 
     // create empty Array for storing values
     var values = [];
-    // console.log(BlockGroups)
+    console.log(BlockGroups)
     // loop through all the block groups
     BlockGroups.eachLayer(function(layer) {
-      console.log(layer._map._layers)
-      var value = layer._map._layers.feature.properties[pctGrowth];
+      // console.log(BlockGroups)
+      var value = layer._map._layers[49].feature.properties;
       values.push(value); // push the value for each layer into the Array
 
       // console.log(layer.feature.properties[attributeValue])
@@ -234,7 +243,7 @@
     });
     console.log(values)
     // determine similar clusters
-    var clusters = ss.ckmeans(values, 6);
+    var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
     var breaks = clusters.map(function(cluster) {
@@ -292,7 +301,23 @@
     // add the empty legend div to the map
     legendControl.addTo(map);
 
-    // updateLegend(breaks);
+    updateLegend(breaks);
+  }
+
+  function updateLegend(breaks) {
+    // select the legend, add a title, begin an unordered list and assign to a variable
+    var legend = $('#legend').html("<h5>" + labels[pctGrowth] + "</h5>");
+
+    // loop through the Array of classification break values
+    for (var i = 0; i <= breaks.length - 1; i++) {
+
+      var color = getColor(breaks[i][0], breaks);
+
+      legend.append(
+        '<span style="background:' + color + '"></span> ' +
+        '<label>' + (breaks[i][0] * 100).toLocaleString() + ' &mdash; ' +
+        (breaks[i][1] * 100).toLocaleString() + ' %</label>');
+    }
   }
 
 })();
