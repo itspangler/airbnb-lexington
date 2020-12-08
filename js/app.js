@@ -171,7 +171,7 @@
   // FUNCTIONS
 
   function updateMap(blockGroupsData) {
-    console.log(blockGroupsData)
+    // console.log(blockGroupsData)
 
     // get the class breaks for the current data attribute
     var breaks = getClassBreaks(blockGroupsData);
@@ -180,9 +180,9 @@
 
     // loop through each county layer to update the color and tooltip info
     blockGroupsData.eachLayer(function(layer) {
-      console.log(layer.feature.properties);
+      // console.log(layer.feature.properties);
       var props = layer.feature.properties;
-      console.log(props[pctGrowth]);
+      // console.log(props[pctGrowth]);
       // set the fill color of layer based on its normalized data value
       layer.setStyle({
         fillColor: getColor(props[pctGrowth], breaks)
@@ -231,17 +231,18 @@
 
     // create empty Array for storing values
     var values = [];
-    console.log(BlockGroups)
+    // console.log(BlockGroups)
     // loop through all the block groups
     BlockGroups.eachLayer(function(layer) {
-      // console.log(BlockGroups)
+      console.log(layer.feature)
+      // console.log(layer)
       var value = layer._map._layers[49].feature.properties;
       values.push(value); // push the value for each layer into the Array
 
       // console.log(layer.feature.properties[attributeValue])
 
     });
-    console.log(values)
+    // console.log(values)
     // determine similar clusters
     var clusters = ss.ckmeans(values, 5);
 
