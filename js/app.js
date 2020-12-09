@@ -1,5 +1,4 @@
-(function() {
-
+(function () {
   // DEFINE MAP OPTIONS
   var options = {
     zoomSnap: 1,
@@ -8,117 +7,119 @@
     minZoom: 0,
     maxZoom: 20,
     // zoomControl: false,
-  }
+  };
 
   // DEFINE BASEMAP OPTIONS
   var stamenOptions = {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    subdomains: 'abcd',
+    attribution:
+      'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    subdomains: "abcd",
     minZoom: 0,
     maxZoom: 20,
-    ext: 'png'
-  }
+    ext: "png",
+  };
 
   // DEFINE MAP
-  var map = L.map('map', options);
+  var map = L.map("map", options);
 
   // DEFINE GLOBAL VARIABLES?
   // var attributeValue = "pctgrowth"
-  var pctGrowth = "pctgrowth"
-
+  var pctGrowth = "pctgrowth";
 
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
     var corners = map._controlCorners,
-      l = 'leaflet-',
+      l = "leaflet-",
       container = map._controlContainer;
 
     function createCorner(vSide, hSide) {
-      var className = l + vSide + ' ' + l + hSide;
+      var className = l + vSide + " " + l + hSide;
 
-      corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+      corners[vSide + hSide] = L.DomUtil.create("div", className, container);
     }
 
-    createCorner('verticalcenter', 'left');
-    createCorner('verticalcenter', 'right');
+    createCorner("verticalcenter", "left");
+    createCorner("verticalcenter", "right");
   }
   addControlPlaceholders(map);
 
   // Add zoom button
-  map.zoomControl.setPosition('verticalcenterleft');
+  map.zoomControl.setPosition("verticalcenterleft");
 
   // Add scale bar
-  L.control.scale({
-    position: 'verticalcenterright'
-  }).addTo(map);
+  L.control
+    .scale({
+      position: "verticalcenterright",
+    })
+    .addTo(map);
 
   // DEFINE BASEMAP
-  var basemap = 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}'
+  var basemap =
+    "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}";
 
   // RADIUS GENERATOR -- not sure if I need
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
   // DEFINE DATA VARIABLES
-  var blockGroups = d3.json('data/bg-race-inc-medval.geojson');
-  console.log(blockGroups)
-  var airbnbCsvData = d3.csv('data/lexington_airbnb_s17.csv');
+  var blockGroups = d3.json("data/bg-race-inc-medval.geojson");
+  console.log(blockGroups);
+  var airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
 
   // create object to hold legend titles
   var labels = {
-    "blackpct": "percentage of pop african american",
-    "medincome_medincome": "median income",
-    "pctgrowth": "percent growth in median home value between '13 and '18"
-  }
+    blackpct: "percentage of pop african american",
+    medincome_medincome: "median income",
+    pctgrowth: "percent growth in median home value between '13 and '18",
+  };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([blockGroups, airbnbCsvData])
-    .then(function(data) {
-      const blockGroupsData = data[0];
-      const csvData = data[1];
-      const airbnbGeojson = {
-        "type": "FeatureCollection",
-        "features": []
-      };
+  Promise.all([blockGroups, airbnbCsvData]).then(function (data) {
+    const blockGroupsData = data[0];
+    const csvData = data[1];
+    const airbnbGeojson = {
+      type: "FeatureCollection",
+      features: [],
+    };
 
-      csvData.forEach(function(row) {
-        var feature = {
-          "type": "Feature",
-          "properties": {
-            "CITY": row["CITY"],
-            "PRICE": Number(row["PRICE"]),
-            "HOST_ID": row["HOST_ID"],
-            "NAME": row["NAME"],
-            "NUM_LIST": Number(row["NUM_LIST"]),
-            "MULT_LIST": row["MULT_LIST"]
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [Number(row['LONG']), Number(row['LAT'])]
-          }
-        }
-        // console.log(feature.properties)
-        airbnbGeojson.features.push(feature);
-      })
-      drawMap(blockGroupsData, airbnbGeojson)
+    csvData.forEach(function (row) {
+      var feature = {
+        type: "Feature",
+        properties: {
+          CITY: row["CITY"],
+          PRICE: Number(row["PRICE"]),
+          HOST_ID: row["HOST_ID"],
+          NAME: row["NAME"],
+          NUM_LIST: Number(row["NUM_LIST"]),
+          MULT_LIST: row["MULT_LIST"],
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [Number(row["LONG"]), Number(row["LAT"])],
+        },
+      };
+      // console.log(feature.properties)
+      airbnbGeojson.features.push(feature);
     });
+    drawMap(blockGroupsData, airbnbGeojson);
+  });
 
   // DEFINE DRAWMAP FUNCTION
   function drawMap(blockGroupsData, airbnbGeojson) {
-    console.log(blockGroupsData)
-    console.log(airbnbGeojson)
+    console.log(blockGroupsData);
+    console.log(airbnbGeojson);
     // add basemap
     L.tileLayer(basemap, stamenOptions).addTo(map);
 
     // add block groups
     var dataLayerBG = L.geoJSON(blockGroupsData, {
-      style: function(feature) {
+      style: function (feature) {
         // style counties with initial default path options
         return {
-          color: '#dddddd',
+          color: "#dddddd",
           weight: 2,
           opacity: 0,
           fillOpacity: 0.3,
-          fillColor: '#1f78b4'
+          fillColor: "#1f78b4",
         };
       },
     }).addTo(map);
@@ -126,42 +127,56 @@
 
     // add airbnb points
     var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function(feature, ll) {
+      pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 0.6,
           radius: 5,
-          fillColor: 'red',
-        })
+          fillColor: "red",
+        });
       },
-      onEachFeature: function(feature, layer) {
-        var tooltip = feature.properties.NAME + '<br>' + 'Host ID: ' + feature.properties.HOST_ID + '<br>' + 'Host number of listings: ' + feature.properties.NUM_LIST + '<br>' + 'Price: ' + feature.properties.PRICE + '<br> ' + ''
+      onEachFeature: function (feature, layer) {
+        var tooltip =
+          feature.properties.NAME +
+          "<br>" +
+          "Host ID: " +
+          feature.properties.HOST_ID +
+          "<br>" +
+          "Host number of listings: " +
+          feature.properties.NUM_LIST +
+          "<br>" +
+          "Price: " +
+          feature.properties.PRICE +
+          "<br> " +
+          "";
         layer.bindTooltip(tooltip);
 
         function onEachFeature(feature, layer) {
-          layer.on('click', function(e) {
-            zoomToFeature(e)
+          layer.on("click", function (e) {
+            zoomToFeature(e);
           });
         }
         // when mousing over a layer
-        layer.on('mouseover', function() {
+        layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
-          layer.setStyle({
-            fillColor: 'yellow',
-            radius: 10,
-            fillOpacity: 0.9,
-          }).bringToFront();
+          layer
+            .setStyle({
+              fillColor: "yellow",
+              radius: 10,
+              fillOpacity: 0.9,
+            })
+            .bringToFront();
         });
         // on mousing off layer
-        layer.on('mouseout', function() {
+        layer.on("mouseout", function () {
           // reset the layer style to its original stroke color
           layer.setStyle({
-            fillColor: 'red',
+            fillColor: "red",
             radius: 5,
             fillOpacity: 0.6,
           });
         });
-      }
+      },
     }).addTo(map);
     addUi(map); // add the UI controls
     // addLegend(map)
@@ -179,14 +194,19 @@
     addLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    blockGroupsData.eachLayer(function(layer) {
+    blockGroupsData.eachLayer(function (layer) {
       // console.log(layer.feature.properties);
-      var props = layer.feature.properties;
+      try {
+        let props = layer.feature.properties;
+        layer.setStyle({
+          fillColor: getColor(props[pctGrowth], breaks),
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
       // console.log(props[pctGrowth]);
       // set the fill color of layer based on its normalized data value
-      layer.setStyle({
-        fillColor: getColor(props[pctGrowth], breaks)
-      });
 
       // assemble string sequence of info for tooltip (end line break with + operator)
       // var tooltipInfo = "<b>" + props["GNOCDC_LAB"] +
@@ -199,20 +219,19 @@
       //   sticky: true,
       //   tooltipAnchor: [200, 200]
       // });
-
     });
   }
 
   function addUi(map) {
     // create the slider control
     var selectControl = L.control({
-      position: 'topright'
+      position: "topright",
     });
     // when control is added
-    selectControl.onAdd = function(map) {
+    selectControl.onAdd = function (map) {
       // get the element with id attribute of ui-controls
       return L.DomUtil.get("ui-controls");
-    }
+    };
     // add the control to the map
     selectControl.addTo(map);
     // add event listener for when user changes selection and call the updateMap() function to redraw map
@@ -224,36 +243,36 @@
     //   updateMap(map);
     //
     // });
-
   }
 
-  function getClassBreaks(BlockGroups) {
-
+  function getClassBreaks(blockGroups) {
     // create empty Array for storing values
     var values = [];
-    // console.log(BlockGroups)
+    // console.log(blockGroups)
     // loop through all the block groups
-    BlockGroups.eachLayer(function(layer) {
-      console.log(layer.feature)
-      // console.log(layer)
-      var value = layer._map._layers[49].feature.properties;
-      values.push(value); // push the value for each layer into the Array
+    blockGroups.eachLayer(function (layer) {
+      try {
+        // var value = layer._map._layers[49].feature.properties;
+        let value = layer.feature.properties;
+        values.push(value); // push the value for each layer into the Array
+      } catch (e) {
+        console.log(e);
+      }
 
       // console.log(layer.feature.properties[attributeValue])
-
     });
+
     // console.log(values)
     // determine similar clusters
     var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function(cluster) {
+    var breaks = clusters.map(function (cluster) {
       return [cluster[0], cluster.pop()];
     });
 
     //return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
     return breaks;
-
   }
 
   function getColor(d, breaks) {
@@ -262,33 +281,30 @@
     // which color value to return to the function caller
 
     if (d <= breaks[0][1]) {
-      return '#f1eef6';
+      return "#f1eef6";
     } else if (d <= breaks[1][1]) {
-      return '#d7b5d8';
+      return "#d7b5d8";
     } else if (d <= breaks[2][1]) {
-      return '#df65b0';
+      return "#df65b0";
     } else if (d <= breaks[3][1]) {
-      return '#dd1c77'
+      return "#dd1c77";
     } else if (d <= breaks[4][1]) {
-      return '#980043'
+      return "#980043";
       // } else if (d <= breaks[5][1]) {
       //   return '#ff2015'
     }
-
   }
 
   function addLegend(breaks) {
-
     // create a new Leaflet control object, and position it top left
     var legendControl = L.control({
-      position: 'topleft'
+      position: "topleft",
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function(map) {
-
+    legendControl.onAdd = function (map) {
       // select a div element with an id attribute of legend
-      var legend = L.DomUtil.get('legend');
+      var legend = L.DomUtil.get("legend");
 
       // disable scroll and click/touch on map when on legend
       L.DomEvent.disableScrollPropagation(legend);
@@ -296,7 +312,6 @@
 
       // return the selection to the method
       return legend;
-
     };
 
     // add the empty legend div to the map
@@ -307,18 +322,22 @@
 
   function updateLegend(breaks) {
     // select the legend, add a title, begin an unordered list and assign to a variable
-    var legend = $('#legend').html("<h5>" + labels[pctGrowth] + "</h5>");
+    var legend = $("#legend").html("<h5>" + labels[pctGrowth] + "</h5>");
 
     // loop through the Array of classification break values
     for (var i = 0; i <= breaks.length - 1; i++) {
-
       var color = getColor(breaks[i][0], breaks);
 
       legend.append(
-        '<span style="background:' + color + '"></span> ' +
-        '<label>' + (breaks[i][0] * 100).toLocaleString() + ' &mdash; ' +
-        (breaks[i][1] * 100).toLocaleString() + ' %</label>');
+        '<span style="background:' +
+          color +
+          '"></span> ' +
+          "<label>" +
+          (breaks[i][0] * 100).toLocaleString() +
+          " &mdash; " +
+          (breaks[i][1] * 100).toLocaleString() +
+          " %</label>"
+      );
     }
   }
-
 })();
