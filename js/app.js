@@ -1,6 +1,6 @@
 (function() {
   // DEFINE MAP OPTIONS
-  var options = {
+  const options = {
     zoomSnap: 1,
     center: [38.03, -84.5],
     zoom: 13,
@@ -10,8 +10,9 @@
   };
 
   // DEFINE BASEMAP OPTIONS
-  var stamenOptions = {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  const stamenOptions = {
+    attribution:
+      'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     subdomains: "abcd",
     minZoom: 0,
     maxZoom: 20,
@@ -19,14 +20,10 @@
   };
 
   // DEFINE MAP
-  var map = L.map("map", options);
+  const map = L.map("map", options);
 
   // DEFINE GLOBAL VARIABLES?
-  // var attributeValue = "pctgrowth"
-  var pctGrowth = "pctgrowth";
-  var pctBlack = "blackpct";
-  var medIncome = "medincome_medincome";
-  var multList = "MULT_LIST";
+  let pctGrowth = "pctgrowth";
 
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
@@ -64,7 +61,6 @@
 
   // DEFINE DATA VARIABLES
   var blockGroups = d3.json("data/bg-race-inc-medval.geojson");
-  // console.log(blockGroups);
   var airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
 
   // create object to hold legend titles
@@ -107,8 +103,6 @@
 
   // DEFINE DRAWMAP FUNCTION
   function drawMap(blockGroupsData, airbnbGeojson) {
-    // console.log(blockGroupsData);
-    // console.log(airbnbGeojson);
     // add basemap
     L.tileLayer(basemap, stamenOptions).addTo(map);
 
@@ -180,24 +174,23 @@
         });
       },
     }).addTo(map);
-    addUi(map); // add the UI controls
+    // addUi(map); // add the UI controls
     // addLegend(map)
-    updateMap(map);
+    updateMap(dataLayerBG);
   }
 
   // FUNCTIONS
-  // console.log(blockGroups)
-  function updateMap(data) {
-    // console.log(data)
+
+  function updateMap(dataLayerBG) {
+    // console.log(blockGroupsData)
 
     // get the class breaks for the current data attribute
-    var breaks = getClassBreaks(data);
+    var breaks = getClassBreaks(dataLayerBG);
     // add the legend to the map using breaks
     addLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    data.eachLayer(function(layer) {
-      // console.log(layer.feature);
+    dataLayerBG.eachLayer(function (layer) {
       try {
         let props = layer.feature.properties;
         layer.setStyle({
