@@ -24,6 +24,7 @@
 
   // DEFINE GLOBAL VARIABLES?
   let pctGrowth = "pctgrowth";
+  let medIncome = "medincome_medincome";
 
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
@@ -246,15 +247,15 @@
     // console.log(data)
     // loop through all the block groups
     dataLayerBG.eachLayer(function(layer) {
-      console.log(layer.feature.properties)
+      // console.log(layer.feature.properties)
       try {
-        let value = layer.feature.properties;
+        let value = layer.feature.properties[pctGrowth];
         values.push(value); // push the value for each layer into the Array
       } catch (e) {
         console.log(e);
       }
 
-      console.log(layer.feature.properties[pctGrowth])
+      // console.log(layer.feature.properties[pctGrowth])
     });
 
     // console.log(values)
