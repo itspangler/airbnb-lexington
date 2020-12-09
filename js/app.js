@@ -240,12 +240,12 @@
     });
   }
 
-  function getClassBreaks(data) {
+  function getClassBreaks(dataLayerBG) {
     // create empty Array for storing values
     var values = [];
-    console.log(data)
+    // console.log(data)
     // loop through all the block groups
-    data.eachLayer(function(layer) {
+    dataLayerBG.eachLayer(function(layer) {
       console.log(layer.feature.properties)
       try {
         let value = layer.feature.properties;
@@ -254,7 +254,7 @@
         console.log(e);
       }
 
-      // console.log(layer.feature.properties[attributeValue])
+      console.log(layer.feature.properties[pctGrowth])
     });
 
     // console.log(values)
