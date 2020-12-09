@@ -1,4 +1,4 @@
-(function () {
+(function() {
   // DEFINE MAP OPTIONS
   var options = {
     zoomSnap: 1,
@@ -11,8 +11,7 @@
 
   // DEFINE BASEMAP OPTIONS
   var stamenOptions = {
-    attribution:
-      'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     subdomains: "abcd",
     minZoom: 0,
     maxZoom: 20,
@@ -25,6 +24,9 @@
   // DEFINE GLOBAL VARIABLES?
   // var attributeValue = "pctgrowth"
   var pctGrowth = "pctgrowth";
+  var pctBlack = "blackpct";
+  var medIncome = "medincome_medincome";
+  var multList = "MULT_LIST";
 
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
@@ -62,18 +64,18 @@
 
   // DEFINE DATA VARIABLES
   var blockGroups = d3.json("data/bg-race-inc-medval.geojson");
-  console.log(blockGroups);
+  // console.log(blockGroups);
   var airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
 
   // create object to hold legend titles
   var labels = {
     blackpct: "percentage of pop african american",
     medincome_medincome: "median income",
-    pctgrowth: "percent growth in median home value between '13 and '18",
+    pctgrowth: "% growth in median home value between '13 and '18",
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([blockGroups, airbnbCsvData]).then(function (data) {
+  Promise.all([blockGroups, airbnbCsvData]).then(function(data) {
     const blockGroupsData = data[0];
     const csvData = data[1];
     const airbnbGeojson = {
@@ -81,7 +83,7 @@
       features: [],
     };
 
-    csvData.forEach(function (row) {
+    csvData.forEach(function(row) {
       var feature = {
         type: "Feature",
         properties: {
@@ -105,14 +107,14 @@
 
   // DEFINE DRAWMAP FUNCTION
   function drawMap(blockGroupsData, airbnbGeojson) {
-    console.log(blockGroupsData);
-    console.log(airbnbGeojson);
+    // console.log(blockGroupsData);
+    // console.log(airbnbGeojson);
     // add basemap
     L.tileLayer(basemap, stamenOptions).addTo(map);
 
     // add block groups
     var dataLayerBG = L.geoJSON(blockGroupsData, {
-      style: function (feature) {
+      style: function(feature) {
         // style counties with initial default path options
         return {
           color: "#dddddd",
@@ -127,7 +129,7 @@
 
     // add airbnb points
     var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function (feature, ll) {
+      pointToLayer: function(feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 0.6,
@@ -135,7 +137,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function (feature, layer) {
+      onEachFeature: function(feature, layer) {
         var tooltip =
           feature.properties.NAME +
           "<br>" +
@@ -152,12 +154,12 @@
         layer.bindTooltip(tooltip);
 
         function onEachFeature(feature, layer) {
-          layer.on("click", function (e) {
+          layer.on("click", function(e) {
             zoomToFeature(e);
           });
         }
         // when mousing over a layer
-        layer.on("mouseover", function () {
+        layer.on("mouseover", function() {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -168,7 +170,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function () {
+        layer.on("mouseout", function() {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -184,18 +186,18 @@
   }
 
   // FUNCTIONS
-
-  function updateMap(blockGroupsData) {
-    // console.log(blockGroupsData)
+  // console.log(blockGroups)
+  function updateMap(data) {
+    // console.log(data)
 
     // get the class breaks for the current data attribute
-    var breaks = getClassBreaks(blockGroupsData);
+    var breaks = getClassBreaks(data);
     // add the legend to the map using breaks
     addLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    blockGroupsData.eachLayer(function (layer) {
-      // console.log(layer.feature.properties);
+    data.eachLayer(function(layer) {
+      // console.log(layer.feature);
       try {
         let props = layer.feature.properties;
         layer.setStyle({
@@ -228,31 +230,31 @@
       position: "topright",
     });
     // when control is added
-    selectControl.onAdd = function (map) {
+    selectControl.onAdd = function(map) {
       // get the element with id attribute of ui-controls
       return L.DomUtil.get("ui-controls");
     };
     // add the control to the map
     selectControl.addTo(map);
     // add event listener for when user changes selection and call the updateMap() function to redraw map
-    // $('select[id="airbnb"]').change(function() {
-    //   // store reference to currently selected value
-    //   attributeValue = $(this).val();
-    //
-    //   // call updateMap function
-    //   updateMap(map);
-    //
-    // });
+    $('select[id="airbnb"]').change(function() {
+      // store reference to currently selected value
+      attributeValue = $(this).val();
+
+      // call updateMap function
+      updateMap(map);
+
+    });
   }
 
-  function getClassBreaks(blockGroups) {
+  function getClassBreaks(data) {
     // create empty Array for storing values
     var values = [];
-    // console.log(blockGroups)
+    console.log(data)
     // loop through all the block groups
-    blockGroups.eachLayer(function (layer) {
+    data.eachLayer(function(layer) {
+      console.log(layer.feature.properties)
       try {
-        // var value = layer._map._layers[49].feature.properties;
         let value = layer.feature.properties;
         values.push(value); // push the value for each layer into the Array
       } catch (e) {
@@ -267,7 +269,7 @@
     var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function (cluster) {
+    var breaks = clusters.map(function(cluster) {
       return [cluster[0], cluster.pop()];
     });
 
@@ -302,7 +304,7 @@
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function (map) {
+    legendControl.onAdd = function(map) {
       // select a div element with an id attribute of legend
       var legend = L.DomUtil.get("legend");
 
@@ -330,13 +332,13 @@
 
       legend.append(
         '<span style="background:' +
-          color +
-          '"></span> ' +
-          "<label>" +
-          (breaks[i][0] * 100).toLocaleString() +
-          " &mdash; " +
-          (breaks[i][1] * 100).toLocaleString() +
-          " %</label>"
+        color +
+        '"></span> ' +
+        "<label>" +
+        (breaks[i][0] * 100).toLocaleString() +
+        " &mdash; " +
+        (breaks[i][1] * 100).toLocaleString() +
+        " %</label>"
       );
     }
   }
