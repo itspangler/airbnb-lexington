@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // DEFINE MAP OPTIONS
   const options = {
     zoomSnap: 1,
@@ -26,11 +26,14 @@
   let pctGrowth = "pctgrowth";
   let medIncome = "medincome_medincome";
 
+  let currentBGAttribute = "pctgrowth";
+  let currentAirBnBState = "";
+
   // CUSTOM ZOOM BUTTON
   function addControlPlaceholders(map) {
-    var corners = map._controlCorners,
-      l = "leaflet-",
-      container = map._controlContainer;
+    const corners = map._controlCorners;
+    const l = "leaflet-";
+    const container = map._controlContainer;
 
     function createCorner(vSide, hSide) {
       var className = l + vSide + " " + l + hSide;
@@ -54,25 +57,28 @@
     .addTo(map);
 
   // DEFINE BASEMAP
-  var basemap =
+  const basemap =
     "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}";
+
+  // add basemap
+  L.tileLayer(basemap, stamenOptions).addTo(map);
 
   // RADIUS GENERATOR -- not sure if I need
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
   // DEFINE DATA VARIABLES
-  var blockGroups = d3.json("data/bg-race-inc-medval.geojson");
-  var airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
+  const blockGroups = d3.json("data/bg-race-inc-medval.geojson");
+  const airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
 
   // create object to hold legend titles
-  var labels = {
+  const labels = {
     blackpct: "percentage of pop african american",
     medincome_medincome: "median income",
     pctgrowth: "% growth in median home value between '13 and '18",
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([blockGroups, airbnbCsvData]).then(function(data) {
+  Promise.all([blockGroups, airbnbCsvData]).then(function (data) {
     const blockGroupsData = data[0];
     const csvData = data[1];
     const airbnbGeojson = {
@@ -80,7 +86,7 @@
       features: [],
     };
 
-    csvData.forEach(function(row) {
+    csvData.forEach(function (row) {
       var feature = {
         type: "Feature",
         properties: {
@@ -104,12 +110,9 @@
 
   // DEFINE DRAWMAP FUNCTION
   function drawMap(blockGroupsData, airbnbGeojson) {
-    // add basemap
-    L.tileLayer(basemap, stamenOptions).addTo(map);
-
     // add block groups
-    var dataLayerBG = L.geoJSON(blockGroupsData, {
-      style: function(feature) {
+    const dataLayerBG = L.geoJSON(blockGroupsData, {
+      style: function (feature) {
         // style counties with initial default path options
         return {
           color: "#dddddd",
@@ -123,8 +126,8 @@
     // console.log(blockGroupsData)
 
     // add airbnb points
-    var dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function(feature, ll) {
+    const dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
+      pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 0.6,
@@ -132,7 +135,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function (feature, layer) {
         var tooltip =
           feature.properties.NAME +
           "<br>" +
@@ -149,12 +152,12 @@
         layer.bindTooltip(tooltip);
 
         function onEachFeature(feature, layer) {
-          layer.on("click", function(e) {
+          layer.on("click", function (e) {
             zoomToFeature(e);
           });
         }
         // when mousing over a layer
-        layer.on("mouseover", function() {
+        layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -165,7 +168,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function() {
+        layer.on("mouseout", function () {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -175,31 +178,29 @@
         });
       },
     }).addTo(map);
-    // addUi(map); // add the UI controls
-    // addLegend(map)
-    updateMap(dataLayerBG);
+    addUiBG(dataLayerBG); // add the UI controls
+    addLegend();
+    updateBG(dataLayerBG);
+    updateAirBnb(dataLayerAirbnb);
   }
 
   // FUNCTIONS
 
-  function updateMap(dataLayerBG) {
+  function updateBG(dataLayerBG) {
     // console.log(blockGroupsData)
 
     // get the class breaks for the current data attribute
     var breaks = getClassBreaks(dataLayerBG);
-    // add the legend to the map using breaks
-    addLegend(breaks);
+    // update the legend to the map using breaks
+
+    // updatedLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
     dataLayerBG.eachLayer(function (layer) {
-      try {
-        let props = layer.feature.properties;
-        layer.setStyle({
-          fillColor: getColor(props[pctGrowth], breaks),
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      let props = layer.feature.properties;
+      layer.setStyle({
+        fillColor: getColor(props[currentBGAttribute], breaks),
+      });
 
       // console.log(props[pctGrowth]);
       // set the fill color of layer based on its normalized data value
@@ -218,26 +219,40 @@
     });
   }
 
-  function addUi(map) {
+  function updateAirBnb(dataLayerAirbnb) {
+    // code here
+  }
+
+  function addUiBG(dataLayerBG) {
+    $('select[id="bg-ui"]').change(() => {
+      // store reference to currently selected value
+      // attributeValue = $(this).val();
+      currentBGAttribute = $(this).val();
+
+      // call updateMap function
+      updateBG(dataLayerBG);
+    });
+  }
+
+  function addUiAirBnB() {
     // create the slider control
     var selectControl = L.control({
       position: "topright",
     });
     // when control is added
-    selectControl.onAdd = function(map) {
+    selectControl.onAdd = function (map) {
       // get the element with id attribute of ui-controls
       return L.DomUtil.get("ui-controls");
     };
     // add the control to the map
     selectControl.addTo(map);
     // add event listener for when user changes selection and call the updateMap() function to redraw map
-    $('select[id="airbnb"]').change(function() {
+    $('select[id="airbnb"]').change(function () {
       // store reference to currently selected value
       attributeValue = $(this).val();
 
       // call updateMap function
       updateMap(map);
-
     });
   }
 
@@ -246,15 +261,10 @@
     var values = [];
     // console.log(data)
     // loop through all the block groups
-    dataLayerBG.eachLayer(function(layer) {
+    dataLayerBG.eachLayer(function (layer) {
       // console.log(layer.feature.properties)
-      try {
-        let value = layer.feature.properties[pctGrowth];
-        values.push(value); // push the value for each layer into the Array
-      } catch (e) {
-        console.log(e);
-      }
-
+      let value = layer.feature.properties[currentBGAttribute];
+      values.push(value); // push the value for each layer into the Array
       // console.log(layer.feature.properties[pctGrowth])
     });
 
@@ -263,7 +273,7 @@
     var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function(cluster) {
+    var breaks = clusters.map(function (cluster) {
       return [cluster[0], cluster.pop()];
     });
 
@@ -291,14 +301,14 @@
     }
   }
 
-  function addLegend(breaks) {
+  function addLegend() {
     // create a new Leaflet control object, and position it top left
     var legendControl = L.control({
       position: "topleft",
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function(map) {
+    legendControl.onAdd = function (map) {
       // select a div element with an id attribute of legend
       var legend = L.DomUtil.get("legend");
 
@@ -312,8 +322,6 @@
 
     // add the empty legend div to the map
     legendControl.addTo(map);
-
-    updateLegend(breaks);
   }
 
   function updateLegend(breaks) {
@@ -326,13 +334,13 @@
 
       legend.append(
         '<span style="background:' +
-        color +
-        '"></span> ' +
-        "<label>" +
-        (breaks[i][0] * 100).toLocaleString() +
-        " &mdash; " +
-        (breaks[i][1] * 100).toLocaleString() +
-        " %</label>"
+          color +
+          '"></span> ' +
+          "<label>" +
+          (breaks[i][0] * 100).toLocaleString() +
+          " &mdash; " +
+          (breaks[i][1] * 100).toLocaleString() +
+          " %</label>"
       );
     }
   }
