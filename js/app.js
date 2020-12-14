@@ -23,8 +23,8 @@
   const map = L.map("map", options);
 
   // DEFINE GLOBAL VARIABLES?
-  let pctGrowth = "pctgrowth";
-  let medIncome = "medincome_medincome";
+  // let pctGrowth = "pctgrowth";
+  // let medIncome = "medincome_medincome";
 
   let currentBGAttribute = "pctgrowth";
   let currentAirBnBState = "";
@@ -74,7 +74,7 @@
   const labels = {
     blackpct: "percentage of pop african american",
     medincome_medincome: "median income",
-    pctgrowth: "% growth in median home value between '13 and '18",
+    pctgrowth: "Percent growth in median home value, 2013-2018",
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
@@ -117,8 +117,8 @@
         return {
           color: "#dddddd",
           weight: 2,
-          opacity: 0,
-          fillOpacity: 0.3,
+          opacity: 1,
+          fillOpacity: 1,
           fillColor: "#1f78b4",
         };
       },
@@ -193,7 +193,7 @@
     var breaks = getClassBreaks(dataLayerBG);
     // update the legend to the map using breaks
 
-    // updatedLegend(breaks);
+    updateLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
     dataLayerBG.eachLayer(function (layer) {
@@ -270,13 +270,12 @@
 
     // console.log(values)
     // determine similar clusters
-    var clusters = ss.ckmeans(values, 5);
+    var clusters = ss.ckmeans(values, 6);
 
     // create an array of the lowest value within each cluster
     var breaks = clusters.map(function (cluster) {
       return [cluster[0], cluster.pop()];
     });
-
     //return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
     return breaks;
   }
@@ -296,19 +295,19 @@
       return "#dd1c77";
     } else if (d <= breaks[4][1]) {
       return "#980043";
-      // } else if (d <= breaks[5][1]) {
-      //   return '#ff2015'
+      } else if (d <= breaks[5][1]) {
+        return '#ff2015'
     }
   }
 
-  function addLegend() {
+  function addLegend(breaks) {
     // create a new Leaflet control object, and position it top left
     var legendControl = L.control({
       position: "topleft",
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function (map) {
+    legendControl.onAdd = function(legend) {
       // select a div element with an id attribute of legend
       var legend = L.DomUtil.get("legend");
 
@@ -322,11 +321,12 @@
 
     // add the empty legend div to the map
     legendControl.addTo(map);
+    updateLegend(map);
   }
 
   function updateLegend(breaks) {
     // select the legend, add a title, begin an unordered list and assign to a variable
-    var legend = $("#legend").html("<h5>" + labels[pctGrowth] + "</h5>");
+    var legend = $("#legend").html("<h5>" + labels[currentBGAttribute] + "</h5>" + "<br>");
 
     // loop through the Array of classification break values
     for (var i = 0; i <= breaks.length - 1; i++) {
@@ -337,9 +337,9 @@
           color +
           '"></span> ' +
           "<label>" +
-          (breaks[i][0] * 100).toLocaleString() +
+          (breaks[i][0]) +
           " &mdash; " +
-          (breaks[i][1] * 100).toLocaleString() +
+          (breaks[i][1]) +
           " %</label>"
       );
     }

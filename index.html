@@ -30,6 +30,15 @@
     <div class='flex-child w-full w300-ml absolute static-ml left bottom bg-transparent'>
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent py18 px12 pt0'>
         <div class='flex-child flex-child--grow px12 py12 pt2 scroll-auto'>
+          <div id='ui-controls'>
+            <ui-h1 class='txt-bold w-full mx-auto'>Select a filter:
+              <select id="airbnb">
+                <option value="ALL" selected>All Room Types</option>
+                <option value="WHOLE">Whole Home</option>
+                <option value="PRIVATE">Private Room</option>
+              </select>
+            </ui-h1>
+          </div>
           <h2>About</h2>
           <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on the cities in which they operate. While global cities like New York, Barcelona, and Amsterdam have been at the fore of these debates, smaller cities have increasingly begun to adopt STR regulations. Lexington, KY is one such city.</p>
           <p> Use this map to explore the footprint of Airbnb – the largest STR platform currently operating – in Lexington. This project draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a data visualization project for assessing the impact of STRs across different cities in the world. By including key indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and gentrification.</p>
@@ -62,18 +71,6 @@
       <div id="map" class='border border-left-light viewport-twothirds viewport-full-ml'></div>
       <div id='legend' class='shadow bg-white round-ml px18 py12'>
         <ui-h1 class='txt-bold mb24 w-full mx-auto'>Legend</ui-h1>
-        <div class='legend-circles relative w180'>
-        </div>
-      </div>
-      <div id='ui-controls'>
-        <ui-h1 class='shadow txt-bold mb24 w-full mx-auto'>Select a filter:
-          <select id="airbnb">
-            <option value="ALL" selected>All Room Types</option>
-            <option value="WHOLE">Whole Home</option>
-            <option value="PRIVATE">Private Room</option>
-          </select>
-        </ui-h1>
-
       </div>
     </div>
 

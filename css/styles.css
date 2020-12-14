@@ -8,10 +8,10 @@
   opacity:0
 }
 
-.txt-h1 {
+/* .txt-h1 {
     font-size: 35px;
     line-height: 54px;
-}
+} */
 
 h1 {
   font-family: "Playfair Display";
@@ -59,7 +59,7 @@ li {
 ui-h1 {
   font-family: "Playfair Display";
   font-weight: lighter;
-  font-size: 1.5em;
+  font-size: 1em;
   background:#fff;
   /* opacity: 1; */
   color:#000;
@@ -85,4 +85,37 @@ body {
 
 .leaflet-verticalcenter .leaflet-control {
     margin-bottom: 10px;
+}
+
+#legend {
+  font-family: "Playfair Display";
+  padding: 6px 8px;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  max-width: 275px;
+}
+
+#legend h5 {
+  font-size: 1rem;
+}
+
+#legend span {
+  font-family: "Poppins";
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 0 10px 4px 0;
+}
+
+#legend label {
+  font-size: 1em;
+  font-family: "Poppins";
+}
+
+#legend label:after {
+  content: '';
+  display: block;
+  clear: both;
 }
