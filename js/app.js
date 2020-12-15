@@ -3,8 +3,8 @@
   const options = {
     zoomSnap: 1,
     center: [38.03, -84.5],
-    zoom: 13,
-    minZoom: 0,
+    zoom: 11,
+    minZoom: 11,
     maxZoom: 20,
     // zoomControl: false,
   };
@@ -96,6 +96,7 @@
           NAME: row["NAME"],
           NUM_LIST: Number(row["NUM_LIST"]),
           MULT_LIST: row["MULT_LIST"],
+          TYPE: row["TYPE"]
         },
         geometry: {
           type: "Point",
@@ -106,6 +107,7 @@
       airbnbGeojson.features.push(feature);
     });
     drawMap(blockGroupsData, airbnbGeojson);
+    map.setMaxBounds(map.getBounds(airbnbGeojson));
   });
 
   // DEFINE DRAWMAP FUNCTION
@@ -137,7 +139,12 @@
       },
       onEachFeature: function (feature, layer) {
         var tooltip =
+          "<b>" +
           feature.properties.NAME +
+          "</b>" +
+          "<br>" +
+          "Listing type: " +
+          feature.properties.TYPE +
           "<br>" +
           "Host ID: " +
           feature.properties.HOST_ID +
@@ -147,15 +154,13 @@
           "<br>" +
           "Price: " +
           feature.properties.PRICE +
-          "<br> " +
+          "<br> "
           "";
         layer.bindTooltip(tooltip);
-
-        function onEachFeature(feature, layer) {
-          layer.on("click", function (e) {
-            zoomToFeature(e);
-          });
-        }
+        // zoom to point on click
+        layer.on('click', function(e){
+          map.setView(e.latlng, 18);
+        });
         // when mousing over a layer
         layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
@@ -179,7 +184,8 @@
       },
     }).addTo(map);
     addUiBG(dataLayerBG); // add the UI controls
-    addLegend();
+    addUiAirBnB();
+    addLegend(map);
     updateBG(dataLayerBG);
     updateAirBnb(dataLayerAirbnb);
   }
@@ -229,7 +235,7 @@
       // attributeValue = $(this).val();
       currentBGAttribute = $(this).val();
 
-      // call updateMap function
+      // call updateBG function
       updateBG(dataLayerBG);
     });
   }
@@ -249,10 +255,10 @@
     // add event listener for when user changes selection and call the updateMap() function to redraw map
     $('select[id="airbnb"]').change(function () {
       // store reference to currently selected value
-      attributeValue = $(this).val();
+      currentAirBnBState = $(this).val();
 
-      // call updateMap function
-      updateMap(map);
+      // call updateAirBnb function
+      updateAirBnb(dataLayerAirbnb);
     });
   }
 
@@ -344,4 +350,5 @@
       );
     }
   }
+
 })();

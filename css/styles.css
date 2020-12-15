@@ -39,7 +39,7 @@ p {
 select {
   font-family: "Poppins", sans-serif;
   /* font-style: oblique; */
-  font-size: 0.6em;
+  font-size: 0.8em;
 }
 
 ul {
@@ -59,7 +59,7 @@ li {
 ui-h1 {
   font-family: "Playfair Display";
   font-weight: lighter;
-  font-size: 1em;
+  font-size: 1.3em;
   background:#fff;
   /* opacity: 1; */
   color:#000;
@@ -90,7 +90,7 @@ body {
 #legend {
   font-family: "Playfair Display";
   padding: 6px 8px;
-  font-size: 1em;
+  font-size: 1.2em;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -98,7 +98,7 @@ body {
 }
 
 #legend h5 {
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 #legend span {
