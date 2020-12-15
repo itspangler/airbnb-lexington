@@ -65,6 +65,33 @@
   // RADIUS GENERATOR -- not sure if I need
   // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
 
+  // DEFINE COLOR PALETTE
+
+  let colorsMedVal =
+
+    ["#edf8e9",
+      "#bae4b3",
+      "#74c476",
+      "#31a354",
+      "#006d2c"
+    ];
+
+  let colorsBlackPct = [
+    "#f1eef6",
+    "#bdc9e1",
+    "#74a9cf",
+    "#2b8cbe",
+    "#045a8d"
+  ]
+
+  let colorsMedInc = [
+    "#edf8fb",
+    "#b3cde3",
+    "#8c96c6",
+    "#8856a7",
+    "#810f7c",
+  ]
+
   // DEFINE DATA VARIABLES
   const blockGroups = d3.json("data/bg-race-inc-medval.geojson");
   const airbnbCsvData = d3.csv("data/lexington_airbnb_s17.csv");
@@ -117,10 +144,10 @@
         // style counties with initial default path options
         return {
           color: "#dddddd",
-          weight: 2,
+          weight: 1,
           opacity: 1,
           fillOpacity: 1,
-          fillColor: "#1f78b4",
+          // fillColor: "#1f78b4",
         };
       },
     }).addTo(map);
@@ -131,7 +158,7 @@
       pointToLayer: function(feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
-          fillOpacity: 0.6,
+          fillOpacity: 1,
           radius: 5,
           fillColor: "red",
         });
@@ -158,16 +185,18 @@
         layer.bindTooltip(tooltip);
         // zoom to point on click
         layer.on('click', function(e) {
-          map.setView(e.latlng, 18);
+          map.flyTo(e.latlng, 16);
         });
         // when mousing over a layer
         layer.on("mouseover", function() {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
+              color: "red",
               fillColor: "yellow",
+              weight: 2,
               radius: 10,
-              fillOpacity: 0.9,
+              fillOpacity: 1,
             })
             .bringToFront();
         });
@@ -177,7 +206,7 @@
           layer.setStyle({
             fillColor: "red",
             radius: 5,
-            fillOpacity: 0.6,
+            fillOpacity: 1,
           });
         });
       },
@@ -277,6 +306,8 @@
     console.log(breaks);
   }
 
+  // console.log(colors[0]);
+
   function getColor(d, breaks) {
     // function accepts a single normalized data attribute value
     // and uses a series of conditional statements to determine
@@ -284,17 +315,15 @@
     // console.log(breaks[0][0]);
 
     if (d <= breaks[0][1]) {
-      return "#f1eef6";
+      return colorsMedVal[0];
     } else if (d <= breaks[1][1]) {
-      return "#d7b5d8";
+      return colorsMedVal[1]
     } else if (d <= breaks[2][1]) {
-      return "#df65b0";
+      return colorsMedVal[2];
     } else if (d <= breaks[3][1]) {
-      return "#dd1c77";
+      return colorsMedVal[3];
     } else if (d <= breaks[4][1]) {
-      return "#980043";
-      // } else if (d <= breaks[5][1]) {
-      //   return '#ff2015'
+      return colorsMedVal[4];
     }
   }
 
@@ -324,7 +353,7 @@
 
   function updateLegend(breaks) {
     // select the legend, add a title, begin an unordered list and assign to a variable
-    var legend = $("#legend").html("<h5>" + labels[currentBGAttribute] + "</h5>" + "<br>");
+    var legend = $("#legend").html("<h5>" + labels[currentBGAttribute] + "</h5>");
 
     // loop through the Array of classification break values
     for (var i = 0; i <= breaks.length - 1; i++) {
