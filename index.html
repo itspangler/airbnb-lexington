@@ -17,6 +17,8 @@
   <link href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css">
   </link>
   <link href='css/styles.css' rel='stylesheet' />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+
 
 </head>
 
@@ -31,7 +33,16 @@
       </div>
     </div>
     <div class="col">
-      <img class="left mb6 pr6" src="images/kentucky.png" width=7.5%>
+      <img class="left mb6 pr6 mr6" src="images/kentucky.png" width=7.5%>
+      <div id='airbnb' class="btn-group ml12">
+        <button type="button" id="allTypes" class="btn btn-outline-danger mr6" style="font-size:small;">All listing types</button>
+        <button type="button" id="entireHome" class="btn btn-outline-danger mr6" style="font-size:small;">Entire home/apt</button>
+        <button type="button" id="privateRoom" class="btn btn-outline-danger mr6" style="font-size:small;">Private room</button>
+        <button type="button" id="hideListings" class="btn btn-outline-danger mr6" style="font-size:small;">Hide Airbnb listings</button>
+        <button type="button" id="showBG" class="btn btn-outline-success mr6" style="font-size:small;">Show block groups</button>
+        <button type="button" id="hideBG" class="btn btn-outline-success" style="font-size:small;">Hide block groups</button>
+
+      </div>
     </div>
   </nav>
   <div class='flex-parent viewport-full relative scroll-hidden bg-transparent'>
@@ -39,12 +50,12 @@
       <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent py18 px12 pt0'>
         <div class='flex-child flex-child--grow px12 py12 pt2 scroll-auto'>
           <div id='ui-controls'>
-            <ui-h1 class='shadow w-full mx-auto'>Select a filter:
+            <ui-h1 class='shadow w-full mx-auto'>Select a data variable:
               <select id="bg">
                 <option value="pctgrowth" selected>Median Home Value</option>
                 <option value="blackpct">Black population</option>
                 <option value="medincome_medincome">Median Income</option>
-                <option value="none">Hide block group layer</option>
+                <!-- <option value="transparent">Hide block group layer</option> -->
               </select>
             </ui-h1>
           </div>
@@ -54,17 +65,17 @@
           <p> Use this map to explore the footprint of Airbnb – the largest STR platform currently operating – in Lexington. This project draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a
             data visualization project for assessing the impact of STRs across different cities in the world. By including key indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and
             gentrification.</p>
-          <p>There are three demographic variables available for exploration: percentage growth in median home value, population of African Americans, and median income. Each of these variables is important to take into consideration when exploring the dynamics of gentrification in a given US city.
-          <!-- <ul> -->
-          <li><b>Toggle demographic data</b> by selecting a variable from the dropdown bar.</li>
-          <li><b>Hover the cursor</b> overtop of a listing to learn more details.</li>
-          <li><b>Choose an option</b> from the dropdown bar to filter points by room type:</li><br>
-          <!-- </ul> -->
+          <p>There are three demographic variables available for exploration: percentage growth in median home value, population of African Americans, and median income. Each of these variables is important to take into consideration when exploring
+            the dynamics of gentrification in a given US city.
+            <!-- <ul> -->
+            <li><b>Toggle demographic data</b> by selecting a variable from the dropdown bar.</li>
+            <li><b>Hover the cursor</b> overtop of a listing to learn more details.</li>
+            <li><b>Choose an option</b> from the dropdown bar to filter points by room type:</li><br>
+            <!-- </ul> -->
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <ul class='px12'>
-            <li>Explore the raw
-              <a class='link' target='blank' href='https://www.opendata.go.ke/datasets/national-boys-and-girls-enrollments-per-class-for-primary-school-education'>data</a>
+            <li>All data from US Census / American Community Survey
             </li>
             <li>Map authored by
               <a class='link' target='blank' href='https://github.com/itspangler'>Ian Spangler</a>

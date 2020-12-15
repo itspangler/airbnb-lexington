@@ -87,6 +87,20 @@ body {
     margin-bottom: 10px;
 }
 
+.allTypes {
+   background-color: #f1eef6 !important !important;
+}
+
+#button {
+  font-size: 2em;
+  font-family: "Poppins";
+}
+
+#airbnb {
+  font-size: 0.5em;
+  font-family: "Poppins";
+}
+
 #legend {
   font-family: "Playfair Display";
   padding: 6px 8px;
@@ -94,7 +108,7 @@ body {
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  max-width: 150px;
+  width: 200px;
 }
 
 #legend h5 {

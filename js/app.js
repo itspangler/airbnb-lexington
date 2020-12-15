@@ -46,7 +46,7 @@
   addControlPlaceholders(map);
 
   // Add zoom button
-  map.zoomControl.setPosition("verticalcenterleft");
+  map.zoomControl.setPosition("verticalcenterright");
 
   // Add scale bar
   L.control
@@ -101,6 +101,7 @@
     blackpct: "Percentage of population African American, 2018",
     medincome_medincome: "Median income, 2018",
     pctgrowth: "Percent growth in median home value, 2013-2018",
+    transparent: "Block groups hidden"
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
@@ -111,7 +112,6 @@
       type: "FeatureCollection",
       features: [],
     };
-
     csvData.forEach(function(row) {
       var feature = {
         type: "Feature",
@@ -131,9 +131,16 @@
       };
       // console.log(feature.properties)
       airbnbGeojson.features.push(feature);
+
     });
     drawMap(blockGroupsData, airbnbGeojson);
     map.setMaxBounds(map.getBounds(airbnbGeojson));
+
+    // var entireHome = L.geoJSON(data) {
+    //     filter: function(feature, layer) {
+    //       return feature.properties.TYPE["Entire home/apt"];
+    //     },
+    //   },
   });
 
   // DEFINE DRAWMAP FUNCTION
@@ -185,7 +192,7 @@
         layer.bindTooltip(tooltip);
         // zoom to point on click
         layer.on('click', function(e) {
-          map.flyTo(e.latlng, 16);
+          map.setView(e.latlng, 16);
         });
         // when mousing over a layer
         layer.on("mouseover", function() {
@@ -211,6 +218,41 @@
         });
       },
     }).addTo(map);
+
+    // add listeners for click to toggle map layers
+
+    $("#allTypes").click(function() {
+      map.addLayer(dataLayerAirbnb)
+      // map.removeLayer()
+    });
+    $("#entireHome").click(function() {
+      map.addLayer(dataLayerAirbnb, {
+        filter: function(feature, layer) {
+          return feature.properties.TYPE["Entire home/apt"];
+          console.log(feature.properties.TYPE["Entire home/apt"])
+        }
+      })
+      map.removeLayer(dataLayerAirbnb)
+    });
+    $("#privateRoom").click(function() {
+      map.addLayer(cafes)
+      map.removeLayer(others)
+    });
+    $("#hideListings").click(function() {
+      // map.addLayer()
+      map.removeLayer(dataLayerAirbnb)
+    });
+    $("#showBG").click(function() {
+      map.removeLayer(dataLayerBG)
+      map.removeLayer(dataLayerAirbnb)
+      map.addLayer(dataLayerBG)
+      map.addLayer(dataLayerAirbnb)
+    });
+    $("#hideBG").click(function() {
+      // map.addLayer(dataLayerBG)
+      map.removeLayer(dataLayerBG)
+    });
+
     addUiBG(dataLayerBG); // add the UI controls
     addUiAirBnB();
     addLegend();
@@ -243,7 +285,7 @@
   function addUiBG(dataLayerBG) {
     // create the dropdown menu control
     var selectControl = L.control({
-      position: "topright",
+      position: "topleft",
     });
     // when control is added
     selectControl.onAdd = function(map) {
@@ -259,26 +301,34 @@
     $('select[id="bg"]').change(function() {
       // store reference to currently selected value
       currentBGAttribute = $(this).val();
-
       // call updateBG function
       updateBG(dataLayerBG);
     });
   }
 
+  function addUiAirBnB(dataLayerAirbnb) {
+    var listingTypeBtn = L.control({
+      position: "topright",
+    });
+
+    // when the button is added to the map
+    listingTypeBtn.onAdd = function(map) {
+      // select a div element with an id attribute of legend
+      return L.DomUtil.get("airbnb");
+
+      $('select[id="airbnb"]').change(function() {
+        // store reference to currently selected value
+        // attributeValue = $(this).val();
+        currentAirBnBState = $(this).val();
+
+        // call updateBG function
+        updateAirBnb(dataLayerAirbnb);
+      });
+    }
+  }
   // define functionality for updating Airbnb listings
   function updateAirBnb(dataLayerAirbnb) {
-    // code here
-  }
 
-  function addUiAirBnB(dataLayerAirbnb) {
-    $('select[id="airbnb"]').change(() => {
-      // store reference to currently selected value
-      // attributeValue = $(this).val();
-      currentBGAttribute = $(this).val();
-
-      // call updateBG function
-      updateAirBnb(dataLayerAirbnb);
-    });
   }
 
   function getClassBreaks(dataLayerBG) {
@@ -334,7 +384,7 @@
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function(legend) {
+    legendControl.onAdd = function() {
       // select a div element with an id attribute of legend
       var legend = L.DomUtil.get("legend");
 
