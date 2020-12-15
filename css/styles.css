@@ -43,6 +43,7 @@ select {
 }
 
 ul {
+  list-style-type: none; /* Remove bullets */
   list-style-position: inside;
   text-indent: -0.5em;
   font-size: 0.8em;
@@ -53,7 +54,7 @@ li {
   list-style-position: inside;
   font-size: 0.8em;
   text-indent: -1.5em;
-  font-style: oblique;  
+  font-style: oblique;
   /* text-align: left; */
 }
 
@@ -117,16 +118,17 @@ body {
 }
 
 #legend span {
-  font-family: "Poppins";
+  /* font-family: "Poppins"; */
   width: 20px;
   height: 20px;
   float: left;
-  margin: 0 10px 4px 0;
+  margin: 12px 10px 4px 0px;
 }
 
 #legend label {
   font-size: 1em;
   font-family: "Poppins";
+  /* padding:  */
 }
 
 #legend label:after {

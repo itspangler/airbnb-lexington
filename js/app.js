@@ -46,12 +46,12 @@
   addControlPlaceholders(map);
 
   // Add zoom button
-  map.zoomControl.setPosition("verticalcenterright");
+  map.zoomControl.setPosition("topright");
 
   // Add scale bar
   L.control
     .scale({
-      position: "verticalcenterright",
+      position: "topright",
     })
     .addTo(map);
 
@@ -157,8 +157,133 @@
           // fillColor: "#1f78b4",
         };
       },
-    }).addTo(map);
+    }).addTo(map)
+    .bringToBack();
     // console.log(blockGroupsData)
+
+    // define airbnb filter variables
+    const entireHome = L.geoJSON(airbnbGeojson, {
+      pointToLayer: function(feature, ll) {
+        return L.circleMarker(ll, {
+          weight: 0,
+          fillOpacity: 1,
+          radius: 5,
+          fillColor: "red",
+        });
+      },
+      onEachFeature: function(feature, layer) {
+        var tooltip =
+          "<b>" +
+          feature.properties.NAME +
+          "</b>" +
+          "<br>" +
+          "Listing type: " +
+          feature.properties.TYPE +
+          "<br>" +
+          "Host ID: " +
+          feature.properties.HOST_ID +
+          "<br>" +
+          "Host number of listings: " +
+          feature.properties.NUM_LIST +
+          "<br>" +
+          "Price: " +
+          feature.properties.PRICE +
+          "<br> "
+        "";
+        layer.bindTooltip(tooltip);
+        // zoom to point on click
+        layer.on('click', function(e) {
+          map.setView(e.latlng, 16);
+        });
+        // when mousing over a layer
+        layer.on("mouseover", function() {
+          // change the stroke color and bring that element to the front
+          layer
+            .setStyle({
+              color: "red",
+              fillColor: "yellow",
+              weight: 2,
+              radius: 10,
+              fillOpacity: 1,
+            })
+            .bringToFront();
+        });
+        // on mousing off layer
+        layer.on("mouseout", function() {
+          // reset the layer style to its original stroke color
+          layer.setStyle({
+            fillColor: "red",
+            radius: 5,
+            fillOpacity: 1,
+          });
+        });
+      },
+      filter: function(feature, layer){
+        return feature.properties.TYPE == "Entire home/apt";
+      },
+    });
+
+    const privateRoom = L.geoJSON(airbnbGeojson, {
+      pointToLayer: function(feature, ll) {
+        return L.circleMarker(ll, {
+          weight: 0,
+          fillOpacity: 1,
+          radius: 5,
+          fillColor: "red",
+        });
+      },
+      onEachFeature: function(feature, layer) {
+        var tooltip =
+          "<b>" +
+          feature.properties.NAME +
+          "</b>" +
+          "<br>" +
+          "Listing type: " +
+          feature.properties.TYPE +
+          "<br>" +
+          "Host ID: " +
+          feature.properties.HOST_ID +
+          "<br>" +
+          "Host number of listings: " +
+          feature.properties.NUM_LIST +
+          "<br>" +
+          "Price: " +
+          feature.properties.PRICE +
+          "<br> "
+        "";
+        layer.bindTooltip(tooltip);
+        // zoom to point on click
+        layer.on('click', function(e) {
+          map.setView(e.latlng, 16);
+        });
+        // when mousing over a layer
+        layer.on("mouseover", function() {
+          // change the stroke color and bring that element to the front
+          layer
+            .setStyle({
+              color: "red",
+              fillColor: "yellow",
+              weight: 2,
+              radius: 10,
+              fillOpacity: 1,
+            })
+            .bringToFront();
+        });
+        // on mousing off layer
+        layer.on("mouseout", function() {
+          // reset the layer style to its original stroke color
+          layer.setStyle({
+            fillColor: "red",
+            radius: 5,
+            fillOpacity: 1,
+          });
+        });
+      },
+      filter: function(feature, layer){
+        return feature.properties.TYPE == "Private room";
+      },
+    });
+
 
     // add airbnb points
     const dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
@@ -219,34 +344,34 @@
       },
     }).addTo(map);
 
-    // add listeners for click to toggle map layers
+        // add listeners for click to toggle map layers
 
     $("#allTypes").click(function() {
+      map.removeLayer(dataLayerAirbnb)
+      map.removeLayer(privateRoom)
+      map.removeLayer(entireHome)
       map.addLayer(dataLayerAirbnb)
-      // map.removeLayer()
     });
     $("#entireHome").click(function() {
-      map.addLayer(dataLayerAirbnb, {
-        filter: function(feature, layer) {
-          return feature.properties.TYPE["Entire home/apt"];
-          console.log(feature.properties.TYPE["Entire home/apt"])
-        }
-      })
       map.removeLayer(dataLayerAirbnb)
+      map.removeLayer(privateRoom)
+      map.addLayer(entireHome)
+      // console.log(entireHome)
     });
     $("#privateRoom").click(function() {
-      map.addLayer(cafes)
-      map.removeLayer(others)
+      map.removeLayer(dataLayerAirbnb)
+      map.removeLayer(entireHome)
+      map.addLayer(privateRoom)
     });
     $("#hideListings").click(function() {
       // map.addLayer()
       map.removeLayer(dataLayerAirbnb)
+      map.removeLayer(privateRoom)
+      map.removeLayer(entireHome)
     });
     $("#showBG").click(function() {
-      map.removeLayer(dataLayerBG)
-      map.removeLayer(dataLayerAirbnb)
       map.addLayer(dataLayerBG)
-      map.addLayer(dataLayerAirbnb)
+      dataLayerBG.bringToBack()
     });
     $("#hideBG").click(function() {
       // map.addLayer(dataLayerBG)
@@ -410,9 +535,9 @@
       var color = getColor(breaks[i][0], breaks);
 
       legend.append(
-        '<span style="background:' +
+        "<ul>" + '<span style="background:' +
         color +
-        '"></span> ' +
+        '"></span> ' + "</ul>" +
         "<label>" +
         (breaks[i][0]) +
         " &mdash; " +
