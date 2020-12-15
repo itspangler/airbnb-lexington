@@ -1,4 +1,4 @@
-(function () {
+(function() {
   // DEFINE MAP OPTIONS
   const options = {
     zoomSnap: 1,
@@ -11,8 +11,7 @@
 
   // DEFINE BASEMAP OPTIONS
   const stamenOptions = {
-    attribution:
-      'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     subdomains: "abcd",
     minZoom: 0,
     maxZoom: 20,
@@ -72,13 +71,13 @@
 
   // create object to hold legend titles
   const labels = {
-    blackpct: "percentage of pop african american",
-    medincome_medincome: "median income",
+    blackpct: "Percentage of population African American, 2018",
+    medincome_medincome: "Median income, 2018",
     pctgrowth: "Percent growth in median home value, 2013-2018",
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([blockGroups, airbnbCsvData]).then(function (data) {
+  Promise.all([blockGroups, airbnbCsvData]).then(function(data) {
     const blockGroupsData = data[0];
     const csvData = data[1];
     const airbnbGeojson = {
@@ -86,7 +85,7 @@
       features: [],
     };
 
-    csvData.forEach(function (row) {
+    csvData.forEach(function(row) {
       var feature = {
         type: "Feature",
         properties: {
@@ -114,7 +113,7 @@
   function drawMap(blockGroupsData, airbnbGeojson) {
     // add block groups
     const dataLayerBG = L.geoJSON(blockGroupsData, {
-      style: function (feature) {
+      style: function(feature) {
         // style counties with initial default path options
         return {
           color: "#dddddd",
@@ -129,7 +128,7 @@
 
     // add airbnb points
     const dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function (feature, ll) {
+      pointToLayer: function(feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 0.6,
@@ -137,7 +136,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function (feature, layer) {
+      onEachFeature: function(feature, layer) {
         var tooltip =
           "<b>" +
           feature.properties.NAME +
@@ -155,14 +154,14 @@
           "Price: " +
           feature.properties.PRICE +
           "<br> "
-          "";
+        "";
         layer.bindTooltip(tooltip);
         // zoom to point on click
-        layer.on('click', function(e){
+        layer.on('click', function(e) {
           map.setView(e.latlng, 18);
         });
         // when mousing over a layer
-        layer.on("mouseover", function () {
+        layer.on("mouseover", function() {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -173,7 +172,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function () {
+        layer.on("mouseout", function() {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -185,54 +184,51 @@
     }).addTo(map);
     addUiBG(dataLayerBG); // add the UI controls
     addUiAirBnB();
-    addLegend(map);
+    addLegend();
     updateBG(dataLayerBG);
     updateAirBnb(dataLayerAirbnb);
   }
 
   // FUNCTIONS
 
+  // define function for updating block groups
   function updateBG(dataLayerBG) {
     // console.log(blockGroupsData)
 
     // get the class breaks for the current data attribute
     var breaks = getClassBreaks(dataLayerBG);
-    // update the legend to the map using breaks
 
+    // update the legend to the map using breaks
     updateLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    dataLayerBG.eachLayer(function (layer) {
+    dataLayerBG.eachLayer(function(layer) {
       let props = layer.feature.properties;
       layer.setStyle({
         fillColor: getColor(props[currentBGAttribute], breaks),
       });
-
-      // console.log(props[pctGrowth]);
-      // set the fill color of layer based on its normalized data value
-
-      // assemble string sequence of info for tooltip (end line break with + operator)
-      // var tooltipInfo = "<b>" + props["GNOCDC_LAB"] +
-      //   " Neighborhood</b></br>" +
-      //   (props[attributeValue]);
-      //
-      // // bind a tooltip to layer with county-specific information
-      // layer.bindTooltip(tooltipInfo, {
-      //   // sticky property so tooltip follows the mouse
-      //   sticky: true,
-      //   tooltipAnchor: [200, 200]
-      // });
     });
   }
 
-  function updateAirBnb(dataLayerAirbnb) {
-    // code here
-  }
-
+  // define UI functionality for changing block group variables
   function addUiBG(dataLayerBG) {
-    $('select[id="bg-ui"]').change(() => {
+    // create the dropdown menu control
+    var selectControl = L.control({
+      position: "topright",
+    });
+    // when control is added
+    selectControl.onAdd = function(map) {
+      // get the element with id attribute of ui-controls
+      return L.DomUtil.get("ui-controls");
+
+    };
+    // add the control to the map
+    selectControl.addTo(map);
+    L.DomEvent.disableScrollPropagation(selectControl);
+    L.DomEvent.disableClickPropagation(selectControl);
+    // add event listener for when user changes selection and call the updateMap() function to redraw map
+    $('select[id="bg"]').change(function() {
       // store reference to currently selected value
-      // attributeValue = $(this).val();
       currentBGAttribute = $(this).val();
 
       // call updateBG function
@@ -240,24 +236,18 @@
     });
   }
 
-  function addUiAirBnB() {
-    // create the slider control
-    var selectControl = L.control({
-      position: "topright",
-    });
-    // when control is added
-    selectControl.onAdd = function (map) {
-      // get the element with id attribute of ui-controls
-      return L.DomUtil.get("ui-controls");
-    };
-    // add the control to the map
-    selectControl.addTo(map);
-    // add event listener for when user changes selection and call the updateMap() function to redraw map
-    $('select[id="airbnb"]').change(function () {
-      // store reference to currently selected value
-      currentAirBnBState = $(this).val();
+  // define functionality for updating Airbnb listings
+  function updateAirBnb(dataLayerAirbnb) {
+    // code here
+  }
 
-      // call updateAirBnb function
+  function addUiAirBnB(dataLayerAirbnb) {
+    $('select[id="airbnb"]').change(() => {
+      // store reference to currently selected value
+      // attributeValue = $(this).val();
+      currentBGAttribute = $(this).val();
+
+      // call updateBG function
       updateAirBnb(dataLayerAirbnb);
     });
   }
@@ -267,7 +257,7 @@
     var values = [];
     // console.log(data)
     // loop through all the block groups
-    dataLayerBG.eachLayer(function (layer) {
+    dataLayerBG.eachLayer(function(layer) {
       // console.log(layer.feature.properties)
       let value = layer.feature.properties[currentBGAttribute];
       values.push(value); // push the value for each layer into the Array
@@ -276,20 +266,22 @@
 
     // console.log(values)
     // determine similar clusters
-    var clusters = ss.ckmeans(values, 6);
+    var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function (cluster) {
+    var breaks = clusters.map(function(cluster) {
       return [cluster[0], cluster.pop()];
     });
     //return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
     return breaks;
+    console.log(breaks);
   }
 
   function getColor(d, breaks) {
     // function accepts a single normalized data attribute value
     // and uses a series of conditional statements to determine
     // which color value to return to the function caller
+    // console.log(breaks[0][0]);
 
     if (d <= breaks[0][1]) {
       return "#f1eef6";
@@ -301,8 +293,8 @@
       return "#dd1c77";
     } else if (d <= breaks[4][1]) {
       return "#980043";
-      } else if (d <= breaks[5][1]) {
-        return '#ff2015'
+      // } else if (d <= breaks[5][1]) {
+      //   return '#ff2015'
     }
   }
 
@@ -340,13 +332,13 @@
 
       legend.append(
         '<span style="background:' +
-          color +
-          '"></span> ' +
-          "<label>" +
-          (breaks[i][0]) +
-          " &mdash; " +
-          (breaks[i][1]) +
-          " %</label>"
+        color +
+        '"></span> ' +
+        "<label>" +
+        (breaks[i][0]) +
+        " &mdash; " +
+        (breaks[i][1]) +
+        " %</label>"
       );
     }
   }
