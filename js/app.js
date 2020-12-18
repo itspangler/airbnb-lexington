@@ -427,6 +427,8 @@
       // select a div element with an id attribute of legend
       return L.DomUtil.get("airbnb");
     };
+
+    listingTypeBtn.addTo(map);
   }
 
   function getClassBreaks(dataLayerBG) {
