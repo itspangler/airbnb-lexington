@@ -380,9 +380,15 @@
     // loop through each county layer to update the color and tooltip info
     dataLayerBG.eachLayer(function (layer) {
       let props = layer.feature.properties;
-      layer.setStyle({
-        fillColor: getColor(props[currentBGAttribute], breaks),
-      });
+      if (!props[currentBGAttribute]) {
+        layer.setStyle({
+          fillColor: "grey",
+        });
+      } else {
+        layer.setStyle({
+          fillColor: getColor(props[currentBGAttribute], breaks),
+        });
+      }
     });
   }
 
@@ -431,8 +437,9 @@
     dataLayerBG.eachLayer(function (layer) {
       // console.log(layer.feature.properties)
       let value = layer.feature.properties[currentBGAttribute];
-      values.push(value); // push the value for each layer into the Array
-      // console.log(layer.feature.properties[pctGrowth])
+      if (value) {
+        values.push(value); // push the value for each layer into the Array
+      }
     });
 
     // console.log(values)
@@ -500,27 +507,35 @@
   }
 
   function updateLegend(breaks) {
+    // var formatMapping = {
+    //   pctgrowth: "%",
+    //   blackpct: "%",
+    //   medincome_medincome: "",
+    // };
+
     // select the legend, add a title, begin an unordered list and assign to a variable
-    var legend = $("#legend").html(
-      "<h5>" + labels[currentBGAttribute] + "</h5>"
-    );
+    var legend = $("#legend").html(`<h5>${labels[currentBGAttribute]}</h5>`);
+
+    var legendList = "";
 
     // loop through the Array of classification break values
     for (var i = 0; i <= breaks.length - 1; i++) {
+      console.log(i);
       var color = getColor(breaks[i][0], breaks);
 
-      legend.append(
-        "<ul>" +
-          '<span style="background:' +
-          color +
-          '"></span> ' +
-          "</ul>" +
-          "<label>" +
-          breaks[i][0] +
-          " &mdash; " +
-          breaks[i][1] +
-          " %</label>"
-      );
+      if (currentBGAttribute == "medincome_medincome") {
+        var listItem = `<div><span style="background:${color}"></span>
+        <label>$${breaks[i][0].toLocaleString()} &mdash; $${breaks[
+          i
+        ][1].toLocaleString()}</label></div>`;
+      } else {
+        var listItem = `<div><span style="background:${color}"></span>
+        <label>${breaks[i][0]} &mdash; ${breaks[i][1]}%</label></div>`;
+      }
+
+      legendList += listItem;
     }
+    // legendList += "</ul>";
+    legend.append(legendList);
   }
 })();

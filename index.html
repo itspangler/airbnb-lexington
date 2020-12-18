@@ -8,7 +8,8 @@
 
   <link href="https://api.mapbox.com/mapbox-assembly/v0.24.0/assembly.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,500,600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
@@ -35,12 +36,18 @@
     <div class="col">
       <img class="left mb6 pr6 mr6" src="images/kentucky.png" width=7.5%>
       <div id='airbnb' class="btn-group ml12">
-        <button type="button" id="allTypes" class="btn btn-outline-danger mr6" style="font-size:small;">All listing types</button>
-        <button type="button" id="entireHome" class="btn btn-outline-danger mr6" style="font-size:small;">Entire home/apt</button>
-        <button type="button" id="privateRoom" class="btn btn-outline-danger mr6" style="font-size:small;">Private room</button>
-        <button type="button" id="hideListings" class="btn btn-outline-danger mr6" style="font-size:small;">Hide Airbnb listings</button>
-        <button type="button" id="showBG" class="btn btn-outline-success mr6" style="font-size:small;">Show block groups</button>
-        <button type="button" id="hideBG" class="btn btn-outline-success" style="font-size:small;">Hide block groups</button>
+        <button type="button" id="allTypes" class="btn btn-outline-danger mr6" style="font-size:small;">All listing
+          types</button>
+        <button type="button" id="entireHome" class="btn btn-outline-danger mr6" style="font-size:small;">Entire
+          home/apt</button>
+        <button type="button" id="privateRoom" class="btn btn-outline-danger mr6" style="font-size:small;">Private
+          room</button>
+        <button type="button" id="hideListings" class="btn btn-outline-danger mr6" style="font-size:small;">Hide Airbnb
+          listings</button>
+        <button type="button" id="showBG" class="btn btn-outline-success mr6" style="font-size:small;">Show block
+          groups</button>
+        <button type="button" id="hideBG" class="btn btn-outline-success" style="font-size:small;">Hide block
+          groups</button>
 
       </div>
     </div>
@@ -62,20 +69,34 @@
           <!-- <ul> -->
 
           <h2>About</h2>
-          <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on the cities in which they operate. While global cities like New York, Barcelona, and Amsterdam have been at the fore of these
-            debates, smaller cities have increasingly begun to adopt STR regulations. Lexington, KY is one such city.</p>
+          <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on
+            the cities in which they operate. While global cities like New York, Barcelona, and Amsterdam have been at
+            the fore of these
+            debates, smaller cities have increasingly begun to adopt STR regulations. Lexington, KY is one such city.
+          </p>
           <h2>Using the map</h2>
-          <p> Use this map to explore the footprint of Airbnb – the largest STR platform currently operating – in Lexington. This project draws inspiration from <a class='link' target='blank' href='https://www.insideairbnb.com'>InsideAirbnb</a>, a
-            data visualization project for assessing the impact of STRs across different cities in the world. By including key indicators of neighborhood change, this project provides a more holistic picture of the relationship between STRs and
+          <p> Use this map to explore the footprint of Airbnb – the largest STR platform currently operating – in
+            Lexington. This project draws inspiration from <a class='link' target='blank'
+              href='https://www.insideairbnb.com'>InsideAirbnb</a>, a
+            data visualization project for assessing the impact of STRs across different cities in the world. By
+            including key indicators of neighborhood change, this project provides a more holistic picture of the
+            relationship between STRs and
             gentrification.</p>
           <li><b>Filter layers or Airbnb listing types</b> by clicking a button in the header.</li>
           <li><b>Hover the cursor</b> overtop of a red point to learn more the Airbnb listing.</li>
           <li><b>Choose a Census data variable</b> from the dropdown bar.</li><br>
           <h2>Understanding the data</h2>
-          <p>There are three demographic variables available for exploration: percentage growth in median home value, population of African Americans, and median income. Each of these variables taken into consideration given their importance for
-            understanding the contemporary dynamics of gentrification, both in general and in Lexington. Indeed, Lexington has struggled with gentrification in recent years. The city's Black communities in the north and east sides are especially
+          <p>There are three demographic variables available for exploration: percentage growth in median home value,
+            population of African Americans, and median income. Each of these variables taken into consideration given
+            their importance for
+            understanding the contemporary dynamics of gentrification, both in general and in Lexington. Indeed,
+            Lexington has struggled with gentrification in recent years. The city's Black communities in the north and
+            east sides are especially
             vulnerable to such processes.</p>
-          <p>It is important to note the limitations of this web tool. Taking into account the city of Lexington's highly seasonal tourism industry, this web map would be enriched by more data on Airbnb bookings by month. Furthermore, it's important to consider that the Airbnb listings represented here are scraped from the Airbnb website which scatters points by up to 200m in order to maintain host anonymity.
+          <p>It is important to note the limitations of this web tool. Taking into account the city of Lexington's
+            highly seasonal tourism industry, this web map would be enriched by more data on Airbnb bookings by month.
+            Furthermore, it's important to consider that the Airbnb listings represented here are scraped from the
+            Airbnb website which scatters points by up to 200m in order to maintain host anonymity.
         </div>
         <footer class='px12 py12 bg-gray-faint txt-s'>
           <ul class='px12'>
@@ -92,13 +113,19 @@
     <div class='shadow-sm flex-child flex-child--grow viewport-twothirds viewport-full-ml'>
       <div id="map" class='border border-left-light viewport-twothirds viewport-full-ml'></div>
       <div id='legend' class='shadow bg-white round-ml px18 py12'>
-        <ui-h1 class='txt-bold mb24 w-full mx-auto'>Legend</ui-h1>
+        <h5></h5>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/simple-statistics@5.2.1/dist/simple-statistics.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>

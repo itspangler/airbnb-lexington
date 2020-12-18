@@ -1,11 +1,16 @@
+body {
+  /* margin-top: 65x; */
+}
+
 /* custom CSS rules */
 /* display none for layout but be careful of license restrictions */
-.mapbox-logo, .leaflet-control-attribution {
+.mapbox-logo,
+.leaflet-control-attribution {
   display: none;
 }
 
 .transparent {
-  opacity:0
+  opacity: 0;
 }
 
 /* .txt-h1 {
@@ -42,55 +47,48 @@ select {
   font-size: 0.8em;
 }
 
-ul {
-  list-style-type: none; /* Remove bullets */
+/* ul {
+  list-style-type: none; 
   list-style-position: inside;
   text-indent: -0.5em;
   font-size: 0.8em;
-  /* text-align: left; */
+
 }
 
 li {
   list-style-position: inside;
   font-size: 0.8em;
   text-indent: -1.5em;
-  /* font-style: oblique; */
-  /* text-align: left; */
-}
+} */
 
 ui-h1 {
   font-family: "Playfair Display";
   font-weight: lighter;
   font-size: 1.3em;
-  background:#fff;
+  background: #fff;
   /* opacity: 1; */
-  color:#000;
+  color: #000;
   display: grid;
-  padding:3px 15px 15px;
+  padding: 3px 15px 15px;
   /* margin-left:10px; */
-  border-radius:5px;
-
-}
-
-body {
-    /* margin-top: 65x; */
+  border-radius: 5px;
 }
 
 .leaflet-verticalcenter {
-    position: absolute;
-    z-index: 1000;
-    pointer-events: none;
-    top: 50%; /* possible because the placeholder's parent is the map */
-    transform: translateY(-50%); /* using the CSS3 Transform technique */
-    padding-top: 10px;
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+  top: 50%; /* possible because the placeholder's parent is the map */
+  transform: translateY(-50%); /* using the CSS3 Transform technique */
+  padding-top: 10px;
 }
 
 .leaflet-verticalcenter .leaflet-control {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .allTypes {
-   background-color: #f1eef6 !important !important;
+  background-color: #f1eef6 !important !important;
 }
 
 #button {
@@ -116,6 +114,8 @@ body {
 #legend h5 {
   font-size: 1em;
 }
+#legend li {
+}
 
 #legend span {
   /* font-family: "Poppins"; */
@@ -128,11 +128,10 @@ body {
 #legend label {
   font-size: 0.8em;
   font-family: "Poppins";
-  /* padding:  */
 }
 
 #legend label:after {
-  content: '';
+  content: "";
   display: block;
   clear: both;
 }
