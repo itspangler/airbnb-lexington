@@ -416,12 +416,12 @@
     selectControl.onAdd = function(map) {
       // get the element with id attribute of ui-controls
       return L.DomUtil.get("ui-controls");
-
     };
     // add the control to the map
     selectControl.addTo(map);
     L.DomEvent.disableScrollPropagation(selectControl);
     L.DomEvent.disableClickPropagation(selectControl);
+
     // add event listener for when user changes selection and call the updateMap() function to redraw map
     $('select[id="bg"]').change(function() {
       // store reference to currently selected value
@@ -517,7 +517,7 @@
       L.DomEvent.disableScrollPropagation(legend);
       L.DomEvent.disableClickPropagation(legend);
 
-      // return the selection to the method
+// return the selection to the method
       return legend;
     };
 
