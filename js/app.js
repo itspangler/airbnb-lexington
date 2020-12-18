@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // DEFINE MAP OPTIONS
   const options = {
     zoomSnap: 1,
@@ -11,7 +11,8 @@
 
   // DEFINE BASEMAP OPTIONS
   const stamenOptions = {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution:
+      'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     subdomains: "abcd",
     minZoom: 0,
     maxZoom: 20,
@@ -67,30 +68,11 @@
 
   // DEFINE COLOR PALETTE
 
-  let colorsMedVal =
+  let colorsMedVal = ["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"];
 
-    ["#edf8e9",
-      "#bae4b3",
-      "#74c476",
-      "#31a354",
-      "#006d2c"
-    ];
+  let colorsBlackPct = ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"];
 
-  let colorsBlackPct = [
-    "#f1eef6",
-    "#bdc9e1",
-    "#74a9cf",
-    "#2b8cbe",
-    "#045a8d"
-  ]
-
-  let colorsMedInc = [
-    "#edf8fb",
-    "#b3cde3",
-    "#8c96c6",
-    "#8856a7",
-    "#810f7c",
-  ]
+  let colorsMedInc = ["#edf8fb", "#b3cde3", "#8c96c6", "#8856a7", "#810f7c"];
 
   // DEFINE DATA VARIABLES
   const blockGroups = d3.json("data/bg-race-inc-medval.geojson");
@@ -101,18 +83,18 @@
     blackpct: "Percentage of population African American, 2018",
     medincome_medincome: "Median income, 2018",
     pctgrowth: "Percent growth in median home value, 2013-2018",
-    transparent: "Block groups hidden"
+    transparent: "Block groups hidden",
   };
 
   // PROMISE.ALL METHOD FOR LOADING DATA
-  Promise.all([blockGroups, airbnbCsvData]).then(function(data) {
+  Promise.all([blockGroups, airbnbCsvData]).then(function (data) {
     const blockGroupsData = data[0];
     const csvData = data[1];
     const airbnbGeojson = {
       type: "FeatureCollection",
       features: [],
     };
-    csvData.forEach(function(row) {
+    csvData.forEach(function (row) {
       var feature = {
         type: "Feature",
         properties: {
@@ -122,7 +104,7 @@
           NAME: row["NAME"],
           NUM_LIST: Number(row["NUM_LIST"]),
           MULT_LIST: row["MULT_LIST"],
-          TYPE: row["TYPE"]
+          TYPE: row["TYPE"],
         },
         geometry: {
           type: "Point",
@@ -131,7 +113,6 @@
       };
       // console.log(feature.properties)
       airbnbGeojson.features.push(feature);
-
     });
     drawMap(blockGroupsData, airbnbGeojson);
     map.setMaxBounds(map.getBounds(airbnbGeojson));
@@ -147,7 +128,7 @@
   function drawMap(blockGroupsData, airbnbGeojson) {
     // add block groups
     const dataLayerBG = L.geoJSON(blockGroupsData, {
-      style: function(feature) {
+      style: function (feature) {
         // style counties with initial default path options
         return {
           color: "#dddddd",
@@ -157,13 +138,14 @@
           // fillColor: "#1f78b4",
         };
       },
-    }).addTo(map)
-    .bringToBack();
+    })
+      .addTo(map)
+      .bringToBack();
     // console.log(blockGroupsData)
 
     // define airbnb filter variables
     const entireHome = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function(feature, ll) {
+      pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 1,
@@ -171,7 +153,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function (feature, layer) {
         var tooltip =
           "<b>" +
           feature.properties.NAME +
@@ -188,15 +170,15 @@
           "<br>" +
           "Price: " +
           feature.properties.PRICE +
-          "<br> "
-        "";
+          "<br> ";
+        ("");
         layer.bindTooltip(tooltip);
         // zoom to point on click
-        layer.on('click', function(e) {
+        layer.on("click", function (e) {
           map.setView(e.latlng, 16);
         });
         // when mousing over a layer
-        layer.on("mouseover", function() {
+        layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -209,7 +191,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function() {
+        layer.on("mouseout", function () {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -218,13 +200,13 @@
           });
         });
       },
-      filter: function(feature, layer){
+      filter: function (feature, layer) {
         return feature.properties.TYPE == "Entire home/apt";
       },
     });
 
     const privateRoom = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function(feature, ll) {
+      pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 1,
@@ -232,7 +214,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function (feature, layer) {
         var tooltip =
           "<b>" +
           feature.properties.NAME +
@@ -249,15 +231,15 @@
           "<br>" +
           "Price: " +
           feature.properties.PRICE +
-          "<br> "
-        "";
+          "<br> ";
+        ("");
         layer.bindTooltip(tooltip);
         // zoom to point on click
-        layer.on('click', function(e) {
+        layer.on("click", function (e) {
           map.setView(e.latlng, 16);
         });
         // when mousing over a layer
-        layer.on("mouseover", function() {
+        layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -270,7 +252,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function() {
+        layer.on("mouseout", function () {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -279,15 +261,14 @@
           });
         });
       },
-      filter: function(feature, layer){
+      filter: function (feature, layer) {
         return feature.properties.TYPE == "Private room";
       },
     });
 
-
     // add airbnb points
     const dataLayerAirbnb = L.geoJSON(airbnbGeojson, {
-      pointToLayer: function(feature, ll) {
+      pointToLayer: function (feature, ll) {
         return L.circleMarker(ll, {
           weight: 0,
           fillOpacity: 1,
@@ -295,7 +276,7 @@
           fillColor: "red",
         });
       },
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function (feature, layer) {
         var tooltip =
           "<b>" +
           feature.properties.NAME +
@@ -312,15 +293,15 @@
           "<br>" +
           "Price: " +
           feature.properties.PRICE +
-          "<br> "
-        "";
+          "<br> ";
+        ("");
         layer.bindTooltip(tooltip);
         // zoom to point on click
-        layer.on('click', function(e) {
+        layer.on("click", function (e) {
           map.setView(e.latlng, 16);
         });
         // when mousing over a layer
-        layer.on("mouseover", function() {
+        layer.on("mouseover", function () {
           // change the stroke color and bring that element to the front
           layer
             .setStyle({
@@ -333,7 +314,7 @@
             .bringToFront();
         });
         // on mousing off layer
-        layer.on("mouseout", function() {
+        layer.on("mouseout", function () {
           // reset the layer style to its original stroke color
           layer.setStyle({
             fillColor: "red",
@@ -344,45 +325,44 @@
       },
     }).addTo(map);
 
-        // add listeners for click to toggle map layers
+    // add listeners for click to toggle map layers
 
-    $("#allTypes").click(function() {
-      map.removeLayer(dataLayerAirbnb)
-      map.removeLayer(privateRoom)
-      map.removeLayer(entireHome)
-      map.addLayer(dataLayerAirbnb)
+    $("#allTypes").click(function () {
+      map.removeLayer(dataLayerAirbnb);
+      map.removeLayer(privateRoom);
+      map.removeLayer(entireHome);
+      map.addLayer(dataLayerAirbnb);
     });
-    $("#entireHome").click(function() {
-      map.removeLayer(dataLayerAirbnb)
-      map.removeLayer(privateRoom)
-      map.addLayer(entireHome)
+    $("#entireHome").click(function () {
+      map.removeLayer(dataLayerAirbnb);
+      map.removeLayer(privateRoom);
+      map.addLayer(entireHome);
       // console.log(entireHome)
     });
-    $("#privateRoom").click(function() {
-      map.removeLayer(dataLayerAirbnb)
-      map.removeLayer(entireHome)
-      map.addLayer(privateRoom)
+    $("#privateRoom").click(function () {
+      map.removeLayer(dataLayerAirbnb);
+      map.removeLayer(entireHome);
+      map.addLayer(privateRoom);
     });
-    $("#hideListings").click(function() {
+    $("#hideListings").click(function () {
       // map.addLayer()
-      map.removeLayer(dataLayerAirbnb)
-      map.removeLayer(privateRoom)
-      map.removeLayer(entireHome)
+      map.removeLayer(dataLayerAirbnb);
+      map.removeLayer(privateRoom);
+      map.removeLayer(entireHome);
     });
-    $("#showBG").click(function() {
-      map.addLayer(dataLayerBG)
-      dataLayerBG.bringToBack()
+    $("#showBG").click(function () {
+      map.addLayer(dataLayerBG);
+      dataLayerBG.bringToBack();
     });
-    $("#hideBG").click(function() {
+    $("#hideBG").click(function () {
       // map.addLayer(dataLayerBG)
-      map.removeLayer(dataLayerBG)
+      map.removeLayer(dataLayerBG);
     });
 
     addUiBG(dataLayerBG); // add the UI controls
     addUiAirBnB();
     addLegend();
     updateBG(dataLayerBG);
-    updateAirBnb(dataLayerAirbnb);
   }
 
   // FUNCTIONS
@@ -398,7 +378,7 @@
     updateLegend(breaks);
 
     // loop through each county layer to update the color and tooltip info
-    dataLayerBG.eachLayer(function(layer) {
+    dataLayerBG.eachLayer(function (layer) {
       let props = layer.feature.properties;
       layer.setStyle({
         fillColor: getColor(props[currentBGAttribute], breaks),
@@ -413,7 +393,7 @@
       position: "topleft",
     });
     // when control is added
-    selectControl.onAdd = function(map) {
+    selectControl.onAdd = function (map) {
       // get the element with id attribute of ui-controls
       return L.DomUtil.get("ui-controls");
     };
@@ -423,7 +403,7 @@
     L.DomEvent.disableClickPropagation(selectControl);
 
     // add event listener for when user changes selection and call the updateMap() function to redraw map
-    $('select[id="bg"]').change(function() {
+    $('select[id="bg"]').change(function () {
       // store reference to currently selected value
       currentBGAttribute = $(this).val();
       // call updateBG function
@@ -437,23 +417,10 @@
     });
 
     // when the button is added to the map
-    listingTypeBtn.onAdd = function(map) {
+    listingTypeBtn.onAdd = function (map) {
       // select a div element with an id attribute of legend
       return L.DomUtil.get("airbnb");
-
-      $('select[id="airbnb"]').change(function() {
-        // store reference to currently selected value
-        // attributeValue = $(this).val();
-        currentAirBnBState = $(this).val();
-
-        // call updateBG function
-        updateAirBnb(dataLayerAirbnb);
-      });
-    }
-  }
-  // define functionality for updating Airbnb listings
-  function updateAirBnb(dataLayerAirbnb) {
-
+    };
   }
 
   function getClassBreaks(dataLayerBG) {
@@ -461,7 +428,7 @@
     var values = [];
     // console.log(data)
     // loop through all the block groups
-    dataLayerBG.eachLayer(function(layer) {
+    dataLayerBG.eachLayer(function (layer) {
       // console.log(layer.feature.properties)
       let value = layer.feature.properties[currentBGAttribute];
       values.push(value); // push the value for each layer into the Array
@@ -473,7 +440,7 @@
     var clusters = ss.ckmeans(values, 5);
 
     // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function(cluster) {
+    var breaks = clusters.map(function (cluster) {
       return [cluster[0], cluster.pop()];
     });
     //return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
@@ -489,16 +456,22 @@
     // which color value to return to the function caller
     // console.log(breaks[0][0]);
 
+    var colorMap = {
+      pctgrowth: colorsMedVal,
+      blackpct: colorsBlackPct,
+      medincome_medincome: colorsMedInc,
+    };
+
     if (d <= breaks[0][1]) {
-      return colorsMedVal[0];
+      return colorMap[currentBGAttribute][0];
     } else if (d <= breaks[1][1]) {
-      return colorsMedVal[1]
+      return colorMap[currentBGAttribute][1];
     } else if (d <= breaks[2][1]) {
-      return colorsMedVal[2];
+      return colorMap[currentBGAttribute][2];
     } else if (d <= breaks[3][1]) {
-      return colorsMedVal[3];
+      return colorMap[currentBGAttribute][3];
     } else if (d <= breaks[4][1]) {
-      return colorsMedVal[4];
+      return colorMap[currentBGAttribute][4];
     }
   }
 
@@ -509,7 +482,7 @@
     });
 
     // when the legend is added to the map
-    legendControl.onAdd = function() {
+    legendControl.onAdd = function () {
       // select a div element with an id attribute of legend
       var legend = L.DomUtil.get("legend");
 
@@ -517,7 +490,7 @@
       L.DomEvent.disableScrollPropagation(legend);
       L.DomEvent.disableClickPropagation(legend);
 
-// return the selection to the method
+      // return the selection to the method
       return legend;
     };
 
@@ -528,23 +501,26 @@
 
   function updateLegend(breaks) {
     // select the legend, add a title, begin an unordered list and assign to a variable
-    var legend = $("#legend").html("<h5>" + labels[currentBGAttribute] + "</h5>");
+    var legend = $("#legend").html(
+      "<h5>" + labels[currentBGAttribute] + "</h5>"
+    );
 
     // loop through the Array of classification break values
     for (var i = 0; i <= breaks.length - 1; i++) {
       var color = getColor(breaks[i][0], breaks);
 
       legend.append(
-        "<ul>" + '<span style="background:' +
-        color +
-        '"></span> ' + "</ul>" +
-        "<label>" +
-        (breaks[i][0]) +
-        " &mdash; " +
-        (breaks[i][1]) +
-        " %</label>"
+        "<ul>" +
+          '<span style="background:' +
+          color +
+          '"></span> ' +
+          "</ul>" +
+          "<label>" +
+          breaks[i][0] +
+          " &mdash; " +
+          breaks[i][1] +
+          " %</label>"
       );
     }
   }
-
 })();
