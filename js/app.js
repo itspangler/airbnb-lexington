@@ -405,8 +405,8 @@
     };
     // add the control to the map
     selectControl.addTo(map);
-    L.DomEvent.disableScrollPropagation(selectControl);
-    L.DomEvent.disableClickPropagation(selectControl);
+    // L.DomEvent.disableScrollPropagation(selectControl);
+    // L.DomEvent.disableClickPropagation(selectControl);
 
     // add event listener for when user changes selection and call the updateMap() function to redraw map
     $('select[id="bg"]').change(function () {
@@ -419,12 +419,12 @@
 
   function addUiAirBnB(dataLayerAirbnb) {
     var listingTypeBtn = L.control({
-      position: "topright",
+      position: "bottomleft",
     });
 
     // when the button is added to the map
     listingTypeBtn.onAdd = function (map) {
-      // select a div element with an id attribute of legend
+      // select a div element with an id attribute of airbnb
       return L.DomUtil.get("airbnb");
     };
 

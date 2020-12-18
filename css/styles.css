@@ -99,6 +99,7 @@ ui-h1 {
 #airbnb {
   font-size: 0.5em;
   font-family: "Poppins";
+  width: 300px;
 }
 
 #legend {
