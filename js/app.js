@@ -62,9 +62,6 @@
   // add basemap
   L.tileLayer(basemap, stamenOptions).addTo(map);
 
-  // RADIUS GENERATOR -- not sure if I need
-  // var radius = d3.scaleSqrt().domain([0, 1e6]).range([1, 9]);
-
   // DEFINE COLOR PALETTE
 
   let colorsMedVal =
@@ -390,13 +387,10 @@
   // define function for updating block groups
   function updateBG(dataLayerBG) {
     // console.log(blockGroupsData)
-
     // get the class breaks for the current data attribute
     var breaks = getClassBreaks(dataLayerBG);
-
     // update the legend to the map using breaks
     updateLegend(breaks);
-
     // loop through each county layer to update the color and tooltip info
     dataLayerBG.eachLayer(function(layer) {
       let props = layer.feature.properties;
