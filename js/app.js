@@ -10,9 +10,7 @@
   };
 
   // DEFINE BASEMAP OPTIONS
-  const stamenOptions = {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    subdomains: "abcd",
+  const osmOptions = {
     minZoom: 0,
     maxZoom: 20,
     ext: "png",
@@ -57,10 +55,10 @@
 
   // DEFINE BASEMAP
   const basemap =
-    "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}";
+    "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   // add basemap
-  L.tileLayer(basemap, stamenOptions).addTo(map);
+  L.tileLayer(basemap, osmOptions).addTo(map);
 
   // DEFINE COLOR PALETTE
 

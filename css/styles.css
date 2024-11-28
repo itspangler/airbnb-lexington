@@ -1,5 +1,10 @@
 /* custom CSS rules */
 /* display none for layout but be careful of license restrictions */
+.leaflet-tile-container {
+  /* filter:grayscale(1); */
+  opacity: 0.5;
+}
+
 .mapbox-logo, .leaflet-control-attribution {
   display: none;
 }
@@ -7,11 +12,6 @@
 .transparent {
   opacity:0
 }
-
-/* .txt-h1 {
-    font-size: 35px;
-    line-height: 54px;
-} */
 
 h1 {
   font-family: "Playfair Display";
@@ -21,7 +21,6 @@ h1 {
 
 h2 {
   font-family: "Playfair Display";
-  /* font-weight: bold; */
   font-size: 1em;
 }
 
@@ -90,7 +89,7 @@ body {
 }
 
 .allTypes {
-   background-color: #f1eef6 !important !important;
+   background-color: #f1eef6 !important;
 }
 
 #button {
@@ -118,7 +117,6 @@ body {
 }
 
 #legend span {
-  /* font-family: "Poppins"; */
   width: 20px;
   height: 20px;
   float: left;
@@ -128,11 +126,26 @@ body {
 #legend label {
   font-size: 0.8em;
   font-family: "Poppins";
-  /* padding:  */
 }
 
 #legend label:after {
   content: '';
   display: block;
   clear: both;
+}
+
+footer {
+  position: relative;
+}
+
+.flex-child {
+  max-height: 90vh;
+}
+
+#map {
+  max-height: 90vh;
+}
+
+.viewport-full {
+  height: 90vh !important;
 }

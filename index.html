@@ -13,9 +13,7 @@
   <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,500,600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
   <link href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.css">
-  </link>
   <link href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css">
-  </link>
   <link href='css/styles.css' rel='stylesheet' />
   <link rel="icon" type="image/png" href="images/favicon.png" />
 
@@ -47,7 +45,7 @@
   </nav>
   <div class='flex-parent viewport-full relative scroll-hidden bg-transparent'>
     <div class='flex-child w-full w300-ml absolute static-ml left bottom bg-transparent'>
-      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent py18 px12 pt0'>
+      <div class='flex-parent flex-parent--column viewport-third h-full-ml hmax-full bg-transparent'>
         <div class='flex-child flex-child--grow px12 py12 pt2 scroll-auto'>
           <div id='ui-controls'>
             <ui-h1 class='shadow w-full mx-auto'>Select a data variable:
@@ -55,12 +53,9 @@
                 <option value="pctgrowth" selected>Median Home Value</option>
                 <option value="blackpct">Black population</option>
                 <option value="medincome_medincome">Median Income</option>
-                <!-- <option value="transparent">Hide block group layer</option> -->
               </select>
             </ui-h1>
           </div>
-          <!-- <ul> -->
-
           <h2>About</h2>
           <p><b>In recent years,</b> short-term rentals (STRs) have come under increased scrutiny for their impact on the cities in which they operate. While global cities like New York, Barcelona, and Amsterdam have been at the fore of these
             debates, smaller cities have increasingly begun to adopt STR regulations. Lexington, KY is one such city.</p>
@@ -77,8 +72,8 @@
             vulnerable to such processes.</p>
           <p>It is important to note the limitations of this web tool. Taking into account the city of Lexington's highly seasonal tourism industry, this web map would be enriched by more data on Airbnb bookings by month. Furthermore, it's important to consider that the Airbnb listings represented here are scraped from the Airbnb website which scatters points by up to 200m in order to maintain host anonymity.
         </div>
-        <footer class='px12 py12 bg-gray-faint txt-s'>
-          <ul class='px12'>
+        <footer class='bg-gray-faint'>
+          <ul class='pl24 py12'>
             <li>All data from US Census / American Community Survey
             </li>
             <li>Map authored by
